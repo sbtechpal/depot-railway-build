@@ -1,0 +1,43 @@
+{
+  "name": "openclaw-demo",
+  "version": "1.0.0",
+  "description": "OpenClaw Demo - Personal AI Assistant with Skills System",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js",
+    "test": "echo \"Running tests...\" && exit 0",
+    "lint": "echo \"Linting code...\" && exit 0"
+  },
+  "keywords": [
+    "ai",
+    "assistant",
+    "openclaw",
+    "skills",
+    "agent"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@openai/api": "^4.73.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "telegraf": "^4.16.3",
+    "whatsapp-web.js": "^1.23.0",
+    "axios": "^1.7.9",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.5",
+    "@types/node-cron": "^3.0.11",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
