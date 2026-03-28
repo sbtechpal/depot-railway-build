@@ -1,7 +1,7 @@
 # Depot CI Demo Video Script
 
 **Title**: "Depot CI: 40x Faster Builds for AI Development"
-**Duration**: 3:45
+**Duration**: 5:30 (updated)
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
 
@@ -124,14 +124,115 @@
 
 ---
 
-## Section 3: The Demo (1:30 - 3:00)
+## Section 2.5: Why Depot CI Wins (1:30 - 2:30)
 
-### 1:30 - 1:45 | Introducing OpenClaw
+### 1:30 - 1:45 | It's Not Just Speed — It's Architecture
+
+**[VISUAL]** Split diagram appears: LEFT = "GitHub Actions", RIGHT = "Depot CI"
+
+**[SOUND]** Music shifts to more technical, driving beat
+
+**[VOICEOVER]**
+"The speed difference you're about to see? It's not magic. It's architecture."
+
+**[VISUAL]** Text animates in between the two sides: *"FUNDAMENTALLY DIFFERENT APPROACHES"*
+
+**[VOICEOVER]**
+"GitHub Actions was built as an event-driven polling system. Depot CI is built as a distributed state machine. Let me show you what that actually means."
+
+---
+
+### 1:45 - 2:05 | The Startup Problem
+
+**[VISUAL]** Animation on LEFT side (GitHub Actions):
+
+```
+┌─────────────────────────────────┐
+│     GITHUB ACTIONS              │
+│  ┌─────────────────────────┐    │
+│  │   Runner polls...       │    │
+│  │   Waiting... waiting... │    │
+│  │   (40+ seconds)         │    │
+│  └─────────────────────────┘    │
+│  ▲ Cold start every time        │
+└─────────────────────────────────┘
+```
+
+**[VOICEOVER]**
+"Every time GitHub Actions starts a job, the runner has to poll GitHub's servers. Wait for assignment. Spin up a fresh EC2 instance. Install dependencies. Forty seconds. Gone."
+
+**[VISUAL]** Animation on RIGHT side (Depot CI):
+
+```
+┌─────────────────────────────────┐
+│       DEPOT CI                  │
+│  ┌─────────────────────────┐    │
+│  │ Standby Pool            │    │
+│  │ Stopped → Running       │    │
+│  │ (2-3 seconds)           │    │
+│  └─────────────────────────┘    │
+│  ▲ Pre-warmed, ready instantly  │
+└─────────────────────────────────┘
+```
+
+**[SOUND]** Subtle "click" when Depot CI instance activates
+
+**[VOICEOVER]**
+"Depot CI keeps standby pools of compute resources — stopped, but ready. When a job comes in? Two seconds. Running. The difference between waiting and working."
+
+---
+
+### 2:05 - 2:20 | The State Problem
+
+**[VISUAL]** Diagram morphs to show "State Management" comparison
+
+**[LEFT - GitHub Actions]**: A "Stateless" box with a question mark, showing a broken connection when a crash occurs
+
+**[RIGHT - Depot CI]**: A "Durable State Machine" with persistent connections, showing automatic recovery
+
+**[VOICEOVER]**
+"GitHub Actions runners are stateless. If something crashes mid-job? You start over from scratch."
+
+**[VISUAL]** Animation on Depot CI side shows a job failing, then automatically resuming from where it left off
+
+**[VOICEOVER]**
+"Depot CI uses Switchyard — a durable orchestrator that tracks every job, every dependency, every state. Failures don't mean starting over. They mean resuming."
+
+---
+
+### 2:20 - 2:30 | The Scheduling Problem
+
+**[VISUAL]** Side-by-side comparison:
+
+```
+GITHUB ACTIONS                    DEPOT CI
+┌──────────────────┐             ┌──────────────────┐
+│ "Got any jobs?"  │             │  Job A → Job B   │
+│ "Here's ONE."    │             │  Job A → Job C   │
+│ "Got any more?"  │             │  [Parallel]      │
+│ "Here's ONE."    │             │  Optimized DAG   │
+└──────────────────┘             └──────────────────┘
+    Pull Model                       Push Model
+```
+
+**[VOICEOVER]**
+"GitHub asks for one job at a time. No awareness of what's coming next. Depot CI sees your entire workflow as a dependency graph — a DAG — and schedules everything optimally from the start."
+
+**[PAUSE - 1 second]**
+
+**[VOICEOVER]**
+"Polling versus orchestrating. Guessing versus knowing. Waiting versus executing."
+
+---
+
+## Section 3: The Demo (2:30 - 4:00)
+
+### 2:30 - 2:45 | Introducing OpenClaw
 
 **[SCREEN]** OpenClaw website (openclaw.ai)
 
 **[VOICEOVER]**
-"To show you what Depot CI can do, we're using OpenClaw."
+"To show you what this architecture actually delivers, we're using OpenClaw."
 
 **[VISUAL]** Scroll through testimonials:
 - Andrej Karpathy
@@ -144,7 +245,7 @@
 
 ---
 
-### 1:45 - 2:00 | The Tech Stack
+### 2:45 - 3:00 | The Tech Stack
 
 **[SCREEN]** VS Code showing the sample app:
 - TypeScript files
@@ -161,7 +262,7 @@
 
 ---
 
-### 2:00 - 2:40 | The Comparison ⭐
+### 3:00 - 3:40 | The Comparison ⭐
 
 **[VISUAL]** Split screen appears:
 
@@ -205,7 +306,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 2:40 - 2:55 | The Results
+### 3:40 - 3:55 | The Results
 
 **[VISUAL]** Both screens show green checkmarks
 
@@ -228,14 +329,14 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 **[VOICEOVER]**
 "The result? GitHub Actions: 4 minutes and 32 seconds. Depot CI: 28 seconds."
 
-**[PAUSE - 2 seconds]**"
+**[PAUSE - 2 seconds]**
 
 **[VOICEOVER]**
 "That's not just faster — that's fundamentally different."
 
 ---
 
-### 2:55 - 3:00 | The Impact Statement
+### 3:55 - 4:00 | The Impact Statement
 
 **[VISUAL]** Both deployments show "Service live at..." URLs
 
@@ -244,9 +345,9 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-## Section 4: The Value (3:00 - 3:45)
+## Section 4: The Value (4:00 - 4:45)
 
-### 3:00 - 3:15 | Time Savings
+### 4:00 - 4:15 | Time Savings
 
 **[VISUAL]** Animated calculation:
 
@@ -267,7 +368,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 3:15 - 3:30 | Cost Savings
+### 4:15 - 4:30 | Cost Savings
 
 **[VISUAL]** Cost comparison chart:
 
@@ -288,7 +389,7 @@ Savings: 80%
 
 ---
 
-### 3:30 - 3:45 | The Bigger Picture
+### 4:30 - 4:45 | The Bigger Picture
 
 **[VISUAL]** Happy developer, multiple deployments flying by
 
@@ -302,9 +403,9 @@ Savings: 80%
 
 ---
 
-## Section 5: Call to Action (3:45 - 4:15)
+## Section 5: Call to Action (4:45 - 5:30)
 
-### 3:45 - 4:00 | Join the Beta
+### 4:45 - 5:00 | Join the Beta
 
 **[VISUAL]** Depot CI interface, beautiful and clean
 
@@ -318,7 +419,24 @@ Savings: 80%
 
 ---
 
-### 4:00 - 4:15 | Final CTA
+### 5:00 - 5:15 | One Command to Migrate
+
+**[SCREEN]** Terminal showing:
+
+```bash
+$ depot ci migrate
+✓ Discovered 5 workflows
+✓ Analyzed compatibility
+✓ Created .depot/ directory
+✓ Ready to commit
+```
+
+**[VOICEOVER]**
+"Migrating is one command. `depot ci migrate`. We copy your workflows, check compatibility, and you're ready. Your existing GitHub Actions keep running in parallel until you're ready to switch."
+
+---
+
+### 5:15 - 5:30 | Final CTA
 
 **[VISUAL]** Large URL: **depot.dev**
 
@@ -395,9 +513,23 @@ Savings: 80%
 |---------|------|------------|----------|
 | Problem | 0:00 | Slow CI, frustrated dev | "Integrating is the bottleneck" |
 | Solution | 0:45 | Depot logo, diagram | "40x faster builds" |
-| Demo | 1:30 | Split screen comparison | "4:32 vs 0:28" |
-| Value | 3:00 | Time/money savings | "Extra morning every week" |
-| CTA | 3:45 | depot.dev URL | "Stop waiting. Start shipping." |
+| **Why It Wins** | **1:30** | **Architecture comparison** | **"It's not magic. It's architecture."** |
+| Demo | 2:30 | Split screen comparison | "4:32 vs 0:28" |
+| Value | 4:00 | Time/money savings | "Extra morning every week" |
+| CTA | 4:45 | depot.dev URL | "Stop waiting. Start shipping." |
+
+---
+
+## Technical Advantages Summary (for graphics team)
+
+The new section (1:30-2:30) showcases these key technical differentiators:
+
+| Advantage | GitHub Actions | Depot CI | Impact |
+|-----------|---------------|----------|--------|
+| **Startup** | 40+ seconds cold start | 2-3 seconds standby pools | 10-20x faster |
+| **State** | Stateless (crash = restart) | Durable (crash = resume) | Reliable recovery |
+| **Scheduling** | Pull model (one job at a time) | Push model (DAG-aware) | Optimal parallelization |
+| **Billing** | Per-minute (rounded up) | Per-second (exact) | Fair pricing |
 
 ---
 
