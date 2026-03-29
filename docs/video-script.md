@@ -561,22 +561,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 **[VISUAL]** Animated loop diagram showing the agent workflow:
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│              THE AGENT FIX-CI LOOP                          │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│    1. Tell agent to fix CI                                  │
-│    2. Agent triggers run (no commit needed)                 │
-│    3. Agent checks status                                   │
-│    4. Agent reads logs + AI diagnosis                       │
-│    5. If needed → SSH into runner                           │
-│    6. Agent fixes code locally                              │
-│    7. Agent reruns                                          │
-│    8. Repeat until green                                    │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+![The Agent Fix-CI Loop](depot-dev/agent-loop.png)
 
 **[VOICEOVER]**
 "With traditional CI, agents have to push commits, wait for external CI, then guess what went wrong. With Depot CI, agents run CI locally against their changes, read failures instantly, and iterate in a tight feedback loop."
