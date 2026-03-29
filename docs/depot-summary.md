@@ -72,17 +72,7 @@ No more digging through thousands of lines of logs or guessing at the root cause
 
 Depot CI is built for AI coding agents (Claude Code, Cursor, etc.):
 
-```text
-The Agent Fix-CI Loop:
-1. Tell agent to fix CI
-2. Agent triggers run (no commit needed)
-3. Agent checks status
-4. Agent reads logs + AI diagnosis
-5. If needed → SSH into runner
-6. Agent fixes code locally
-7. Agent reruns
-8. Repeat until green
-```
+![The Agent Fix-CI Loop](depot-dev/agent-loop.png)
 
 **Traditional CI**: `push → wait → guess → fix → push → wait → guess`
 
