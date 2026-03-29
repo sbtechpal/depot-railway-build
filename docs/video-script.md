@@ -1,7 +1,7 @@
 # Depot CI Demo Video Script
 
 **Title**: "Depot CI: 40x Faster Builds for AI Development"
-**Duration**: 6:15 (updated)
+**Duration**: 7:00 (updated)
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
 
@@ -509,9 +509,119 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-## Section 4: The Value (4:40 - 5:25)
+## Section 3.5: AI-Native CI (4:45 - 5:20)
 
-### 4:40 - 4:55 | Time Savings
+### 4:45 - 4:55 | AI Failure Diagnosis
+
+**[VISUAL]** Depot CI dashboard showing a failed job:
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│  DEPOT CI DASHBOARD — FAILED JOB                            │
+├─────────────────────────────────────────────────────────────┤
+│  Job: ci.yml #42                                            │
+│  Status: ✗ FAILED                                           │
+│                                                             │
+│  ╔═════════════════════════════════════════════════════════╗│
+│  ║  AI FAILURE DIAGNOSIS                                   ║│
+│  ╠═════════════════════════════════════════════════════════╣│
+│  ║  🔍 What went wrong:                                    ║│
+│  ║     The build failed because the TypeScript            ║│
+│  ║     compiler found type errors in src/auth.ts.         ║│
+│  ║     Specifically, the UserSession type is missing     ║│
+│  ║     the 'expiresAt' property.                          ║│
+│  ║                                                          ║│
+│  ║  💡 Suggested fix:                                      ║│
+│  ║     Add the missing property to the UserSession        ║│
+│  ║     interface: expiresAt: Date                         ║│
+│  ╚═════════════════════════════════════════════════════════╝│
+└─────────────────────────────────────────────────────────────┘
+```
+
+**[SOUND]** Subtle "bling" animation when AI diagnosis appears
+
+**[VOICEOVER]**
+"But Depot CI isn't just fast — it's intelligent. When a job fails, you get an AI-generated failure diagnosis. It explains what went wrong and suggests exactly how to fix it."
+
+**[VISUAL]** The diagnosis panel highlights the fix suggestion
+
+**[VOICEOVER]**
+"No more digging through thousands of lines of logs. No more guessing at the root cause. Depot CI's AI analyzes the failure and gives you the answer."
+
+---
+
+### 4:55 - 5:05 | Built for Coding Agents
+
+**[VISUAL]** Animation showing Claude Code / Cursor logo alongside Depot CI logo
+
+**[SOUND]** Music shifts to more modern, AI-focused sound
+
+**[VOICEOVER]**
+"Depot CI is built for the AI-augmented development era. It integrates seamlessly with coding agents like Claude Code and Cursor."
+
+**[VISUAL]** Animated loop diagram showing the agent workflow:
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│              THE AGENT FIX-CI LOOP                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│    1. Tell agent to fix CI                                  │
+│    2. Agent triggers run (no commit needed)                 │
+│    3. Agent checks status                                   │
+│    4. Agent reads logs + AI diagnosis                       │
+│    5. If needed → SSH into runner                           │
+│    6. Agent fixes code locally                              │
+│    7. Agent reruns                                          │
+│    8. Repeat until green                                    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**[VOICEOVER]**
+"With traditional CI, agents have to push commits, wait for external CI, then guess what went wrong. With Depot CI, agents run CI locally against their changes, read failures instantly, and iterate in a tight feedback loop."
+
+**[VISUAL]** Split comparison:
+- LEFT: "Push → Wait → Guess → Fix → Push → Wait"
+- RIGHT: "Fix → Run → Fix → Run → Fix → Green"
+
+**[VOICEOVER]**
+"Push-wait-guess versus fix-run-green. This is what development was supposed to feel like."
+
+---
+
+### 5:05 - 5:20 | The End of Push-Wait-Guess
+
+**[VISUAL]** Terminal showing rapid agent iteration:
+
+```bash
+$ depot ci run --job test
+✗ FAILED: TypeError in auth.ts
+
+$ # Agent reads AI diagnosis, adds missing property
+
+$ depot ci run --job test
+✗ FAILED: Missing import
+
+$ # Agent fixes import, reruns
+
+$ depot ci run --job test
+✓ PASSED: All tests passing
+```
+
+**[VOICEOVER]**
+"Coding agents can now fix CI failures without polluting your git history. No more 'fix ci' commits. No more waiting for external systems. Just rapid iteration until everything passes."
+
+**[VISUAL]** Text appears: *"The End of Push-Wait-Guess CI"*
+
+**[VOICEOVER]**
+"This is CI built for AI development. Fast failure diagnosis. Tight agent loops. Zero friction."
+
+---
+
+## Section 4: The Value (5:20 - 5:55)
+
+### 5:20 - 5:30 | Time Savings
 
 **[VISUAL]** Animated calculation:
 
@@ -532,7 +642,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 4:55 - 5:10 | Cost Savings
+### 5:30 - 5:40 | Cost Savings
 
 **[VISUAL]** Cost comparison chart:
 
@@ -553,7 +663,7 @@ Savings: 80%
 
 ---
 
-### 5:10 - 5:25 | The Bigger Picture
+### 5:40 - 5:50 | The Bigger Picture
 
 **[VISUAL]** Happy developer, multiple deployments flying by
 
@@ -567,9 +677,9 @@ Savings: 80%
 
 ---
 
-## Section 5: Call to Action (5:25 - 6:10)
+## Section 5: Call to Action (5:50 - 6:40)
 
-### 5:25 - 5:40 | Get Started Today
+### 5:50 - 6:05 | Get Started Today
 
 **[VISUAL]** Depot CI interface, beautiful and clean
 
@@ -583,7 +693,7 @@ Savings: 80%
 
 ---
 
-### 5:40 - 5:55 | One Command to Migrate
+### 6:05 - 6:15 | One Command to Migrate
 
 **[SCREEN]** Terminal showing:
 
@@ -600,7 +710,7 @@ $ depot ci migrate
 
 ---
 
-### 5:55 - 6:10 | Final CTA
+### 6:15 - 6:40 | Final CTA
 
 **[VISUAL]** Large URL: **depot.dev**
 
@@ -680,8 +790,9 @@ $ depot ci migrate
 | **Why It Wins** | **1:30** | **3-part architecture + Switchyard** | **"It's not magic. It's architecture."** |
 | Demo | 3:10 | Split screen comparison | "4:32 vs 0:28" |
 | **Debugging** | **4:35** | **Replay from step UI** | **"Debug smarter"** |
-| Value | 4:40 | Time/money savings | "Extra morning every week" |
-| CTA | 5:25 | depot.dev URL | "Stop waiting. Start shipping." |
+| **AI-Native CI** | **4:45** | **AI failure diagnosis + Agent loops** | **"Built for AI development"** |
+| Value | 5:20 | Time/money savings | "Extra morning every week" |
+| CTA | 5:50 | depot.dev URL | "Stop waiting. Start shipping." |
 
 ---
 
@@ -695,6 +806,8 @@ The "Why It Wins" section (1:30-3:10) showcases these key technical differentiat
 - **3-Part Architecture Diagram** (1:45-2:00): Visual showing Frontend, Orchestrator (Switchyard), and Compute layers
 - **Switchyard Deep Dive** (2:00-2:15): Detailed view of workflow parsing, dependency resolution (DAG), and durable state machine
 - **Debugging Superpower** (4:35-4:40): Dashboard UI showing "Replay from step" and SSH debug buttons
+- **AI Failure Diagnosis** (4:45-4:55): Dashboard showing AI-generated failure analysis and suggested fixes
+- **Coding Agent Integration** (4:55-5:20): Agent loop diagram showing push-wait-guess vs fix-run-green comparison
 
 **Overall Technical Comparison:**
 
@@ -705,6 +818,7 @@ The "Why It Wins" section (1:30-3:10) showcases these key technical differentiat
 | **Scheduling** | Pull model (one job at a time) | Push model (DAG-aware) | Optimal parallelization |
 | **Billing** | Per-minute (rounded up) | Per-second (exact) | Fair pricing |
 | **Debugging** | Restart from beginning | Replay from any step + SSH | Faster iteration |
+| **AI Features** | None | AI failure diagnosis + Agent loops | Built for AI development |
 
 ---
 
@@ -712,8 +826,8 @@ The "Why It Wins" section (1:30-3:10) showcases these key technical differentiat
 
 **Official Brand Resources:**
 
-- **Brand Assets**: https://depot.dev/about/brand-assets
-- **Brand Guidelines**: https://drive.google.com/file/d/1dIIvZiRsxeol2flEthiKes0046IPtdXx/view?usp=sharing
+- [Brand Assets](https://depot.dev/about/brand-assets)
+- [Brand Guidelines](https://drive.google.com/file/d/1dIIvZiRsxeol2flEthiKes0046IPtdXx/view?usp=sharing)
 
 **Key Brand Notes:**
 
