@@ -38,29 +38,7 @@ Depot CI is built for programmatic use, making it a natural fit for AI coding ag
 
 ### The Agent Loop
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│                    THE AGENT FIX-CI LOOP                    │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  1. Tell agent to fix CI                                    │
-│     │                                                       │
-│  2. Agent triggers run scoped to smallest job               │
-│     │                                                       │
-│  3. Agent checks status                                     │
-│     │                                                       │
-│  4. Agent reads logs from failed jobs                       │
-│     │                                                       │
-│  5. If logs aren't enough → SSH into runner                 │
-│     │                                                       │
-│  6. Agent fixes code locally                                │
-│     │                                                       │
-│  7. Agent reruns                                            │
-│     │                                                       │
-│  8. Repeat until CI passes                                 │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+![The Agent Fix-CI Loop](agent-loop.png)
 
 ### Why Depot CI Works Well for Agents
 
