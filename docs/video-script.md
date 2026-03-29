@@ -1,7 +1,7 @@
 # Depot CI Demo Video Script
 
 **Title**: "Depot CI: 40x Faster Builds for AI Development"
-**Duration**: 5:30 (updated)
+**Duration**: 6:10 (updated)
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
 
@@ -124,7 +124,7 @@
 
 ---
 
-## Section 2.5: Why Depot CI Wins (1:30 - 2:30)
+## Section 2.5: Why Depot CI Wins (1:30 - 3:00)
 
 ### 1:30 - 1:45 | It's Not Just Speed — It's Architecture
 
@@ -142,7 +142,111 @@
 
 ---
 
-### 1:45 - 2:05 | The Startup Problem
+### 1:45 - 2:00 | The Three-Part Architecture
+
+**[VISUAL]** A clean animated diagram appears showing Depot CI's three layers:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    DEPOT CI ARCHITECTURE                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  FRONTEND LAYER                                           │   │
+│  │  • GitHub Actions YAML Parser                            │   │
+│  │  • Validates & converts workflows                        │   │
+│  │  • Supports future formats (GitLab CI, etc.)             │   │
+│  └────────────────────┬─────────────────────────────────────┘   │
+│                       │                                         │
+│  ┌────────────────────▼─────────────────────────────────────┐   │
+│  │  ORCHESTRATOR LAYER (Switchyard)                          │   │
+│  │  • Durable state machine                                  │   │
+│  │  • Builds job dependency graphs (DAG)                     │   │
+│  │  • Schedules tasks across compute fleet                  │   │
+│  │  • Tracks state, handles failures & retries              │   │
+│  └────────────────────┬─────────────────────────────────────┘   │
+│                       │                                         │
+│  ┌────────────────────▼─────────────────────────────────────┐   │
+│  │  COMPUTE LAYER                                            │   │
+│  │  • Standby pools (2-3 sec startup)                       │   │
+│  │  • Sandboxes with BuildKit pre-installed                 │   │
+│  │  • SSH debugging, metrics, logs                           │   │
+│  │  • Per-second billing                                     │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**[SOUND]** Subtle "whoosh" as each layer animates in
+
+**[VOICEOVER]**
+"Depot CI has three layers. A frontend that parses your GitHub Actions YAML. An orchestrator called Switchyard that manages job dependencies and state. And a compute layer with pre-warmed sandboxes ready to execute."
+
+**[VISUAL]** The diagram highlights the ORCHESTRATOR LAYER with a pulsing glow
+
+**[VOICEOVER]**
+"Each layer is independent. Swap the frontend, add new workflow formats. The orchestrator doesn't care. Upgrade compute, add new sandbox types. Your workflows keep running. This is modular, future-proof architecture."
+
+---
+
+### 2:00 - 2:15 | Switchyard: The Brain
+
+**[VISUAL]** The ORCHESTRATOR LAYER expands into a detailed view:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    SWITCHYARD ORCHESTRATOR                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌────────────────────────────────────────────────────────┐    │
+│  │  1. WORKFLOW PARSER                                      │    │
+│  │     • Reads GitHub Actions YAML                         │    │
+│  │     • Extracts jobs, steps, dependencies                │    │
+│  │     • Builds Dependency Graph (DAG)                     │    │
+│  └────────────────────────────────────────────────────────┘    │
+│                           │                                      │
+│  ┌──────────────────────────▼──────────────────────────────┐   │
+│  │  2. DEPENDENCY RESOLUTION                                │   │
+│  │     Job A ─────► Job B ─────► Job D                     │   │
+│  │         └──► Job C ─────► Job E                         │   │
+│  │                                                           │   │
+│  │     • Identifies parallelizable jobs                     │   │
+│  │     • Calculates optimal execution order                 │   │
+│  │     • Respects conditional logic (if/else)               │   │
+│  └──────────────────────────┬──────────────────────────────┘   │
+│                           │                                      │
+│  ┌──────────────────────────▼──────────────────────────────┐   │
+│  │  3. DURABLE STATE MACHINE                                │   │
+│  │     ┌─────────────┐    ┌─────────────┐    ┌──────────┐  │   │
+│  │     │  QUEUED     │───▶│  RUNNING    │───▶│ COMPLETE │  │   │
+│  │     └─────────────┘    └─────────────┘    └──────────┘  │   │
+│  │            │                                       │      │   │
+│  │            └─────────────▶ FAILED ──▶ RETRY ───────┘      │   │
+│  │                                                           │   │
+│  │     • State persisted to durable storage                 │   │
+│  │     • Survives infrastructure failures                  │   │
+│  │     • Resume from exact point of failure                 │   │
+│  └────────────────────────────────────────────────────────┘    │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**[VOICEOVER]**
+"Switchyard is the brain of Depot CI. First, it parses your workflow and builds a dependency graph — knowing exactly which jobs can run in parallel, and which must wait."
+
+**[VISUAL]** Animation shows the DAG being built, with parallel jobs highlighting simultaneously
+
+**[VOICEOVER]**
+"Then it schedules everything optimally across our compute fleet. And it maintains durable state throughout. If something fails? Switchyard knows exactly where to resume. No starting over from scratch."
+
+**[PAUSE - 1 second]**
+
+**[VOICEOVER]**
+"This is like having a project manager who never forgets, never loses context, and always knows the fastest path to completion."
+
+---
+
+### 2:30 - 2:45 | The Startup Problem
 
 **[VISUAL]** Animation on LEFT side (GitHub Actions):
 
@@ -182,7 +286,7 @@
 
 ---
 
-### 2:05 - 2:20 | The State Problem
+### 2:45 - 3:00 | The State Problem
 
 **[VISUAL]** Diagram morphs to show "State Management" comparison
 
@@ -200,7 +304,7 @@
 
 ---
 
-### 2:20 - 2:30 | The Scheduling Problem
+### 3:00 - 3:10 | The Scheduling Problem
 
 **[VISUAL]** Side-by-side comparison:
 
@@ -225,9 +329,9 @@ GITHUB ACTIONS                    DEPOT CI
 
 ---
 
-## Section 3: The Demo (2:30 - 4:00)
+## Section 3: The Demo (3:10 - 4:40)
 
-### 2:30 - 2:45 | Introducing OpenClaw
+### 3:10 - 3:25 | Introducing OpenClaw
 
 **[SCREEN]** OpenClaw website (openclaw.ai)
 
@@ -245,7 +349,7 @@ GITHUB ACTIONS                    DEPOT CI
 
 ---
 
-### 2:45 - 3:00 | The Tech Stack
+### 3:25 - 3:40 | The Tech Stack
 
 **[SCREEN]** VS Code showing the sample app:
 - TypeScript files
@@ -262,7 +366,7 @@ GITHUB ACTIONS                    DEPOT CI
 
 ---
 
-### 3:00 - 3:40 | The Comparison ⭐
+### 3:40 - 4:20 | The Comparison ⭐
 
 **[VISUAL]** Split screen appears:
 
@@ -306,7 +410,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 3:40 - 3:55 | The Results
+### 4:20 - 4:35 | The Results
 
 **[VISUAL]** Both screens show green checkmarks
 
@@ -336,7 +440,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 3:55 - 4:00 | The Impact Statement
+### 4:35 - 4:40 | The Impact Statement
 
 **[VISUAL]** Both deployments show "Service live at..." URLs
 
@@ -345,9 +449,9 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-## Section 4: The Value (4:00 - 4:45)
+## Section 4: The Value (4:40 - 5:25)
 
-### 4:00 - 4:15 | Time Savings
+### 4:40 - 4:55 | Time Savings
 
 **[VISUAL]** Animated calculation:
 
@@ -368,7 +472,7 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 4:15 - 4:30 | Cost Savings
+### 4:55 - 5:10 | Cost Savings
 
 **[VISUAL]** Cost comparison chart:
 
@@ -389,7 +493,7 @@ Savings: 80%
 
 ---
 
-### 4:30 - 4:45 | The Bigger Picture
+### 5:10 - 5:25 | The Bigger Picture
 
 **[VISUAL]** Happy developer, multiple deployments flying by
 
@@ -403,23 +507,23 @@ Savings: 80%
 
 ---
 
-## Section 5: Call to Action (4:45 - 5:30)
+## Section 5: Call to Action (5:25 - 6:10)
 
-### 4:45 - 5:00 | Join the Beta
+### 5:25 - 5:40 | Get Started Today
 
 **[VISUAL]** Depot CI interface, beautiful and clean
 
 **[VOICEOVER]**
-"Depot CI is in beta right now, and we're looking for teams ready to build at the speed of AI."
+"Depot CI is now generally available, and ready for teams who want to build at the speed of AI."
 
 **[VISUAL]** "Try it free" badge appears
 
 **[VOICEOVER]**
-"That means free usage during the beta period. No credit card required."
+"Start with a free 7-day trial. Full access, no credit card required. Then plans start at just $20 per month with 2,000 build minutes included. And per-second billing means you only pay for what you actually use."
 
 ---
 
-### 5:00 - 5:15 | One Command to Migrate
+### 5:40 - 5:55 | One Command to Migrate
 
 **[SCREEN]** Terminal showing:
 
@@ -436,7 +540,7 @@ $ depot ci migrate
 
 ---
 
-### 5:15 - 5:30 | Final CTA
+### 5:55 - 6:10 | Final CTA
 
 **[VISUAL]** Large URL: **depot.dev**
 
@@ -446,7 +550,7 @@ $ depot ci migrate
 - GitHub: github.com/depot
 
 **[VOICEOVER]**
-"Visit depot.dev to join the beta. Follow us @depotdev for updates."
+"Visit depot.dev to start building faster today. Follow us @depotdev for updates."
 
 **[VISUAL]** Final tagline appears:
 
@@ -513,16 +617,22 @@ $ depot ci migrate
 |---------|------|------------|----------|
 | Problem | 0:00 | Slow CI, frustrated dev | "Integrating is the bottleneck" |
 | Solution | 0:45 | Depot logo, diagram | "40x faster builds" |
-| **Why It Wins** | **1:30** | **Architecture comparison** | **"It's not magic. It's architecture."** |
-| Demo | 2:30 | Split screen comparison | "4:32 vs 0:28" |
-| Value | 4:00 | Time/money savings | "Extra morning every week" |
-| CTA | 4:45 | depot.dev URL | "Stop waiting. Start shipping." |
+| **Why It Wins** | **1:30** | **3-part architecture + Switchyard** | **"It's not magic. It's architecture."** |
+| Demo | 3:10 | Split screen comparison | "4:32 vs 0:28" |
+| Value | 4:40 | Time/money savings | "Extra morning every week" |
+| CTA | 5:25 | depot.dev URL | "Stop waiting. Start shipping." |
 
 ---
 
 ## Technical Advantages Summary (for graphics team)
 
-The new section (1:30-2:30) showcases these key technical differentiators:
+The "Why It Wins" section (1:30-3:10) showcases these key technical differentiators:
+
+**New Content Added:**
+- **3-Part Architecture Diagram** (1:45-2:00): Visual showing Frontend, Orchestrator (Switchyard), and Compute layers
+- **Switchyard Deep Dive** (2:00-2:15): Detailed view of workflow parsing, dependency resolution (DAG), and durable state machine
+
+**Overall Technical Comparison:**
 
 | Advantage | GitHub Actions | Depot CI | Impact |
 |-----------|---------------|----------|--------|
