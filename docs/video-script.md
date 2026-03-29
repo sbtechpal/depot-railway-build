@@ -1,7 +1,7 @@
 # Depot CI Demo Video Script
 
 **Title**: "Depot CI: 40x Faster Builds for AI Development"
-**Duration**: 6:10 (updated)
+**Duration**: 6:15 (updated)
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
 
@@ -108,19 +108,26 @@
 
 ---
 
-### 1:15 - 1:30 | Compatibility
+### 1:15 - 1:30 | Drop-in Replacement
 
 **[VISUAL]** GitHub logo + Depot logo, connection line between them
 
-**[VISUAL]** Text: *"Your Workflows. Faster."*
+**[VISUAL]** Animation showing:
+
+```
+.github/workflows/         .depot/workflows/
+├── ci.yml        ──────▶  ├── ci.yml
+├── build.yml     ──────▶  ├── build.yml
+└── test.yml      ──────▶  └── test.yml
+```
 
 **[VOICEOVER]**
-"Already using GitHub Actions? Bring your workflows. We run them faster, more reliably. Same YAML, better performance."
+"Depot CI is a drop-in replacement for GitHub Actions. Simply copy your workflows from `.github/workflows` to `.depot/workflows`. Same YAML. Same syntax. Just copy and go."
 
-**[VISUAL]** Side-by-side workflow files (identical), different execution speeds
+**[VISUAL]** Text appears: *"No Rewrites. Just Copy."*
 
 **[VOICEOVER]**
-"No rewrite. No migration project. Just speed."
+"No rewrite. No migration project. One command to migrate. Then copy, commit, and you're running on Depot CI infrastructure."
 
 ---
 
@@ -440,7 +447,41 @@ Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
 
 ---
 
-### 4:35 - 4:40 | The Impact Statement
+### 4:35 - 4:40 | Debugging Superpower ⭐
+
+**[VISUAL]** Quick animation showing Depot CI dashboard:
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│  DEPOT CI DASHBOARD                                          │
+├─────────────────────────────────────────────────────────────┤
+│  Job: ci.yml #42                                            │
+│  Steps:                                                     │
+│    ✓ Checkout           2s                                 │
+│    ✓ Setup Node         8s                                 │
+│    ✓ Install deps       12s                                │
+│    ✗ Build              FAILED 45s                         │
+│                                                             │
+│  [🔄 Replay from "Install deps"]  [🔍 SSH Debug]            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**[VOICEOVER]**
+"And when something does fail? Depot CI has debugging superpowers. Replay from any step — skip everything that worked and jump straight to debugging the problem."
+
+**[VISUAL]** Animation shows "Replay from step" button being clicked, job restarting from that step
+
+**[VOICEOVER]**
+"Or SSH directly into the running sandbox. Full observability, full control."
+
+**[PAUSE - 1 second]**
+
+**[VOICEOVER]**
+"Traditional CI? Restart from the beginning and hope. Depot CI? Debug smarter."
+
+---
+
+### 4:40 - 4:45 | The Impact Statement
 
 **[VISUAL]** Both deployments show "Service live at..." URLs
 
@@ -619,6 +660,7 @@ $ depot ci migrate
 | Solution | 0:45 | Depot logo, diagram | "40x faster builds" |
 | **Why It Wins** | **1:30** | **3-part architecture + Switchyard** | **"It's not magic. It's architecture."** |
 | Demo | 3:10 | Split screen comparison | "4:32 vs 0:28" |
+| **Debugging** | **4:35** | **Replay from step UI** | **"Debug smarter"** |
 | Value | 4:40 | Time/money savings | "Extra morning every week" |
 | CTA | 5:25 | depot.dev URL | "Stop waiting. Start shipping." |
 
@@ -629,18 +671,38 @@ $ depot ci migrate
 The "Why It Wins" section (1:30-3:10) showcases these key technical differentiators:
 
 **New Content Added:**
+
+- **Drop-in Replacement Visual** (1:15-1:30): Shows .github/workflows → .depot/workflows copy animation
 - **3-Part Architecture Diagram** (1:45-2:00): Visual showing Frontend, Orchestrator (Switchyard), and Compute layers
 - **Switchyard Deep Dive** (2:00-2:15): Detailed view of workflow parsing, dependency resolution (DAG), and durable state machine
+- **Debugging Superpower** (4:35-4:40): Dashboard UI showing "Replay from step" and SSH debug buttons
 
 **Overall Technical Comparison:**
 
 | Advantage | GitHub Actions | Depot CI | Impact |
-|-----------|---------------|----------|--------|
+| :--- | :--- | :--- | :--- |
 | **Startup** | 40+ seconds cold start | 2-3 seconds standby pools | 10-20x faster |
 | **State** | Stateless (crash = restart) | Durable (crash = resume) | Reliable recovery |
 | **Scheduling** | Pull model (one job at a time) | Push model (DAG-aware) | Optimal parallelization |
 | **Billing** | Per-minute (rounded up) | Per-second (exact) | Fair pricing |
+| **Debugging** | Restart from beginning | Replay from any step + SSH | Faster iteration |
 
 ---
 
-**End of Script**
+## Brand Assets (for graphics team)
+
+**Official Brand Resources:**
+
+- **Brand Assets**: https://depot.dev/about/brand-assets
+- **Brand Guidelines**: https://drive.google.com/file/d/1dIIvZiRsxeol2flEthiKes0046IPtdXx/view?usp=sharing
+
+**Key Brand Notes:**
+
+- Use official Depot logo from brand assets
+- Follow brand guidelines for color palette and typography
+- Depot logo and product names should be used consistently
+- GitHub Actions compatibility should be shown as "drop-in replacement" messaging
+
+---
+
+## End of Script
