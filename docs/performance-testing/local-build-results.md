@@ -43,7 +43,27 @@ Baseline local build performance for the OpenClaw Demo sample app.
 
 **All stages were cached** — Docker reused all existing layers without rebuilding anything.
 
-> **Why this matters:** In real CI/CD scenarios, most builds will have at least some changes (code, dependencies, or Dockerfile). This cached result shows the theoretical maximum caching benefit. Actual cached builds with changes will be slower as only unchanged layers are cached.
+### Cached Build (Small Code Change) 📝
+
+> **Test:** Changed version string in `src/index.ts` from `1.0.0` to `1.0.1` — a realistic scenario where only source code changes.
+
+| Stage | Status | Time |
+|-------|--------|------|
+| `deps` (npm ci) | **CACHED** ✅ | 0s |
+| `production-deps` (npm ci) | **CACHED** ✅ | 0s |
+| `build` (copy source) | Rebuilt | ~0s |
+| `build` (tsc) | Rebuilt | 3.1s |
+| `production` layers | Rebuilt | ~4s |
+| `export` | Rebuilt | 10.4s |
+
+| Build Type | Time | Speedup |
+|------------|------|---------|
+| Clean (no cache) | 3:03 (183s) | baseline |
+| **Cached (code change)** | **0:17 (17s)** | **10.8x faster** |
+
+**Key insight:** Dependency layers were fully cached, saving ~160 seconds. Only source-affected stages rebuilt.
+
+> **Why this matters:** This is a **realistic CI/CD scenario** — developers push code changes, dependencies remain unchanged. The heavy npm ci steps are cached, making builds 10x faster.
 
 ---
 
@@ -113,6 +133,7 @@ COPY package.json ./
 |------|------------|----------------|
 | **Local Clean** | 3:03 (183s) | baseline |
 | **Local Cached (no changes)** | 0:01 (1.3s) | 140x faster |
+| **Local Cached (code change)** | 0:17 (17s) | 10.8x faster |
 | **Railway Auto-Build** | 0:29 (29s) | 6.3x faster |
 | **GitHub Actions** | TBD | - |
 | **Depot CI** | TBD | - |
