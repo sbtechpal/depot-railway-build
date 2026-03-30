@@ -15,49 +15,52 @@ env:
   NODE_VERSION: '18'
   DEPOT_PROJECT_ID: ${{ secrets.DEPOT_PROJECT_ID }}
   RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
-  RAILWAY_SERVICE_ID: ${{ secrets.DEPOT_RAILWAY_SERVICE_ID }}
+  RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
 
 jobs:
   depot-build:
     name: Build with Depot CI
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
     # Use Depot's high-performance runners
-    runs-on: depot-${{ env.DEPOT_PROJECT_ID }}
+    runs-on: depot-ubuntu-22.04
+    timeout-minutes: 5
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Depot CLI
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: sample-app/package-lock.json
+
+      - name: Install dependencies
         run: |
-          curl -L https://depot.dev/install.sh | sh
-          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+          echo "::group::Installing dependencies"
+          cd sample-app
+          npm ci
+          echo "::endgroup::"
 
       - name: Authenticate with Depot
         run: depot login --token ${{ secrets.DEPOT_TOKEN }}
 
-      - name: Build with Depot (40x faster)
+      - name: Build Docker image with Depot (40x faster)
         run: |
           echo "::group::Depot CI Build"
           cd sample-app
-          depot build -t openclaw-demo:${{ github.sha }} .
+          depot build -t openclaw-demo:${{ github.sha }} -t openclaw-demo:latest .
           echo "::endgroup::"
 
-      - name: Push to Depot Registry
-        run: |
-          depot push openclaw-demo:${{ github.sha }}
-
-      - name: Run tests with Depot
+      - name: Run tests
         run: |
           cd sample-app
-          depot run -- npm test
+          npm test
 
-      - name: Build TypeScript with Depot cache
+      - name: Build TypeScript
         run: |
           cd sample-app
-          depot run -- npm run build
+          npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
