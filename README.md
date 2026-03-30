@@ -282,3 +282,5 @@ MIT
 ---
 
 **Built to showcase Depot CI — 40x faster builds for the AI-augmented development era.**
+
+# Test Flow 3: GitHub Actions baseline - Mon Mar 30 08:49:21 EDT 2026
