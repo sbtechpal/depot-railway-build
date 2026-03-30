@@ -28,9 +28,9 @@ chmod +x scripts/setup.sh
 
 1. Go to [depot.dev](https://depot.dev)
 2. Click "Get Started" or "Sign Up"
-3. Choose GitHub authentication (recommended)
-4. Authorize the Depot GitHub app
-5. Create a new project: `openclaw-demo`
+3. Create a new project: `openclaw-demo`
+4. Choose GitHub authentication (recommended)
+5. Authorize the Depot GitHub app
 
 **Get your credentials:**
 ```bash
