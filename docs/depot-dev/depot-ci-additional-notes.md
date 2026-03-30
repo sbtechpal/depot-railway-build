@@ -81,3 +81,7 @@ Think of "sandbox" as the isolated cloud compute instance that Depot creates to 
 - **Sandbox ≠ Agent**: The sandbox is the compute environment. The agent (or orchestrator) is what manages the sandboxes.
 - **Switchyard = The "Agent"**: Switchyard is Depot's orchestrator that schedules jobs and assigns them to sandboxes.
 - **Sandbox = Where Work Happens**: Each sandbox is an isolated compute instance that executes your workflow.
+
+
+# Runner Comparison Depot vs. Hosted GitHub Actions
+https://github.com/bytechie/Compare-Runners-Cache-Test
