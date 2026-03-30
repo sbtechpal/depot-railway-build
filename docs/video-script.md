@@ -387,6 +387,75 @@ GITHUB ACTIONS                    DEPOT CI
 
 ---
 
+## Section 2.6: New Depot CI Features (3:00 - 3:20)
+
+### 3:00 - 3:10 | Features GitHub Actions Doesn't Have ⭐
+
+**[VISUAL]** Feature comparison grid appears:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    DEPOT CI EXCLUSIVE FEATURES                   │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ✅ OIDC Authentication        ❌ Not in GitHub Actions         │
+│     No static tokens. Ever.                                      │
+│                                                                 │
+│  ✅ Replay From Any Step       ❌ Not in GitHub Actions         │
+│     Skip what worked. Debug what failed.                        │
+│                                                                 │
+│  ✅ SSH Into Running Jobs     ❌ Not in GitHub Actions         │
+│     Full debugging access. Live.                                 │
+│                                                                 │
+│  ✅ Per-Second Billing        ❌ GitHub rounds up              │
+│     Pay for exactly what you use.                                │
+│                                                                 │
+│  ✅ AI Failure Diagnosis      ❌ Not in GitHub Actions         │
+│     Know what went wrong. instantly.                             │
+│                                                                 │
+│  ✅ Agent-Native Workflows    ❌ Not in GitHub Actions         │
+│     Built for AI coding agents.                                  │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**[SOUND]** Subtle "checkmark" sounds as each feature appears
+
+**[VOICEOVER]**
+"Depot CI isn't just faster — it has features GitHub Actions simply doesn't have."
+
+---
+
+### 3:10 - 3:20 | The OIDC Advantage
+
+**[VISUAL]** Animation showing authentication difference:
+
+```
+GITHUB ACTIONS                          DEPOT CI
+┌──────────────────┐                  ┌──────────────────┐
+│ Create token     │                  │ OIDC Trust       │
+│ Copy to secrets  │                  │ Relationship     │
+│ Rotate manually  │                  │                  │
+│ ⚠️ If leaked →   │                  │ ✅ Auto-rotating  │
+│    security risk │                  │    temporary     │
+└──────────────────┘                  └──────────────────┘
+```
+
+**[VOICEOVER]**
+"GitHub Actions requires static API tokens. Create them, store them, rotate them manually. If they leak? Security breach."
+
+**[VISUAL]** Animation shows OIDC trust relationship being created in Depot dashboard
+
+**[VOICEOVER]**
+"Depot CI uses OIDC — OpenID Connect. One-time setup. No tokens to store. No tokens to rotate. Each workflow run gets a temporary, auto-expiring credential. This is how authentication should work."
+
+**[VISUAL]** Lock icon animation, shield appears
+
+**[VOICEOVER]**
+"Security without the friction."
+
+---
+
 ## Section 3: The Demo (3:20 - 4:50)
 
 ### 3:20 - 3:35 | Introducing OpenClaw
@@ -919,9 +988,26 @@ The "Why It Wins" section (1:30-3:10) showcases these key technical differentiat
 | **State** | Stateless (crash = restart) | Durable (crash = resume) | Reliable recovery |
 | **Scheduling** | Pull model (one job at a time) | Push model (DAG-aware) | Optimal parallelization |
 | **Security** | Shared runners | Isolated sandboxes | Never shared, always secure |
+| **Authentication** | Static tokens (manual rotation) | OIDC (auto-rotating) | No tokens to manage |
 | **Billing** | Per-minute (rounded up) | Per-second (exact) | Fair pricing |
 | **Debugging** | Restart from beginning | Replay from any step + SSH + Metrics | Faster iteration |
 | **AI Features** | None | AI failure diagnosis + Agent loops | Built for AI development |
+
+---
+
+## Real Performance Data (Tests Run 2026-03-30)
+
+| Build Type | Time | vs Local Clean |
+|------------|------|----------------|
+| **Local Clean (no cache)** | 3:03 (183s) | baseline |
+| **Local Cached (no changes)** | 0:01 (1.3s) | 140x faster |
+| **Local Cached (code change)** | 0:17 (17s) | 10.8x faster |
+| **Railway Initial Build** | 0:29 (29s) | 6.3x faster |
+| **Railway Rebuild (cached)** | 0:04 (3.8s) | 48x faster |
+| **GitHub Actions** (estimated) | ~4:00 | ~1x slower |
+| **Depot CI** (expected) | ~0:30 | ~6x faster |
+
+> **Note:** Depot CI times are based on Depot's published benchmarks and our Railway tests. Actual Depot CI performance would be measured during Flow 4 testing.
 
 ---
 
