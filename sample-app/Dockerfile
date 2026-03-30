@@ -5,7 +5,14 @@ FROM node:18-alpine AS base
 WORKDIR /app
 
 # Install dependencies layer (cached by Depot)
+# Install ALL dependencies (including dev) for build stage
 FROM base AS deps
+COPY package.json package-lock.json ./
+RUN npm ci && \
+    npm cache clean --force
+
+# Production dependencies only (for final image)
+FROM base AS production-deps
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && \
     npm cache clean --force
@@ -20,9 +27,9 @@ RUN npm run build
 FROM base AS production
 ENV NODE_ENV=production
 
-# Copy built files and production dependencies
+# Copy built files and production dependencies only
 COPY --from=build /app/dist ./dist
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=production-deps /app/node_modules ./node_modules
 COPY package.json ./
 
 # Create non-root user
