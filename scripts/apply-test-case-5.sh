@@ -116,9 +116,9 @@ export class Cache {
 EOF
 
 # Update index.ts with new endpoints
-if ! grep -q "Database" sample-app/src/index.ts; then
+if ! grep -q "Database" src/index.ts; then
   # Add imports
-  sed -i "7i import { Database } from './database.js';\\nimport { Cache } from './cache.js';" sample-app/src/index.ts
+  sed -i "7i import { Database } from './database.js';\\nimport { Cache } from './cache.js';" src/index.ts
 
   # Add initialization and endpoints
   sed -i "/const PORT =/a\\
@@ -130,7 +130,7 @@ const db = new Database({\\
   database: process.env.DB_NAME || 'test'\\
 });\\
 \\
-const cache = new Cache();" sample-app/src/index.ts
+const cache = new Cache();" src/index.ts
 
   # Add endpoints before server start
   sed -i "/app.listen(PORT/a\\
@@ -157,7 +157,7 @@ app.get('/cache-stats', (_req, res) => {\\
     size: cache.size(),\\
     testValue: value\\
   });\\
-});" sample-app/src/index.ts
+});" src/index.ts
 fi
 
 cd ..
