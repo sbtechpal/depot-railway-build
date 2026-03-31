@@ -114,15 +114,17 @@ jobs:
         with:
           context: ./sample-app
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ env.GHCR_IMAGE }}:${{ github.sha }}
+            ${{ env.GHCR_IMAGE }}:gh-latest
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Run tests in Docker image
         run: |
-          echo "Testing image: ${{ steps.meta.outputs.tags }}"
-          docker run --rm ${{ env.GHCR_IMAGE }}:gh-latest npm test
+          echo "Testing image: ${{ env.GHCR_IMAGE }}:${{ github.sha }}"
+          docker run --rm ${{ env.GHCR_IMAGE }}:${{ github.sha }} npm test
 
       - name: Image built successfully
         run: |
