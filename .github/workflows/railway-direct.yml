@@ -51,8 +51,9 @@ jobs:
         with:
           context: ./sample-app
           push: true
-          tags: ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:latest
-          tags: ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:${{ github.sha }}
+          tags: |
+            ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:latest
+            ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:${{ github.sha }}
           cache: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
