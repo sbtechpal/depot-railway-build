@@ -14,7 +14,7 @@ Performance test results for Flow 2 (Railway Auto-Build).
 |-----------|-------------|------|-----------|-----------|
 | **1. Baseline (cached)** | No changes, fresh branch | **3.66s** | 1.8x slower | ~100% |
 | **2. Comment Change** | Source comment modified | **16.88s** | 1.2x slower | ~80% |
-| **3. New Function** | New utils.ts file | TBD | TBD | ~60% |
+| **3. New Function** | New utils.ts file | **15.02s** | 1.1x faster | ~60% |
 | **4. New Dependency** | Package.json change | TBD | TBD | ~40% |
 | **5. Major Changes** | Multiple new packages | TBD | TBD | ~10% |
 
@@ -75,10 +75,51 @@ Performance test results for Flow 2 (Railway Auto-Build).
 2. New branch = no layer cache history
 3. Slightly slower network/download overhead
 
+**Why Railway is slower:**
+1. No persistent cache across branches (this is performance-testing branch, not main)
+2. New branch = no layer cache history
+3. Slightly slower network/download overhead
+
 **Expected vs Actual:**
 - Expected: ~10-15s
 - Actual: 16.88s
 - Within expected range
+
+---
+
+### Test Case 3: New Function
+
+**Log:** `flow2-railway-build-logs/Test-Case3-New-Function-buildlogs.1774933206407.log`
+
+**Time:** **15.02 seconds**
+
+**Build Breakdown:**
+- npm ci (deps): ~2s (04:57:38.150 → 04:57:40.030)
+- npm ci (production-deps): ~2.2s (04:57:40.030 → 04:57:42.266)
+- TypeScript build: ~1.6s (04:57:38.163 → 04:57:39.769)
+- Total: 15.02s
+
+**Cache Behavior:**
+- ✅ deps stages: CACHED
+- ✅ production-deps: CACHED
+- ❌ build (COPY source): REBUILT (new file utils.ts)
+- ❌ build (tsc): REBUILT
+- ✅ production: CACHED
+
+**Comparison to Flow 1:**
+- Flow 1 (Local): 17 seconds
+- Flow 2 (Railway): 15.02 seconds
+- **Railway is 1.1x faster** 🎉
+
+**Why Railway is faster:**
+- Infrastructure variation (could be faster this run)
+- Better network to npm registry
+- Optimized build servers
+
+**Expected vs Actual:**
+- Expected: ~15-25s (new file should be slower than comment)
+- Actual: 15.02s
+- On the faster end (great Railway performance!)
 
 ### Test Case 1: Baseline (Cached)
 
