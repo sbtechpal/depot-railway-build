@@ -105,7 +105,12 @@ jobs:
           project: ${{ env.DEPOT_PROJECT_ID }}
           token: ${{ secrets.DEPOT_TOKEN }}  # Optional! Falls back to OIDC
           context: ./sample-app
-          tags: openclaw-demo:${{ github.sha }},openclaw-demo:depot-latest
+          tags: |
+            openclaw-demo:${{ github.sha }}
+            openclaw-demo:depot-latest
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Run tests
         run: |
