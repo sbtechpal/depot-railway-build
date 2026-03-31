@@ -4,6 +4,59 @@ Complete instructions for running each test case individually for all 4 flows.
 
 ---
 
+## Quick Start: Using Workflow Dropdowns ⚡
+
+**Flows 3 & 4 (GitHub Actions & Depot CI) now have built-in test case selection!**
+
+### How It Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  GitHub Actions Workflow UI                                 │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Run workflow ▼                                             │
+│  ┌──────────────────────────────────────┐                  │
+│  │ Use workflow from:                  │                  │
+│  │ Branch: main                    ▼   │                  │
+│  │                                     │                  │
+│  │ Performance Test Case ▼            │  ← Select here!   │
+│  │ ┌───────────────────────────────┐  │                  │
+│  │ │ • baseline                     │  │                  │
+│  │ │ • test-2-comment               │  │                  │
+│  │ │ • test-3-function             │  │                  │
+│  │ │ • test-4-dependency            │  │                  │
+│  │ │ • test-5-major                 │  │                  │
+│  │ └───────────────────────────────┘  │                  │
+│  │                                     │                  │
+│  │ [ Run workflow ]                   │                  │
+│  └──────────────────────────────────────┘                  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Flow 3: GitHub Actions → Railway
+
+1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/railway-direct.yml
+2. Click **"Run workflow"**
+3. Select test case from dropdown
+4. Click **"Run workflow"**
+
+### Flow 4: Depot CI → Railway
+
+1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/depot-ci.yml
+2. Click **"Run workflow"**
+3. Select test case from dropdown
+4. Click **"Run workflow"**
+
+**The workflow automatically:**
+- ✅ Applies the test case changes
+- ✅ Displays expected cache hit percentage
+- ✅ Shows timing for each build step
+- ✅ Deploys to Railway
+
+---
+
 ## Preparation
 
 **Before starting, ensure you have:**
@@ -215,212 +268,55 @@ git push
 
 ## Flow 3: GitHub Actions → Railway
 
-### Test Case 1: Baseline (No Changes)
+### Using the Test Case Dropdown ⚡
 
-**Purpose:** Measure GitHub Actions cached build
+**All test cases are now available as dropdown options!**
 
-**Steps:**
-1. Go to: https://github.com/bytechie/depot-railway-build/actions
-2. Click **"Build & Deploy to Railway (Baseline)"**
-3. Click **"Run workflow"**
-4. Leave defaults, click **"Run workflow"**
-5. Watch the progress
-6. Record total workflow time
-
-**Record:** `___ seconds`
-
----
-
-### Test Case 2: Comment Change
-
-**Purpose:** Minimal source change via GitHub Actions
-
-```bash
-# Apply test case
-./scripts/apply-test-case-2.sh
-
-# Commit and push (triggers workflow via push if enabled)
-# OR use manual trigger:
-git add sample-app/src/index.ts
-git commit -m "Test Case 2: Comment change"
-# Note: Manual trigger required since workflows are set to workflow_dispatch only
-```
-
-**Manual Trigger:**
+**Steps for any test case:**
 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/railway-direct.yml
 2. Click **"Run workflow"**
-3. Click **"Run workflow"**
-4. Watch the progress
-5. Record total workflow time
+3. Select test case from dropdown:
+   - `baseline` - No changes
+   - `test-2-comment` - Comment change
+   - `test-3-function` - New function
+   - `test-4-dependency` - New dependency
+   - `test-5-major` - Major changes
+4. Click **"Run workflow"**
+5. Watch the progress
+6. Record total workflow time from logs
 
-**Record:** `___ seconds`
-
----
-
-### Test Case 3: New Function
-
-**Purpose:** Small code addition via GitHub Actions
-
-```bash
-# Apply test case
-./scripts/apply-test-case-3.sh
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/railway-direct.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
-
----
-
-### Test Case 4: New Dependency
-
-**Purpose:** Package.json change via GitHub Actions
-
-```bash
-# Apply test case
-./scripts/apply-test-case-4.sh
-
-# Commit changes first
-git add sample-app/
-git commit -m "Test Case 4: New dependency"
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/railway-direct.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
-
----
-
-### Test Case 5: Major Changes
-
-**Purpose:** Significant changes via GitHub Actions
-
-```bash
-# Apply test case
-./scripts/apply-test-case-5.sh
-
-# Commit changes first
-git add sample-app/
-git commit -m "Test Case 5: Major changes"
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/railway-direct.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
+**The workflow automatically:**
+- Applies the test case changes
+- Displays expected cache hit
+- Builds and deploys
+- Shows timing for each step
 
 ---
 
 ## Flow 4: Depot CI → Railway
 
-### Test Case 1: Baseline (No Changes)
+### Using the Test Case Dropdown ⚡
 
-**Purpose:** Measure Depot CI cached build
+**All test cases are now available as dropdown options!**
 
-**Steps:**
-1. Go to: https://github.com/bytechie/depot-railway-build/actions
-2. Click **"Build & Deploy with Depot CI"**
-3. Click **"Run workflow"**
-4. Leave defaults, click **"Run workflow"**
+**Steps for any test case:**
+1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/depot-ci.yml
+2. Click **"Run workflow"**
+3. Select test case from dropdown:
+   - `baseline` - No changes
+   - `test-2-comment` - Comment change
+   - `test-3-function` - New function
+   - `test-4-dependency` - New dependency
+   - `test-5-major` - Major changes
+4. Click **"Run workflow"**
 5. Watch the progress
-6. Record total workflow time
+6. Record total workflow time from logs
 
-**Record:** `___ seconds`
-
----
-
-### Test Case 2: Comment Change
-
-**Purpose:** Minimal source change via Depot CI
-
-```bash
-# Apply test case
-./scripts/apply-test-case-2.sh
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/depot-ci.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
-
----
-
-### Test Case 3: New Function
-
-**Purpose:** Small code addition via Depot CI
-
-```bash
-# Apply test case
-./scripts/apply-test-case-3.sh
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/depot-ci.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
-
----
-
-### Test Case 4: New Dependency
-
-**Purpose:** Package.json change via Depot CI
-
-```bash
-# Apply test case
-./scripts/apply-test-case-4.sh
-
-# Commit changes first
-git add sample-app/
-git commit -m "Test Case 4: New dependency"
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/depot-ci.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
-
----
-
-### Test Case 5: Major Changes
-
-**Purpose:** Significant changes via Depot CI
-
-```bash
-# Apply test case
-./scripts/apply-test-case-5.sh
-
-# Commit changes first
-git add sample-app/
-git commit -m "Test Case 5: Major changes"
-
-# Manual trigger
-# 1. Go to: https://github.com/bytechie/depot-railway-build/actions/workflows/depot-ci.yml
-# 2. Click "Run workflow"
-# 3. Click "Run workflow"
-# 4. Watch progress
-```
-
-**Record:** `___ seconds`
+**The workflow automatically:**
+- Applies the test case changes
+- Displays expected cache hit
+- Builds with Depot CI
+- Shows timing for each step
 
 ---
 
@@ -491,6 +387,16 @@ git clean -fd sample-app/
 3. **Note cache behavior** - Check which layers were rebuilt
 4. **Compare across flows** - Same test case across all 4 flows shows true difference
 5. **Document environment** - Note your machine specs for local builds
+6. **Use dropdowns for Flows 3 & 4** - Much easier than manual script running!
+
+## Workflow Test Case Quick Reference
+
+| Flow | How to Select Test Case |
+|------|------------------------|
+| **Flow 1: Local** | Run `./scripts/apply-test-case-N.sh` manually |
+| **Flow 2: Railway** | Run script, then `git push` |
+| **Flow 3: GitHub Actions** | Use dropdown in workflow UI ⚡ |
+| **Flow 4: Depot CI** | Use dropdown in workflow UI ⚡ |
 
 ---
 
