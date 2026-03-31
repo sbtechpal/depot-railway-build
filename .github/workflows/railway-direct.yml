@@ -1,6 +1,6 @@
 # Flow 3: GitHub Actions → Railway (Baseline)
 # This workflow represents the traditional CI/CD approach
-# Builds Docker image in GitHub Actions, then deploys to Railway
+# Builds Docker image in GitHub Actions, pushes to GHCR, deploys to Railway
 # Used as a baseline to compare against Depot CI performance
 
 name: Build & Deploy to Railway (Baseline)
@@ -23,6 +23,8 @@ env:
   NODE_VERSION: '18'
   RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
   RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+  # GitHub Container Registry
+  GHCR_IMAGE: ghcr.io/${{ github.repository_owner }}/openclaw-demo
 
 jobs:
   build:
@@ -31,6 +33,7 @@ jobs:
     timeout-minutes: 15
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.build.outputs.digest }}
 
     steps:
       - name: Checkout code
@@ -39,21 +42,32 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Extract metadata for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: openclaw-demo
+          images: ${{ env.GHCR_IMAGE }}
           tags: |
             type=sha,prefix={{branch}}-
             type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       - name: Build Docker image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: ./sample-app
-          load: true  # Load into Docker daemon (not push)
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           cache: type=gha
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -62,18 +76,14 @@ jobs:
 
       - name: Run tests in Docker image
         run: |
-          docker run --rm ${{ steps.meta.outputs.tags }} npm test
+          echo "Testing image: ${{ steps.meta.outputs.tags }}"
+          docker run --rm ${{ env.GHCR_IMAGE }}:${{ github.sha }} npm test
 
-      - name: Save Docker image
+      - name: Image built successfully
         run: |
-          docker save ${{ steps.meta.outputs.tags }} | gzip > /tmp/docker-image.tar.gz
-
-      - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: docker-image
-          path: /tmp/docker-image.tar.gz
-          retention-days: 1
+          echo "::notice::Image built and pushed to GHCR"
+          echo "Image: ${{ steps.meta.outputs.tags }}"
+          echo "Digest: ${{ steps.build.outputs.digest }}"
 
   deploy:
     name: Deploy to Railway
@@ -86,36 +96,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download Docker image artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: docker-image
-          path: /tmp
-
-      - name: Load Docker image
-        run: |
-          docker load < /tmp/docker-image.tar.gz
-
       - name: Install Railway CLI
         run: |
           curl -sSL https://railway.app/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Deploy to Railway
+      - name: Deploy GHCR image to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          IMAGE: ${{ env.GHCR_IMAGE }}:${{ github.sha }}
         run: |
-          echo "::group::Deploying Docker image to Railway"
+          echo "::group::Deploying GHCR image to Railway"
+          echo "Image: $IMAGE"
           cd sample-app
-          # Railway will build and deploy using the Dockerfile
-          railway up --service ${{ env.RAILWAY_SERVICE_ID }}
+
+          # Deploy using the pre-built GHCR image
+          railway up --service ${{ env.RAILWAY_SERVICE_ID }} --image $IMAGE
           echo "::endgroup::"
 
       - name: Verify deployment
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          echo "Deployment URL:"
+          echo "🚀 Deployment URL:"
           railway domain --service ${{ env.RAILWAY_SERVICE_ID }}
 
   benchmark:
@@ -135,6 +138,7 @@ jobs:
           echo "🐌 Traditional CI:"
           echo "   - Docker build on ubuntu-latest"
           echo "   - GitHub Actions cache (layer caching)"
-          echo "   - Image built locally, then deployed via Railway"
+          echo "   - Image stored in GHCR"
+          echo "   - Railway deploys from GHCR"
           echo ""
           echo "⚡ Compare with Depot CI for 5-10x speedup"
