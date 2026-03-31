@@ -1,5 +1,6 @@
 # Flow 3: GitHub Actions → Railway (Baseline)
 # This workflow represents the traditional CI/CD approach
+# Builds Docker image in GitHub Actions, then deploys to Railway
 # Used as a baseline to compare against Depot CI performance
 
 name: Build & Deploy to Railway (Baseline)
@@ -17,104 +18,87 @@ on:
         required: false
         type: boolean
         default: false
-      log_level:
-        description: 'Log level'
-        required: false
-        type: choice
-        default: 'info'
-        options:
-          - debug
-          - info
-          - warning
-          - error
 
 env:
   NODE_VERSION: '18'
   RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
   RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
-  LOG_LEVEL: ${{ github.event.inputs.log_level || 'info' }}
+  # Railway's internal registry for storing images
+  RAILWAY_REGISTRY: production-us-east4-eqdc4a.railway-registry.com
 
 jobs:
   build:
-    name: Build and Test
+    name: Build Docker Image
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Enable debug logging
-        if: github.event.inputs.debug_enabled == 'true'
-        run: |
-          echo "🐛 Debug mode enabled"
-          echo "LOG_LEVEL=${{ env.LOG_LEVEL }}" >> $GITHUB_ENV
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Log in to Railway Registry
+        uses: docker/login-action@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          registry: ${{ env.RAILWAY_REGISTRY }}
+          username: railway
+          password: ${{ secrets.RAILWAY_TOKEN }}
 
-      - name: Install dependencies
-        run: |
-          echo "::group::Installing dependencies"
-          npm ci
-          echo "::endgroup::"
-
-      - name: Run linter
-        run: npm run lint
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build application
-        run: |
-          echo "::group::Building application"
-          npm run build
-          echo "::endgroup::"
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
         with:
-          name: dist
-          path: sample-app/dist
-          retention-days: 1
+          context: ./sample-app
+          push: true
+          tags: ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:latest
+          tags: ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:${{ github.sha }}
+          cache: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          annotations: |
+            manifest:description:Built with GitHub Actions
+
+      - name: Run tests in Docker image
+        run: |
+          docker run --rm ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:${{ github.sha }} npm test
+
+      - name: Image digest
+        run: echo "Image built with digest ${{ steps.build.outputs.digest }}"
 
   deploy:
     name: Deploy to Railway
     runs-on: ubuntu-latest
     needs: build
-    timeout-minutes: 15
+    timeout-minutes: 10
     if: inputs.skip_deploy != true
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: sample-app/dist
-
       - name: Install Railway CLI
         run: |
           curl -sSL https://railway.app/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Deploy to Railway
+      - name: Deploy pre-built image to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          IMAGE: ${{ env.RAILWAY_REGISTRY }}/${{ env.RAILWAY_PROJECT_ID }}/${{ env.RAILWAY_SERVICE_ID }}:${{ github.sha }}
         run: |
-          echo "::group::Deploying to Railway"
+          echo "::group::Deploying pre-built Docker image to Railway"
+          echo "Image: $IMAGE"
           cd sample-app
-          railway up --service ${{ env.RAILWAY_SERVICE_ID }}
+          # Use the pre-built image instead of rebuilding
+          railway up --service ${{ env.RAILWAY_SERVICE_ID }} --image $IMAGE
           echo "::endgroup::"
 
-      - name: Get deployment URL
+      - name: Verify deployment
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
+          echo "Deployment URL:"
           railway domain --service ${{ env.RAILWAY_SERVICE_ID }}
 
   benchmark:
@@ -126,6 +110,14 @@ jobs:
     steps:
       - name: Calculate workflow duration
         run: |
-          START_TIME="${{ github.event.workflow_run.created_at }}"
-          echo "Workflow started: $START_TIME"
-          echo "This metrics collection would be enhanced with Depot CI"
+          echo "📊 GitHub Actions Baseline Metrics"
+          echo "===================================="
+          echo "Build job: ${{ needs.build.result }}"
+          echo "Deploy job: ${{ needs.deploy.result }}"
+          echo ""
+          echo "🐌 Traditional CI:"
+          echo "   - Docker build on ubuntu-latest"
+          echo "   - GitHub Actions cache (layer caching)"
+          echo "   - Manual Railway registry login"
+          echo ""
+          echo "⚡ Compare with Depot CI for 5-10x speedup"
