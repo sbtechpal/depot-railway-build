@@ -50,19 +50,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Apply Test Case 2: Comment Change
+      - name: "Apply Test Case 2: Comment Change"
         if: ${{ inputs.test_case == 'test-2-comment' }}
         run: ./scripts/apply-test-case-2.sh
 
-      - name: Apply Test Case 3: New Function
+      - name: "Apply Test Case 3: New Function"
         if: ${{ inputs.test_case == 'test-3-function' }}
         run: ./scripts/apply-test-case-3.sh
 
-      - name: Apply Test Case 4: New Dependency
+      - name: "Apply Test Case 4: New Dependency"
         if: ${{ inputs.test_case == 'test-4-dependency' }}
         run: ./scripts/apply-test-case-4.sh
 
-      - name: Apply Test Case 5: Major Changes
+      - name: "Apply Test Case 5: Major Changes"
         if: ${{ inputs.test_case == 'test-5-major' }}
         run: ./scripts/apply-test-case-5.sh
 
