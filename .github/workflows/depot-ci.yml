@@ -42,6 +42,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      packages: write
 
     steps:
       - name: Checkout code
@@ -108,7 +109,7 @@ jobs:
           tags: |
             openclaw-demo:${{ github.sha }}
             openclaw-demo:depot-latest
-          push: true
+          push: false
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
