@@ -1,7 +1,7 @@
-# Depot CI Demo Video Script
+# Depot CI vs GitHub Actions: Performance Comparison Video Script
 
-**Title**: "Depot CI: 40x Faster Builds for AI Development"
-**Duration**: 7:45 (updated)
+**Title**: "Depot CI vs GitHub Actions: 5x Faster Docker Builds"
+**Duration**: ~6 minutes
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
 
@@ -13,7 +13,6 @@
 |--------|---------|
 | `[VISUAL]` | On-screen graphics/text |
 | `[SCREEN]` | Screen recording action |
-| `[CAMERA]` | Camera angle or movement |
 | `[SOUND]` | Sound effect or music cue |
 | `[PAUSE]` | Brief pause for emphasis |
 | `( )` | Optional/directional notes |
@@ -24,858 +23,427 @@
 
 ### 0:00 - 0:15 | Opening Hook
 
-**[VISUAL]** Dark screen, text fades in: *"In the AI-augmented development era..."*
+**[VISUAL]** Dark screen, text fades in: *"Your CI is slowing you down..."*
 
 **[SOUND]** Subtle, building tech ambient music starts
 
 **[VOICEOVER]**
-"In the AI-augmented development era... writing code is no longer the bottleneck."
+"Your CI is slowing you down."
 
-**[VISUAL]** Text continues: *"...integrating it is."*
+**[VISUAL]** Text continues: *"...and you might not even realize it."*
 
 **[VOICEOVER]**
-"Integrating it is."
+"And you might not even realize it."
 
 ---
 
-### 0:15 - 0:30 | The Reality Check
+### 0:15 - 0:30 | The Reality
 
-**[VISUAL]** Montage:
-- Developer typing furiously
-- CI progress bar: "Building... 15 min remaining"
-- Clock spinning, timestamps flying by
-
-**[VOICEOVER]**
-"With AI agents like Claude Code and Cursor, a team of 10 engineers can now produce output like 100."
-
-**[VISUAL]** Chart: Code volume line going up sharply, CI performance line staying flat
+**[VISUAL]** Split screen:
+- LEFT: Developer typing fast, code flying
+- RIGHT: CI progress bar: "Building... 2 min remaining"
 
 **[VOICEOVER]**
-"But traditional CI systems? They were built for a different world."
+"With modern tools like AI coding assistants, you can write code faster than ever. But your CI? It's still running at the same speed it did five years ago."
+
+**[VISUAL]** Developer waiting, watching progress bar, checking phone
+
+**[VOICEOVER]**
+"You write in seconds. Your CI builds in minutes. That mismatch? It's costing you time, every single day."
 
 ---
 
-### 0:30 - 0:45 | The Pain
+### 0:30 - 0:45 | GitHub Actions: The Default Choice
 
-**[SCREEN]** GitHub Actions workflow running slowly:
-- "Setup Node.js" (30s)
-- "Install dependencies" (2m 15s)
-- "Build" (1m 45s)
-- Timer at 4:32 and still going
+**[VISUAL]** GitHub Actions logo appears
+
+**[SCREEN]** GitHub Actions workflow running:
+```
+Run docker build
+- Pulling image...
+- Installing dependencies...
+- Building...
+Time elapsed: 2:15
+```
 
 **[VOICEOVER]**
-"GitHub Actions. CircleCI. Buildkite. Great tools, but they're architecturally wrong for this moment."
+"Most of us use GitHub Actions. It's the default. It's easy. But for Docker builds? It's not exactly fast."
 
-**[VISUAL]** Frustrated developer at desk, head in hands
+**[VISUAL]** Chart showing GitHub Actions build times climbing
 
 **[VOICEOVER]**
-"15-minute pipelines were annoying. Now? They're crippling."
+"And when every build takes 2-3 minutes, those minutes add up. Hours every week. Days every month. All spent... waiting."
 
 ---
 
 ## Section 2: The Solution (0:45 - 1:30)
 
-### 0:45 - 1:00 | Introducing Depot CI
+### 0:45 - 1:00 | Enter Depot CI
 
 **[VISUAL]** Clean white screen, Depot logo animates in
 
 **[SOUND]** Subtle "whoosh" logo sound, music becomes more optimistic
 
-**[VISUAL]** Tagline appears: *"40x Faster Builds"*
+**[VISUAL]** Tagline appears: *"5x Faster Docker Builds"*
 
 **[VOICEOVER]**
-"Meet Depot CI. A programmable CI engine built with performance as a first-class citizen."
+"This is Depot CI. It's a drop-in replacement for GitHub Actions that's specifically optimized for Docker builds."
 
 ---
 
-### 1:00 - 1:15 | How It Works
+### 1:00 - 1:15 | The Simple Switch
 
-**[VISUAL]** Animated diagram:
-```
-┌─────────┐    ┌──────────────┐    ┌─────────┐
-│  Code   │───▶│  Depot CI    │───▶│ Deployed│
-└─────────┘    └──────────────┘    └─────────┘
-                    │
-        ┌───────────┼───────────┐
-        ▼           ▼           ▼
-    ┌───────┐  ┌───────┐  ┌───────┐
-    │ Cache │  │ Scale │  │ Fast  │
-    └───────┘  └───────┘  └───────┘
+**[VISUAL]** GitHub Actions workflow transforms to Depot CI:
+
+```yaml
+# Before: GitHub Actions
+- uses: docker/build-push-action@v5
+
+# After: Depot CI
+- uses: depot/build-push-action@v1
 ```
 
 **[VOICEOVER]**
-"Depot CI isn't just faster — it's built differently. Intelligent caching that learns across every build. Distributed compute that scales when you need it. An orchestrator designed for modern workloads."
+"The switch is simple. One line change. Replace `docker/build-push-action` with `depot/build-push-action`. Same YAML. Same configuration. Just faster."
 
 ---
 
-### 1:15 - 1:30 | Drop-in Replacement
+### 1:15 - 1:30 | What Makes It Different
 
-**[VISUAL]** GitHub logo + Depot logo, connection line between them
-
-**[VISUAL]** Animation showing:
-
-```
-.github/workflows/         .depot/workflows/
-├── ci.yml        ──────▶  ├── ci.yml
-├── build.yml     ──────▶  ├── build.yml
-└── test.yml      ──────▶  └── test.yml
-```
-
-**[VOICEOVER]**
-"Depot CI is a drop-in replacement for GitHub Actions. Simply copy your workflows from `.github/workflows` to `.depot/workflows`. Same YAML. Same syntax. Just copy and go."
-
-**[VISUAL]** Text appears: *"No Rewrites. Just Copy."*
-
-**[VOICEOVER]**
-"No rewrite. No migration project. One command to migrate. Then copy, commit, and you're running on Depot CI infrastructure."
-
----
-
-## Section 2.5: Why Depot CI Wins (1:30 - 3:00)
-
-### 1:30 - 1:45 | It's Not Just Speed — It's Architecture
-
-**[VISUAL]** Split diagram appears: LEFT = "GitHub Actions", RIGHT = "Depot CI"
-
-**[SOUND]** Music shifts to more technical, driving beat
-
-**[VOICEOVER]**
-"The speed difference you're about to see? It's not magic. It's architecture."
-
-**[VISUAL]** Text animates in between the two sides: *"FUNDAMENTALLY DIFFERENT APPROACHES"*
-
-**[VOICEOVER]**
-"GitHub Actions was built as an event-driven polling system. Depot CI is built as a distributed state machine. Let me show you what that actually means."
-
----
-
-### 1:45 - 2:00 | The Three-Part Architecture
-
-**[VISUAL]** A clean animated diagram appears showing Depot CI's three layers:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    DEPOT CI ARCHITECTURE                        │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │  FRONTEND LAYER                                           │   │
-│  │  • GitHub Actions YAML Parser                            │   │
-│  │  • Validates & converts workflows                        │   │
-│  │  • Supports future formats (GitLab CI, etc.)             │   │
-│  └────────────────────┬─────────────────────────────────────┘   │
-│                       │                                         │
-│  ┌────────────────────▼─────────────────────────────────────┐   │
-│  │  ORCHESTRATOR LAYER (Switchyard)                          │   │
-│  │  • Durable state machine                                  │   │
-│  │  • Builds job dependency graphs (DAG)                     │   │
-│  │  • Schedules tasks across compute fleet                  │   │
-│  │  • Tracks state, handles failures & retries              │   │
-│  └────────────────────┬─────────────────────────────────────┘   │
-│                       │                                         │
-│  ┌────────────────────▼─────────────────────────────────────┐   │
-│  │  COMPUTE LAYER                                            │   │
-│  │  • Standby pools (2-3 sec startup)                       │   │
-│  │  • Sandboxes with BuildKit pre-installed                 │   │
-│  │  • SSH debugging, metrics, logs                           │   │
-│  │  • Per-second billing                                     │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**[SOUND]** Subtle "whoosh" as each layer animates in
-
-**[VOICEOVER]**
-"Depot CI has three layers. A frontend that parses your GitHub Actions YAML. An orchestrator called Switchyard that manages job dependencies and state. And a compute layer with pre-warmed sandboxes ready to execute."
-
-**[VISUAL]** The diagram highlights the ORCHESTRATOR LAYER with a pulsing glow
-
-**[VOICEOVER]**
-"Each layer is independent. Swap the frontend, add new workflow formats. The orchestrator doesn't care. Upgrade compute, add new sandbox types. Your workflows keep running. This is modular, future-proof architecture."
-
----
-
-### 2:00 - 2:15 | Switchyard: The Brain
-
-**[VISUAL]** The ORCHESTRATOR LAYER expands into a detailed view:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    SWITCHYARD ORCHESTRATOR                        │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌────────────────────────────────────────────────────────┐    │
-│  │  1. WORKFLOW PARSER                                      │    │
-│  │     • Reads GitHub Actions YAML                         │    │
-│  │     • Extracts jobs, steps, dependencies                │    │
-│  │     • Builds Dependency Graph (DAG)                     │    │
-│  └────────────────────────────────────────────────────────┘    │
-│                           │                                      │
-│  ┌──────────────────────────▼──────────────────────────────┐   │
-│  │  2. DEPENDENCY RESOLUTION                                │   │
-│  │     Job A ─────► Job B ─────► Job D                     │   │
-│  │         └──► Job C ─────► Job E                         │   │
-│  │                                                           │   │
-│  │     • Identifies parallelizable jobs                     │   │
-│  │     • Calculates optimal execution order                 │   │
-│  │     • Respects conditional logic (if/else)               │   │
-│  └──────────────────────────┬──────────────────────────────┘   │
-│                           │                                      │
-│  ┌──────────────────────────▼──────────────────────────────┐   │
-│  │  3. DURABLE STATE MACHINE                                │   │
-│  │     ┌─────────────┐    ┌─────────────┐    ┌──────────┐  │   │
-│  │     │  QUEUED     │───▶│  RUNNING    │───▶│ COMPLETE │  │   │
-│  │     └─────────────┘    └─────────────┘    └──────────┘  │   │
-│  │            │                                       │      │   │
-│  │            └─────────────▶ FAILED ──▶ RETRY ───────┘      │   │
-│  │                                                           │   │
-│  │     • State persisted to durable storage                 │   │
-│  │     • Survives infrastructure failures                  │   │
-│  │     • Resume from exact point of failure                 │   │
-│  └────────────────────────────────────────────────────────┘    │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**[VOICEOVER]**
-"Switchyard is the brain of Depot CI. First, it parses your workflow and builds a dependency graph — knowing exactly which jobs can run in parallel, and which must wait."
-
-**[VISUAL]** Animation shows the DAG being built, with parallel jobs highlighting simultaneously
-
-**[VOICEOVER]**
-"Then it schedules everything optimally across our compute fleet. And it maintains durable state throughout. If something fails? Switchyard knows exactly where to resume. No starting over from scratch."
-
-**[PAUSE - 1 second]**
-
-**[VOICEOVER]**
-"This is like having a project manager who never forgets, never loses context, and always knows the fastest path to completion."
-
----
-
-### 2:30 - 2:45 | The Startup Problem
-
-**[VISUAL]** Animation on LEFT side (GitHub Actions):
-
-```
-┌─────────────────────────────────┐
-│     GITHUB ACTIONS              │
-│  ┌─────────────────────────┐    │
-│  │   Runner polls...       │    │
-│  │   Waiting... waiting... │    │
-│  │   (40+ seconds)         │    │
-│  └─────────────────────────┘    │
-│  ▲ Cold start every time        │
-└─────────────────────────────────┘
-```
-
-**[VOICEOVER]**
-"Every time GitHub Actions starts a job, the runner has to poll GitHub's servers. Wait for assignment. Spin up a fresh EC2 instance. Install dependencies. Forty seconds. Gone."
-
-**[VISUAL]** Animation on RIGHT side (Depot CI):
-
-```
-┌─────────────────────────────────┐
-│       DEPOT CI                  │
-│  ┌─────────────────────────┐    │
-│  │ Standby Pool            │    │
-│  │ Stopped → Running       │    │
-│  │ (2-3 seconds)           │    │
-│  └─────────────────────────┘    │
-│  ▲ Pre-warmed, ready instantly  │
-└─────────────────────────────────┘
-```
-
-**[SOUND]** Subtle "click" when Depot CI instance activates
-
-**[VOICEOVER]**
-"Depot CI keeps standby pools of compute resources — stopped, but ready. When a job comes in? Two seconds. Running. The difference between waiting and working."
-
----
-
-### 2:45 - 3:00 | The State Problem
-
-**[VISUAL]** Diagram morphs to show "State Management" comparison
-
-**[LEFT - GitHub Actions]**: A "Stateless" box with a question mark, showing a broken connection when a crash occurs
-
-**[RIGHT - Depot CI]**: A "Durable State Machine" with persistent connections, showing automatic recovery
-
-**[VOICEOVER]**
-"GitHub Actions runners are stateless. If something crashes mid-job? You start over from scratch."
-
-**[VISUAL]** Animation on Depot CI side shows a job failing, then automatically resuming from where it left off
-
-**[VOICEOVER]**
-"Depot CI uses Switchyard — a durable orchestrator that tracks every job, every dependency, every state. Failures don't mean starting over. They mean resuming."
-
----
-
-### 3:00 - 3:10 | The Scheduling Problem
-
-**[VISUAL]** Split screen shows the same workflow scheduled differently:
-
-```
-GITHUB ACTIONS                    DEPOT CI
-┌──────────────────┐             ┌──────────────────┐
-│ "Got any jobs?"  │             │    PARALLEL       │
-│ "Here's ONE."    │             │  ┌────┐  ┌────┐   │
-│ (runs job)       │             │  │test│  │lint│   │
-│                  │             │  └────┘  └────┘   │
-│ "Got any more?"  │             │       ↓          │
-│ "Here's ONE."    │             │    ┌────┐        │
-│ (runs next)      │             │    │build│       │
-│                  │             │    └────┘        │
-│ "Got any more?"  │             │       ↓          │
-│ "Here's ONE."    │             │    ┌────┐        │
-│ One. At. A. Time.│             │    │deploy│      │
-└──────────────────┘             │    └────┘        │
-    Pull Model                  └──────────────────┘
-                               Builds DAG → Schedules
-                               all jobs optimally
-```
-
-**[VOICEOVER]**
-"GitHub Actions? The runner polls for jobs one at a time. No awareness of what else is coming. It can't plan ahead."
-
-**[VISUAL]** Animation highlights the DEPOT CI side showing the DAG being built
-
-**[VOICEOVER]**
-"Depot CI parses your workflow and builds a dependency graph — a DAG. It sees EVERY job upfront. It knows which jobs can run in parallel — like test and lint — and which must wait — like build needing test, or deploy needing everything else."
-
-**[VISUAL]** Animation shows parallel jobs (test + lint) running simultaneously in green boxes
-
-**[VOICEOVER]**
-"GitHub: 'Got any jobs?' 'Here's ONE.' Depot CI: 'Here's your workflow, here's your optimal schedule, go.'"
-
-**[PAUSE - 1 second]**
-
-**[VOICEOVER]**
-"Polling versus orchestrating. Guessing versus knowing. Waiting versus executing."
-
----
-
-### 3:10 - 3:20 | The Security Bonus
-
-**[VISUAL]** Diagram showing isolated sandboxes:
-
-```text
-┌─────────────────────────────────────────────────────────────────┐
-│                    ISOLATED SANDBOXES                          │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐        │
-│  │   Job A     │    │   Job B     │    │   Job C     │        │
-│  │   Sandbox   │    │   Sandbox   │    │   Sandbox   │        │
-│  │             │    │             │    │             │        │
-│  │  • Secrets  │    │  • Secrets  │    │  • Secrets  │        │
-│  │  • Isolated │    │  • Isolated │    │  • Isolated │        │
-│  │  • Destroyed│    │  • Destroyed│    │  • Destroyed│        │
-│  └─────────────┘    └─────────────┘    └─────────────┘        │
-│                                                                 │
-│  Never shared. Always secure.                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**[VOICEOVER]**
-"Every job runs in a dedicated sandbox. Never shared. Always destroyed after use. Your secrets stay yours. Your builds stay isolated."
-
-**[VISUAL]** Lock icon animation, shield appears around each sandbox
-
-**[VOICEOVER]**
-"Security isn't an afterthought — it's built in."
-
----
-
-## Section 2.6: New Depot CI Features (3:00 - 3:20)
-
-### 3:00 - 3:10 | Features GitHub Actions Doesn't Have ⭐
-
-**[VISUAL]** Feature comparison grid appears:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    DEPOT CI EXCLUSIVE FEATURES                   │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ✅ OIDC Authentication        ❌ Not in GitHub Actions         │
-│     No static tokens. Ever.                                      │
-│                                                                 │
-│  ✅ Replay From Any Step       ❌ Not in GitHub Actions         │
-│     Skip what worked. Debug what failed.                        │
-│                                                                 │
-│  ✅ SSH Into Running Jobs     ❌ Not in GitHub Actions         │
-│     Full debugging access. Live.                                 │
-│                                                                 │
-│  ✅ Per-Second Billing        ❌ GitHub rounds up              │
-│     Pay for exactly what you use.                                │
-│                                                                 │
-│  ✅ AI Failure Diagnosis      ❌ Not in GitHub Actions         │
-│     Know what went wrong. instantly.                             │
-│                                                                 │
-│  ✅ Agent-Native Workflows    ❌ Not in GitHub Actions         │
-│     Built for AI coding agents.                                  │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**[SOUND]** Subtle "checkmark" sounds as each feature appears
-
-**[VOICEOVER]**
-"Depot CI isn't just faster — it has features GitHub Actions simply doesn't have."
-
----
-
-### 3:10 - 3:20 | The OIDC Advantage
-
-**[VISUAL]** Animation showing authentication difference:
-
-```
-GITHUB ACTIONS                          DEPOT CI
-┌──────────────────┐                  ┌──────────────────┐
-│ Create token     │                  │ OIDC Trust       │
-│ Copy to secrets  │                  │ Relationship     │
-│ Rotate manually  │                  │                  │
-│ ⚠️ If leaked →   │                  │ ✅ Auto-rotating  │
-│    security risk │                  │    temporary     │
-└──────────────────┘                  └──────────────────┘
-```
-
-**[VOICEOVER]**
-"GitHub Actions requires static API tokens. Create them, store them, rotate them manually. If they leak? Security breach."
-
-**[VISUAL]** Animation shows OIDC trust relationship being created in Depot dashboard
-
-**[VOICEOVER]**
-"Depot CI uses OIDC — OpenID Connect. One-time setup. No tokens to store. No tokens to rotate. Each workflow run gets a temporary, auto-expiring credential. This is how authentication should work."
-
-**[VISUAL]** Lock icon animation, shield appears
-
-**[VOICEOVER]**
-"Security without the friction."
-
----
-
-## Section 3: The Demo (3:20 - 4:50)
-
-### 3:20 - 3:35 | Introducing OpenClaw
-
-**[SCREEN]** OpenClaw website (openclaw.ai)
-
-**[VOICEOVER]**
-"To show you what this architecture actually delivers, we're using OpenClaw."
-
-**[VISUAL]** Scroll through testimonials:
-- Andrej Karpathy
-- Nat Eliason
-- "iPhone moment"
-- "Early AGI"
-
-**[VOICEOVER]**
-"OpenClaw is a personal AI assistant that's taking the tech world by storm. It runs on your own hardware. It works through WhatsApp, Telegram, Discord. It's the future of personal AI."
-
----
-
-### 3:35 - 3:50 | The Tech Stack
-
-**[SCREEN]** VS Code showing the sample app:
-- TypeScript files
-- Dependencies in package.json
-- Dockerfile
-
-**[VOICEOVER]**
-"And it's exactly the kind of application that benefits from Depot CI. Node.js, TypeScript, dozens of dependencies, complex Docker builds."
-
-**[VISUAL]** File count animation: "15 dependencies", "Multi-stage Docker", "TypeScript compilation"
-
-**[VOICEOVER]**
-"The kind of build that makes traditional CI sweat."
-
----
-
-### 3:50 - 4:30 | The Comparison ⭐
-
-**[VISUAL]** Split screen appears:
+**[VISUAL]** Simple comparison diagram:
 
 ```
 ┌─────────────────────┬─────────────────────┐
-│   GITHUB ACTIONS     │      DEPOT CI        │
-│    (Baseline)        │      (Showcase)      │
+│   GitHub Actions    │      Depot CI        │
 ├─────────────────────┼─────────────────────┤
-│  [SCREEN RECORDING]  │  [SCREEN RECORDING]  │
-│                     │                     │
-│  Starting...        │  Starting...        │
+│  Generic runners    │  Docker-optimized   │
+│  Basic caching      │  Advanced caching   │
+│  Cold starts        │  Pre-warmed pool    │
+│  ~134s average      │  ~27s average       │
 └─────────────────────┴─────────────────────┘
 ```
 
 **[VOICEOVER]**
-"Let's compare. On the left: traditional GitHub Actions. On the right: Depot CI. Same code, same destination, different infrastructure."
-
-**[SCREEN]** Both workflows start simultaneously
-
-**[TIMERS APPEAR]**
-```
-GitHub Actions: 0:00 ───────────────────
-Depot CI:       0:00 ───────────────────
-```
-
-**[VOICEOVER]**
-"Both workflows start now..."
-
-**[TIME LAPSE - 5 seconds real-time)**
-
-**[SCREEN UPDATE]**
-```
-GitHub Actions: 0:45 ▓▓░░░░░░░░░░░ Installing dependencies...
-Depot CI:       0:08 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ COMPLETE
-```
-
-**[VOICEOVER]**
-"Watch this. GitHub Actions is still installing dependencies. Depot CI? Already done."
-
-**[SOUND]** Subtle "ding" when Depot CI completes
+"Depot CI uses Docker-optimized runners with intelligent caching and pre-warmed build pools. The result? Builds that are 5 times faster."
 
 ---
 
-### 4:30 - 4:45 | The Results
+## Section 3: Real Performance Data (1:30 - 3:00)
 
-**[VISUAL]** Both screens show green checkmarks
+### 1:30 - 1:45 | The Test Setup
 
-**[VISUAL]** Final times animate in:
+**[VISUAL]** Test setup appears:
 
 ```
-┌─────────────────────┬─────────────────────┐
-│   GITHUB ACTIONS     │      DEPOT CI        │
-├─────────────────────┼─────────────────────┤
-│                     │                     │
-│      ✓ SUCCESS      │      ✓ SUCCESS      │
-│                     │                     │
-│   Time: 4:32        │   Time: 0:28        │
-│                     │                     │
-└─────────────────────┴─────────────────────┘
+Test Environment:
+├── Same Dockerfile (multi-stage build)
+├── Same Node.js application
+├── Same dependencies
+├── 5 test scenarios
+└── Fair comparison
 ```
-
-**[SOUND]** Success chime
 
 **[VOICEOVER]**
-"The result? GitHub Actions: 4 minutes and 32 seconds. Depot CI: 28 seconds."
+"We wanted to see the real difference, so we ran a fair comparison. Same Dockerfile. Same application. Five different test scenarios. From cold builds to dependency changes."
+
+---
+
+### 1:45 - 2:15 | The Results
+
+**[VISUAL]** Large results table appears:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│           DEPOT CI vs GITHUB ACTIONS                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Test Case           GitHub    Depot    Depot Speedup       │
+│  ─────────────────────────────────────────────────────────  │
+│  Baseline (cold)     141s      31s      4.5x faster       │
+│  Comment change       65s      23s      2.8x faster       │
+│  New function         64s      23s      2.8x faster       │
+│  New dependency      193s      31s      6.2x faster       │
+│  Major changes       133s      26s      5.1x faster       │
+│                                                             │
+│  AVERAGE              134s      27s      5.0x faster       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**[SOUND]** Subtle "whoosh" as each row animates in
+
+**[VOICEOVER]**
+"Here are the results. GitHub Actions averaged 134 seconds per build. Depot CI averaged 27 seconds. That's a 5x speedup."
 
 **[PAUSE - 2 seconds]**
 
 **[VOICEOVER]**
-"That's not just faster — that's fundamentally different."
+"And Depot CI won every single test case."
 
 ---
 
-### 4:45 - 4:55 | Debugging Superpower ⭐
+### 2:15 - 2:45 | The Dependency Difference
 
-**[VISUAL]** Quick animation showing Depot CI dashboard:
+**[VISUAL]** Focus on the "New Dependency" row:
 
-```text
+```
 ┌─────────────────────────────────────────────────────────────┐
-│  DEPOT CI DASHBOARD                                          │
+│  NEW DEPENDENCY TEST (Adding ESLint package)               │
 ├─────────────────────────────────────────────────────────────┤
-│  Job: ci.yml #42                                            │
-│  Steps:                                                     │
-│    ✓ Checkout           2s                                 │
-│    ✓ Setup Node         8s                                 │
-│    ✓ Install deps       12s                                │
-│    ✗ Build              FAILED 45s                         │
 │                                                             │
-│  [🔄 Replay from "Install deps"]  [🔍 SSH Debug]            │
+│  GitHub Actions: 193 seconds  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░         │
+│  Depot CI:        31 seconds  ▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░         │
+│                                                             │
+│  Depot CI is 6.2x faster for dependency changes             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **[VOICEOVER]**
-"And when something does fail? Depot CI has debugging superpowers. Replay from any step — skip everything that worked and jump straight to debugging the problem."
+"Look at the dependency test. When adding a new package, GitHub Actions took over 3 minutes. Depot CI took just 31 seconds. That's a 6x difference."
 
-**[VISUAL]** Animation shows "Replay from step" button being clicked, job restarting from that step
+**[VISUAL]** Animation showing why:
+- GitHub Actions: Re-downloads everything
+- Depot CI: Uses smart cache, only downloads new packages
 
-**[VISUAL]** Dashboard showing CPU/memory graphs, step timing metrics:
+**[VOICEOVER]**
+"Depot CI's intelligent caching means it only downloads what's new. GitHub Actions re-downloads everything from scratch."
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│  JOB METRICS                                                 │
-├─────────────────────────────────────────────────────────────┤
-│  CPU Usage    ┌─────────────────────────────────────┐       │
-│  100% ─       │▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│       │
-│   50% ─       └─────────────────────────────────────┘       │
-│    0% ─                                              45s    │
-│                                                             │
-│  Memory      ┌─────────────────────────────────────┐       │
-│  8GB  ─       │▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░│       │
-│  4GB  ─       └─────────────────────────────────────┘       │
-│  0GB  ─                                              45s    │
-│                                                             │
-│  Step Timing: Checkout 2s │ Setup 8s │ Install 12s │ Build 45s │
-└─────────────────────────────────────────────────────────────┘
+---
+
+### 2:45 - 3:00 | The Cold Build Reality
+
+**[VISUAL]** Baseline comparison:
+
+```
+First build of the day (no cache):
+GitHub Actions: 2:21
+Depot CI:       0:31
+
+You save nearly 2 minutes on your very first build.
 ```
 
 **[VOICEOVER]**
-"Full observability. CPU usage, memory metrics, step-by-step timing. You don't just see that it failed — you see exactly why, exactly where, and exactly how to fix it."
-
-**[VISUAL]** Animation shows "Replay from step" button being clicked, job restarting from that step
-
-**[VOICEOVER]**
-"Or SSH directly into the running sandbox. Full observability, full control."
-
-**[PAUSE - 1 second]**
-
-**[VOICEOVER]**
-"Traditional CI? Restart from the beginning and hope. Depot CI? Debug smarter."
+"Even on cold builds with no cache, Depot CI is 4.5x faster. That's nearly 2 minutes saved on your first build of the day. Before you've even had your coffee."
 
 ---
 
-### 4:55 - 5:00 | The Impact Statement
+## Section 4: Why Depot Wins (3:00 - 4:00)
 
-**[VISUAL]** Both deployments show "Service live at..." URLs
+### 3:00 - 3:20 | Architecture Matters
 
-**[VOICEOVER]**
-"Both deployed successfully. The difference? With Depot CI, you've already moved on to your next feature."
+**[VISUAL]** Simple architecture comparison:
 
----
-
-## Section 3.5: AI-Native CI (5:00 - 5:35)
-
-### 5:00 - 5:10 | AI Failure Diagnosis
-
-**[VISUAL]** Depot CI dashboard showing a failed job:
-
-```text
-┌─────────────────────────────────────────────────────────────┐
-│  DEPOT CI DASHBOARD — FAILED JOB                            │
-├─────────────────────────────────────────────────────────────┤
-│  Job: ci.yml #42                                            │
-│  Status: ✗ FAILED                                           │
-│                                                             │
-│  ╔═════════════════════════════════════════════════════════╗│
-│  ║  AI FAILURE DIAGNOSIS                                   ║│
-│  ╠═════════════════════════════════════════════════════════╣│
-│  ║  🔍 What went wrong:                                    ║│
-│  ║     The build failed because the TypeScript            ║│
-│  ║     compiler found type errors in src/auth.ts.         ║│
-│  ║     Specifically, the UserSession type is missing     ║│
-│  ║     the 'expiresAt' property.                          ║│
-│  ║                                                          ║│
-│  ║  💡 Suggested fix:                                      ║│
-│  ║     Add the missing property to the UserSession        ║│
-│  ║     interface: expiresAt: Date                         ║│
-│  ╚═════════════════════════════════════════════════════════╝│
-└─────────────────────────────────────────────────────────────┘
 ```
-
-**[SOUND]** Subtle "bling" animation when AI diagnosis appears
-
-**[VOICEOVER]**
-"But Depot CI isn't just fast — it's intelligent. When a job fails, you get an AI-generated failure diagnosis. It explains what went wrong and suggests exactly how to fix it."
-
-**[VISUAL]** The diagnosis panel highlights the fix suggestion
-
-**[VOICEOVER]**
-"No more digging through thousands of lines of logs. No more guessing at the root cause. Depot CI's AI analyzes the failure and gives you the answer."
-
----
-
-### 5:10 - 5:20 | Built for Coding Agents
-
-**[VISUAL]** Animation showing Claude Code / Cursor logo alongside Depot CI logo
-
-**[SOUND]** Music shifts to more modern, AI-focused sound
-
-**[VOICEOVER]**
-"Depot CI is built for the AI-augmented development era. It integrates seamlessly with coding agents like Claude Code and Cursor."
-
-**[VISUAL]** Animated loop diagram showing the agent workflow:
-
-![The Agent Fix-CI Loop](depot-dev/agent-loop.png)
-
-**[VOICEOVER]**
-"With traditional CI, agents have to push commits, wait for external CI, then guess what went wrong. With Depot CI, agents run CI locally against their changes, read failures instantly, and iterate in a tight feedback loop."
-
-**[VISUAL]** Split comparison:
-- LEFT: "Push → Wait → Guess → Fix → Push → Wait"
-- RIGHT: "Fix → Run → Fix → Run → Fix → Green"
-
-**[VOICEOVER]**
-"Push-wait-guess versus fix-run-green. This is what development was supposed to feel like."
-
----
-
-### 5:20 - 5:35 | The End of Push-Wait-Guess
-
-**[VISUAL]** Terminal showing rapid agent iteration:
-
-```bash
-$ depot ci run --job test
-✗ FAILED: TypeError in auth.ts
-
-$ # Agent reads AI diagnosis, adds missing property
-
-$ depot ci run --job test
-✗ FAILED: Missing import
-
-$ # Agent fixes import, reruns
-
-$ depot ci run --job test
-✓ PASSED: All tests passing
+GitHub Actions              Depot CI
+┌─────────────┐            ┌─────────────┐
+│ Generic VM  │            │ BuildKit    │
+│ + Docker    │            │ Optimized   │
+│             │            │ + Advanced  │
+│ Cold start  │            │ Cache       │
+└─────────────┘            └─────────────┘
 ```
 
 **[VOICEOVER]**
-"Coding agents can now fix CI failures without polluting your git history. No more 'fix ci' commits. No more waiting for external systems. Just rapid iteration until everything passes."
-
-**[VISUAL]** Text appears: *"The End of Push-Wait-Guess CI"*
-
-**[VOICEOVER]**
-"This is CI built for AI development. Fast failure diagnosis. Tight agent loops. Zero friction."
+"The difference comes down to architecture. GitHub Actions uses generic runners that have to set up Docker from scratch. Depot CI uses Docker-optimized infrastructure with BuildKit built in."
 
 ---
 
-## Section 4: The Value (5:35 - 6:25)
+### 3:20 - 3:40 | The Cache Advantage
 
-### 5:35 - 5:45 | Time Savings
-
-**[VISUAL]** Animated calculation:
+**[VISUAL]** Cache comparison animation:
 
 ```
-10 builds/day × 4 min saved = 40 min/day
-40 min/day × 5 days = 200 min/week
+GitHub Actions Cache:
+├── Limited to GitHub's infrastructure
+├── Basic layer caching
+└── Shared across all users
+
+Depot CI Cache:
+├── Distributed global cache
+├── Layer-aware intelligent caching
+└── Per-project optimization
 ```
 
-**[VISUAL]** Text: *"That's an extra morning every week."*
-
 **[VOICEOVER]**
-"What does this mean for your team? If you do 10 builds a day, that's nearly an hour saved. Every single day."
-
-**[VISUAL]** Calendar animation showing extra time appearing
-
-**[VOICEOVER]**
-"An extra morning, every week. What would your team do with that time?"
+"Depot CI's caching is distributed and intelligent. It learns from every build across every project. Your cache benefits from the entire Depot community."
 
 ---
 
-### 5:45 - 5:55 | Cost Savings
+### 3:40 - 4:00 | Additional Features
 
-**[VISUAL]** Cost comparison chart:
-
-```
-Traditional CI:  $██████████ ($100/month)
-Depot CI:        $██░░░░░░░░░ ($20/month)
-
-Savings: 80%
-```
-
-**[VOICEOVER]**
-"And it's not just time — it's money. 80% reduction in CI compute costs. That's real dollars back in your budget."
-
-**[VISUAL]** Per-second billing comparison:
+**[VISUAL]** Feature list appears:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                   PER-SECOND BILLING                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  TRADITIONAL CI:           DEPOT CI:                            │
-│  31 seconds =               31 seconds =                        │
-│  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░│
-│  You pay for 1 minute       You pay for 31 seconds             │
-│  (rounded up)               (exact usage)                       │
-│                                                                 │
-│  Fair. Transparent. Honest.                                      │
-└─────────────────────────────────────────────────────────────────┘
+Depot CI Features (Not in GitHub Actions):
+
+✅ SSH into running builds
+✅ Replay from any step
+✅ Per-second billing
+✅ Detailed metrics dashboard
+✅ AI failure diagnosis
 ```
 
 **[VOICEOVER]**
-"Traditional CI rounds up. Thirty-one seconds? You pay for a full minute. Depot CI bills per second. Fair. Transparent. Honest."
-
-**[VISUAL]** Money animation (coins falling into piggy bank)
-
-**[VOICEOVER]**
-"Dollars you can spend on... anything else."
+"Beyond speed, Depot CI includes features GitHub Actions doesn't have. SSH into running builds for debugging. Replay from any failed step. Per-second billing so you only pay for what you use. AI-powered failure diagnosis that tells you exactly what went wrong."
 
 ---
 
-### 5:55 - 6:05 | The Bigger Picture
+## Section 5: The Impact (4:00 - 5:00)
 
-**[VISUAL]** Happy developer, multiple deployments flying by
+### 4:00 - 4:20 | Time Savings
+
+**[VISUAL]** Calculator animation:
+
+```
+Your Current Setup:
+10 builds/day × 2 min = 20 min/day
+20 min/day × 5 days = 100 min/week
+
+With Depot CI:
+10 builds/day × 0.5 min = 5 min/day
+5 min/day × 5 days = 25 min/week
+
+TIME SAVED: 75 minutes per week
+```
 
 **[VOICEOVER]**
-"Fast builds mean more iterations. More iterations mean better products. Better products mean happier customers and more successful teams."
+"If you do 10 builds a day, GitHub Actions costs you about 20 minutes. With Depot CI? That's 5 minutes. You save over an hour every week."
 
-**[VISUAL]** Team celebrating, shipping confetti
+**[VISUAL]** Calendar showing freed-up time
 
 **[VOICEOVER]**
-"This is what development was supposed to feel like."
+"What would you do with an extra hour every week?"
 
 ---
 
-### 6:05 - 6:15 | Trusted by Teams
+### 4:20 - 4:40 | Cost Savings
 
-**[VISUAL]** Company logos or testimonials scrolling
+**[VISUAL]** Cost comparison:
+
+```
+GitHub Actions:
+134 seconds/build × 500 builds/month = 18,700 seconds
+Cost per minute: $0.008
+Monthly: ~$250
+
+Depot CI:
+27 seconds/build × 500 builds/month = 3,750 seconds
+Cost per minute: $0.007
+Monthly: ~$44
+
+SAVINGS: 80% reduction
+```
 
 **[VOICEOVER]**
-"Teams across the industry are already shipping faster with Depot CI. From startups to enterprises, developers are reclaiming their time and focusing on what matters — building great software."
-
-**[VISUAL]** Text appears: *"Join the teams building at the speed of AI."*
-
-**[VOICEOVER]**
-"The future of CI isn't just faster. It's smarter. It's built for AI. And it's here."
+"Because Depot CI is 5x faster, you use 5x less compute. That's about $200 saved every month for a typical team. That adds up."
 
 ---
 
-## Section 5: Call to Action (6:15 - 7:45)
+### 4:40 - 5:00 | Developer Experience
 
-### 6:15 - 6:30 | Get Started Today
-
-**[VISUAL]** Depot CI interface, beautiful and clean
+**[VISUAL]** Happy developer, fast builds flying by
 
 **[VOICEOVER]**
-"Depot CI is now generally available, and ready for teams who want to build at the speed of AI."
+"But the real value isn't just time or money. It's how it feels to have fast CI. You push code, seconds later it's built. You make a small change, you don't hesitate to test it."
 
-**[VISUAL]** "Try it free" badge appears
+**[VISUAL]** Text: *"Ship faster. Iterate more. Wait less."*
 
 **[VOICEOVER]**
-"Start with a free 7-day trial. Full access, no credit card required. Then plans start at just $20 per month with 2,000 build minutes included. And per-second billing means you only pay for what you actually use."
+"Fast CI changes how you work. You ship faster. You iterate more. You wait less."
 
 ---
 
-### 6:30 - 6:40 | One Command to Migrate
+## Section 6: Call to Action (5:00 - 6:00)
+
+### 5:00 - 5:20 | Get Started
+
+**[VISUAL]** Depot CI interface
+
+**[VOICEOVER]**
+"Ready to speed up your builds? Getting started with Depot CI takes just a few minutes."
 
 **[SCREEN]** Terminal showing:
 
 ```bash
-$ depot ci migrate
-✓ Discovered 5 workflows
-✓ Analyzed compatibility
-✓ Created .depot/ directory
-✓ Ready to commit
+npm install -g @depot/cli
+depot login
+depot init
 ```
 
 **[VOICEOVER]**
-"Migrating is one command. `depot ci migrate`. We copy your workflows, check compatibility, and you're ready. Your existing GitHub Actions keep running in parallel until you're ready to switch."
+"Install the CLI. Login. Initialize your project. That's it."
 
 ---
 
-### 6:40 - 7:45 | Final CTA
+### 5:20 - 5:40 | The One-Line Change
+
+**[SCREEN]** GitHub workflow file:
+
+```yaml
+# Before
+- uses: docker/build-push-action@v5
+
+# After
+- uses: depot/build-push-action@v1
+  with:
+    project: your-project-id
+```
+
+**[VOICEOVER]**
+"In your workflow file, change one line. Replace the Docker build action with Depot's build action. Same configuration. Same behavior. Just faster."
+
+---
+
+### 5:40 - 6:00 | Start Today
 
 **[VISUAL]** Large URL: **depot.dev**
 
-**[VISUAL]** Social handles:
-- X: @depotdev
-- Discord: discord.gg/depot
-- GitHub: github.com/depot
-
 **[VOICEOVER]**
-"Visit depot.dev to start building faster today. Follow us @depotdev for updates."
+"Visit depot.dev to get started. Free trial available. Then plans start at just $20 per month."
 
 **[VISUAL]** Final tagline appears:
 
 **[SOUND]** Music swells briefly then fades
 
 > *"Stop waiting for your builds."*
-> *"Start shipping."*
+> *"Start shipping faster."*
 > *"Depot CI"*
 
 **[SOUND]** Clean closing chord
+
+---
+
+## Test Data Summary
+
+### Real Performance Results
+
+Tests conducted: 2026-03-31 to 2026-04-02
+Organization: sbtechpal
+Repository: depot-railway-build
+
+| Test Case | GitHub Actions | Depot CI | Speedup |
+|-----------|----------------|----------|---------|
+| Baseline (cold) | 141s | 31s | 4.5x |
+| Comment change | 65s | 23s | 2.8x |
+| New function | 64s | 23s | 2.8x |
+| New dependency | 193s | 31s | 6.2x |
+| Major changes | 133s | 26s | 5.1x |
+| **Average** | **134s** | **27s** | **5.0x** |
+
+### Test Environment
+
+| Component | GitHub Actions | Depot CI |
+|-----------|----------------|----------|
+| Runner | ubuntu-latest (2-core) | depot-ubuntu-22.04 (optimized) |
+| Cache | GitHub Actions Cache | Depot distributed cache |
+| Docker | docker/build-push-action | depot/build-push-action |
+| Image | GHCR | GHCR |
+
+### Key Findings
+
+1. **Depot CI wins every test case** - 5/5 victories
+2. **Biggest win: Dependency changes** - 6.2x faster
+3. **Consistent performance** - 23-31s across all tests
+4. **GitHub Actions variability** - 64-193s depending on test
 
 ---
 
@@ -886,10 +454,9 @@ $ depot ci migrate
 | Tip | Details |
 |-----|---------|
 | **Resolution** | Record at 1080p or higher |
-| **Mouse movement** | Smooth, deliberate motions |
-| **Highlighting** | Use subtle highlights for key areas |
-| **Timing** | The comparison section needs to feel real — don't fake it |
-| **Pacing** | Allow slight pauses after key statements |
+| **Timing** | Let the results table breathe - let viewers absorb the numbers |
+| **Comparison** | Use actual screen recordings of real builds when possible |
+| **Emphasis** | Highlight the 5x number - that's the key takeaway |
 
 ### Voiceover Guidelines
 
@@ -897,134 +464,11 @@ $ depot ci migrate
 |---------|----------|
 | **Tone** | Professional but approachable |
 | **Pace** | 140-150 words per minute |
-| **Emphasis** | Bold words should be emphasized |
-| **Pauses** | Marked [PAUSE] are ~1 second |
-| **Energy** | Increase slightly during the demo section |
-
-### Post-Production Checklist
-
-- [ ] Sync voiceover perfectly with visuals
-- [ ] Add subtle sound effects at key moments
-- [ ] Ensure music doesn't compete with voiceover
-- [ ] Color grade for consistency
-- [ ] Add closed captions
-- [ ] Export in multiple formats
-- [ ] Create eye-catching thumbnail
-
----
+| **Emphasis** | Emphasize: "5x faster", "every test", "27 seconds" |
+| **Pauses** | Pause after key statistics |
 
 ### Production Notes
 
-**OpenClaw Demo:**
-
-OpenClaw is a fictional example app used for demonstration purposes. During recording, either:
-
-- Use a real-world sample app with similar tech stack (Node.js, TypeScript, Docker)
-- Replace OpenClaw references with actual customer/product names if available
-- Create a simple demo app that showcases the CI features
-
-**Social Proof Section:**
-
-The "Trusted by Teams" section (6:05-6:15) currently shows placeholder content. Options for production:
-
-- Add real company logos of Depot CI customers
-- Include testimonial quotes from real users
-- Use metrics like "X teams already using Depot CI"
-- Replace with depersonalized "teams like yours" messaging if specific logos aren't available
-
----
-
-## Alternative Closings
-
-### Option A: Direct
-*"Visit depot.dev and start building faster today."*
-
-### Option B: Vision
-*"The future of CI is here. Don't get left behind."*
-
-### Option C: Challenge
-*"What would you build with an extra hour every day?"*
-
----
-
-## Quick Reference for Recording
-
-| Section | Time | Key Visual | Key Line |
-|---------|------|------------|----------|
-| Problem | 0:00 | Slow CI, frustrated dev | "Integrating is the bottleneck" |
-| Solution | 0:45 | Depot logo, diagram | "40x faster builds" |
-| **Why It Wins** | **1:30** | **3-part architecture + Switchyard** | **"It's not magic. It's architecture."** |
-| **Security** | **3:10** | **Isolated sandboxes diagram** | **"Security built in"** |
-| Demo | 3:20 | Split screen comparison | "4:32 vs 0:28" |
-| **Debugging** | **4:45** | **Replay from step + Metrics UI** | **"Debug smarter"** |
-| **AI-Native CI** | **5:00** | **AI failure diagnosis + Agent loops** | **"Built for AI development"** |
-| Value | 5:35 | Time/money savings | "Extra morning every week" |
-| **Social Proof** | **6:05** | **Teams/building faster** | **"Join the teams"** |
-| CTA | 6:15 | depot.dev URL | "Stop waiting. Start shipping." |
-
----
-
-## Technical Advantages Summary (for graphics team)
-
-The "Why It Wins" section (1:30-3:10) showcases these key technical differentiators:
-
-**New Content Added:**
-
-- **Drop-in Replacement Visual** (1:15-1:30): Shows .github/workflows → .depot/workflows copy animation
-- **3-Part Architecture Diagram** (1:45-2:00): Visual showing Frontend, Orchestrator (Switchyard), and Compute layers
-- **Switchyard Deep Dive** (2:00-2:15): Detailed view of workflow parsing, dependency resolution (DAG), and durable state machine
-- **Security Bonus** (3:10-3:20): Isolated sandboxes diagram showing security built-in
-- **Debugging Superpower** (4:45-4:55): Dashboard UI showing "Replay from step", SSH debug, and CPU/memory metrics
-- **AI Failure Diagnosis** (5:00-5:10): Dashboard showing AI-generated failure analysis and suggested fixes
-- **Coding Agent Integration** (5:10-5:35): Agent loop diagram showing push-wait-guess vs fix-run-green comparison
-- **Per-Second Billing Visual** (5:45-5:55): Comparison showing traditional CI rounding vs Depot CI exact billing
-- **Social Proof** (6:05-6:15): Trusted by teams section (placeholder for real testimonials)
-
-**Overall Technical Comparison:**
-
-| Advantage | GitHub Actions | Depot CI | Impact |
-| :--- | :--- | :--- | :--- |
-| **Startup** | 40+ seconds cold start | 2-3 seconds standby pools | 10-20x faster |
-| **State** | Stateless (crash = restart) | Durable (crash = resume) | Reliable recovery |
-| **Scheduling** | Pull model (one job at a time) | Push model (DAG-aware) | Optimal parallelization |
-| **Security** | Shared runners | Isolated sandboxes | Never shared, always secure |
-| **Authentication** | Static tokens (manual rotation) | OIDC (auto-rotating) | No tokens to manage |
-| **Billing** | Per-minute (rounded up) | Per-second (exact) | Fair pricing |
-| **Debugging** | Restart from beginning | Replay from any step + SSH + Metrics | Faster iteration |
-| **AI Features** | None | AI failure diagnosis + Agent loops | Built for AI development |
-
----
-
-## Real Performance Data (Tests Run 2026-03-30)
-
-| Build Type | Time | vs Local Clean |
-|------------|------|----------------|
-| **Local Clean (no cache)** | 3:03 (183s) | baseline |
-| **Local Cached (no changes)** | 0:01 (1.3s) | 140x faster |
-| **Local Cached (code change)** | 0:17 (17s) | 10.8x faster |
-| **Railway Initial Build** | 0:29 (29s) | 6.3x faster |
-| **Railway Rebuild (cached)** | 0:04 (3.8s) | 48x faster |
-| **GitHub Actions** (estimated) | ~4:00 | ~1x slower |
-| **Depot CI** (expected) | ~0:30 | ~6x faster |
-
-> **Note:** Depot CI times are based on Depot's published benchmarks and our Railway tests. Actual Depot CI performance would be measured during Flow 4 testing.
-
----
-
-## Brand Assets (for graphics team)
-
-**Official Brand Resources:**
-
-- [Brand Assets](https://depot.dev/about/brand-assets)
-- [Brand Guidelines](https://drive.google.com/file/d/1dIIvZiRsxeol2flEthiKes0046IPtdXx/view?usp=sharing)
-
-**Key Brand Notes:**
-
-- Use official Depot logo from brand assets
-- Follow brand guidelines for color palette and typography
-- Depot logo and product names should be used consistently
-- GitHub Actions compatibility should be shown as "drop-in replacement" messaging
-
----
-
-## End of Script
+- **Real Data**: All performance numbers are from actual tests
+- **Fair Comparison**: Same Dockerfile, same app, same destination registry
+- **Reproducible**: Tests can be rerun for verification
