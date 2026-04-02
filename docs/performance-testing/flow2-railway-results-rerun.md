@@ -13,7 +13,7 @@ Performance test results for Flow 2 (Railway Auto-Build) on `flow2-retest` branc
 | Test Case | Description | Time | vs Flow 1 | vs Flow 3 | vs Flow 4 |
 |-----------|-------------|------|-----------|-----------|-----------|
 | **1. Baseline** | No changes, cold build | **34.20s** | 4.7x faster | 4.1x faster | Similar |
-| **2. Comment Change** | Source comment modified | TBD | TBD | TBD | TBD |
+| **2. Comment Change** | Source comment modified | **23.60s** | Similar | 2.8x faster | Similar |
 | **3. New Function** | New utils.ts file | TBD | TBD | TBD | TBD |
 | **4. New Dependency** | Package.json change | TBD | TBD | TBD | TBD |
 | **5. Major Changes** | Multiple new packages | TBD | TBD | TBD | TBD |
@@ -86,3 +86,34 @@ git push
 git reset --hard HEAD^
 git clean -fd sample-app/
 ```
+
+---
+
+### Test Case 2: Comment Change
+
+**Log:** `flow2-railway-build-logs/railway-test2/flow2-railway-rerun-Applying-Test-Case-2-Comment-Change-logs.1775093870911.log`
+
+**Time:** **23.60 seconds**
+
+**Build Breakdown:**
+- All dependency layers: CACHED ✅
+- Source copy: Rebuilt (~1s)
+- TypeScript build: ~4s
+- Total: 23.60s
+
+**Cache Behavior:**
+- Excellent cache hit! Only source layers rebuilt
+- Both `npm ci` layers cached from previous build
+- Only `COPY . .` and `npm run build` executed
+
+**Comparison:**
+| Flow | Time | vs Flow 2 |
+|------|------|-----------|
+| Flow 1 (Local) | 14s | Local 1.7x faster |
+| Flow 2 (Railway) | **23.60s** | baseline |
+| Flow 3 (GitHub Actions) | 65s | GitHub 2.8x slower |
+| Flow 4 (Depot CI) | 23s | Similar |
+
+**Key Insight:** Railway's layer caching works excellently! 31% faster than cold build (34.20s → 23.60s). Only Local with persistent cache beats it for tiny changes.
+
+---
