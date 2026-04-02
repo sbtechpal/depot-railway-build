@@ -78,8 +78,8 @@ Final performance comparison of all 4 Docker build flows with 5 test cases each.
 
 | Flow | Wins | Average Time (all tests) |
 |------|------|------------------------|
-| **Flow 2 (Railway)** | **4/5** 🏆 | **26s** |
-| Flow 4 (Depot CI) | 1/5 🥈 | 27s |
+| **Flow 4 (Depot CI)** | **4/5** 🏆 | **27s** |
+| Flow 2 (Railway) | 1/5 🥈 | 29s |
 | Flow 1 (Local) | 1/5 🥉 | 108s |
 | Flow 3 (GitHub Actions) | 0/5 ❌ | 134s |
 
@@ -87,15 +87,15 @@ Final performance comparison of all 4 Docker build flows with 5 test cases each.
 
 ## Key Insights
 
-### 1. Railway is the Overall Winner 🏆
+### 1. Depot CI is the Overall Winner 🏆
 - Wins 4 out of 5 test cases
-- Consistently fast across all scenarios
+- Consistently faster across all scenarios
 - Excellent for dependency-heavy builds
 
-### 2. Depot CI is a Strong Contender
-- Beats GitHub Actions by 2.8x to 6.2x
-- Comparable to Railway for major changes
-- Only 2s slower than Railway on average
+### 2. Railway is a Strong Close Second
+- Wins 1 test case (New Function)
+- Only 2s slower than Depot on average
+- Simpler setup with auto-build on git push
 
 ### 3. GitHub Actions Struggles
 - Slowest for cold builds (141s baseline)
@@ -108,7 +108,7 @@ Final performance comparison of all 4 Docker build flows with 5 test cases each.
 - Limited by local hardware/network
 
 ### 5. Cloud Infrastructure Wins Overall
-- Railway/Depot: 26-27s average
+- Depot/Railway: 27-29s average
 - Local: 108s average (4x slower)
 - GitHub Actions: 134s average (5x slower)
 
@@ -134,9 +134,9 @@ Final performance comparison of all 4 Docker build flows with 5 test cases each.
 - Instant feedback loop
 
 ### For CI/CD (Production Builds)
-**Use:** Flow 2 (Railway) or Flow 4 (Depot CI)
-- Railway: 4/5 wins, simplest setup
-- Depot: Comparable speed, integrates with GitHub Actions
+**Use:** Flow 4 (Depot CI) or Flow 2 (Railway)
+- Depot CI: 4/5 wins, fastest overall
+- Railway: Close second, simplest auto-build setup
 
 ### For GitHub Actions Users
 **Upgrade to:** Flow 4 (Depot CI)
@@ -160,10 +160,11 @@ This ensures fair comparison across all flows.
 
 ## Conclusion
 
-**Railway is the overall winner** for Docker build performance, with Depot CI as a close second for GitHub Actions users.
+**Depot CI is the overall winner** for Docker build performance, winning 4 out of 5 test cases. Railway is a close second and offers simpler auto-build setup.
 
 The choice depends on your use case:
 - **Development:** Local with cache
-- **Simple CI/CD:** Railway
-- **GitHub Actions users:** Depot CI
+- **Best CI/CD performance:** Depot CI
+- **Simplest setup:** Railway auto-build
+- **GitHub Actions users:** Depot CI (drop-in replacement)
 - **Avoid:** Regular GitHub Actions without Depot
