@@ -62,15 +62,16 @@ depot-railway-build/
 │   ├── github-secrets.md    # Secrets configuration
 │   ├── faq.md               # Common questions
 │   ├── api-endpoints.md     # REST API reference
-│   ├── deployment-workflows.md  # All deployment targets
-│   ├── all-flows-comparison.md  # Complete 4-flows analysis ⭐
-│   ├── openclaw-analysis.md    # OpenClaw deep dive
-│   ├── comparison-results.md   # Performance comparison (all flows)
-│   ├── railway-cost-video-script.md # Railway cost video ⭐
-│   ├── live-demo-walkthrough.md # Live presentation guide ⭐
-│   ├── demo-video-storyboard.md # Video production guide
-│   ├── video-script.md      # Recording script with timestamps
+│   ├── openclaw-analysis.md # OpenClaw deep dive
+│   ├── depot-summary.md     # Depot CI overview
+│   ├── performance-test-guide.md  # Flow measurement guide
+│   ├── live-demo-walkthrough.md   # Live presentation guide
+│   ├── recording-checklist.md     # Video production checklist
+│   ├── video-script.md      # Depot vs GitHub Actions video script
 │   └── stakeholder-presentation.md # Executive deck
+│   └── performance-testing/
+│       ├── comparison-summary.md   # Complete test results ⭐
+│       └── test-case-instructions.md  # Test case guide
 │
 └── README.md
 ```
@@ -84,7 +85,7 @@ depot-railway-build/
 | **3. GitHub Actions → Railway** | CI builds, then deploys | 3-5 min | ~$0.01 | Teams needing CI |
 | **4. Depot CI → Railway** | Depot CI builds, then depots ⭐ | 30-60s | ~$0.01 | **Production** ⭐ |
 
-**📊 Full comparison:** See [all-flows-comparison.md](./docs/all-flows-comparison.md)
+**📊 Full comparison:** See [comparison-summary.md](./docs/performance-testing/comparison-summary.md)
 | **5. Depot CI → AWS/GCP/Azure/Fly** | Multi-platform deployments | ✅ Implemented |
 
 ## Quick Start
@@ -149,7 +150,7 @@ docker run -p 3000:3000 openclaw-demo
 
 **Savings**: ~80% on CI/CD compute costs vs Railway auto-build
 
-**📊 Full comparison:** See [all-flows-comparison.md](./docs/all-flows-comparison.md)
+**📊 Full comparison:** See [comparison-summary.md](./docs/performance-testing/comparison-summary.md)
 
 ## Deployment Options
 
@@ -163,7 +164,7 @@ Depot CI supports deployment to multiple platforms. Choose your target:
 | **Azure ACI** | `depot-ci-azure.yml` | ⭐⭐⭐ Medium | Microsoft stack |
 | **Fly.io** | `depot-ci-fly.yml` | ⭐⭐ Easy | Edge deployments |
 
-**See also:** [Deployment Workflows Guide](./docs/deployment-workflows.md)
+**See also:** [Performance Test Guide](./docs/performance-test-guide.md) for flow measurements
 
 ## Documentation
 
@@ -180,21 +181,21 @@ Depot CI supports deployment to multiple platforms. Choose your target:
 
 | Document | Description |
 |----------|-------------|
-| [All Flows Comparison](./docs/all-flows-comparison.md) | Complete 4-flows analysis ⭐ |
+| [Comparison Summary](./docs/performance-testing/comparison-summary.md) | Complete performance test results ⭐ |
 | [API Endpoints](./docs/api-endpoints.md) | REST API reference |
 | [OpenClaw Analysis](./docs/openclaw-analysis.md) | OpenClaw deep dive |
-| [Comparison Results](./docs/comparison-results.md) | Performance metrics (all flows) |
-| [Deployment Workflows](./docs/deployment-workflows.md) | All platform deployments |
+| [Depot Summary](./docs/depot-summary.md) | Depot CI overview and features |
+| [Performance Test Guide](./docs/performance-test-guide.md) | Flow measurement guide |
+| [Test Case Instructions](./docs/performance-testing/test-case-instructions.md) | Test case scenarios |
 
 ### Media & Presentations
 
 | Document | Description |
 |----------|-------------|
-| [Railway Cost Video Script](./docs/railway-cost-video-script.md) | 90s Railway cost video ⭐ |
-| [Live Demo Walkthrough](./docs/live-demo-walkthrough.md) | Live presentation script ⭐ |
-| [Demo Video Storyboard](./docs/demo-video-storyboard.md) | Video production guide |
-| [Video Script](./docs/video-script.md) | Recording script with timestamps |
-| [Stakeholder Presentation](./docs/stakeholder-presentation.md) | 17-slide executive deck |
+| [Video Script](./docs/video-script.md) | Depot vs GitHub Actions video ⭐ |
+| [Live Demo Walkthrough](./docs/live-demo-walkthrough.md) | Live presentation guide ⭐ |
+| [Recording Checklist](./docs/recording-checklist.md) | Video production checklist |
+| [Stakeholder Presentation](./docs/stakeholder-presentation.md) | Executive presentation deck |
 
 ## Setup Instructions
 
@@ -282,5 +283,3 @@ MIT
 ---
 
 **Built to showcase Depot CI — 40x faster builds for the AI-augmented development era.**
-
-# Test Flow 3: GitHub Actions baseline - Mon Mar 30 08:49:21 EDT 2026
