@@ -15,6 +15,47 @@ Complete instructions for running each test case individually for all 4 flows.
 
 ---
 
+## Test Case Overview
+
+| Test | Complexity | Changes | Layers Affected | Expected Cache Hit |
+|------|------------|---------|-----------------|-------------------|
+| **1. Baseline** | None | No changes | All layers cached | ~100% |
+| **2. Comment** | Minimal | Source comment | build stage only | ~80% |
+| **3. Function** | Low | New function | build stage only | ~60% |
+| **4. Dependency** | Medium | New npm package | deps + build | ~40% |
+| **5. Major** | High | New deps + files | deps + build + production | ~10% |
+
+### Test Case Details
+
+**Test 1: Baseline (No Changes)**
+- Purpose: Measure fully cached build performance
+- What changes: Nothing - clean baseline
+- Expected: All layers cached, minimal rebuild time
+
+**Test 2: Comment Change**
+- Purpose: Measure performance with trivial source change
+- What changes: Add a comment to `src/index.ts`
+- Layers affected: build stage only (COPY source, tsc)
+- Expected: ~80% cache hit
+
+**Test 3: New Function**
+- Purpose: Measure performance with small code addition
+- What changes: Add a new utility function to `src/utils.ts`
+- Layers affected: build stage only (COPY source, tsc)
+- Expected: ~60% cache hit
+
+**Test 4: New Dependency**
+- Purpose: Measure performance with package.json change
+- What changes: Add eslint to devDependencies
+- Layers affected: deps, production-deps, build, production
+- Expected: ~40% cache hit (dependency layers rebuild)
+
+**Test 5: Major Changes**
+- Purpose: Measure performance with significant changes
+- What changes: Multiple new packages (lodash, moment) + new files
+- Layers affected: All layers (near-full rebuild)
+- Expected: ~10% cache hit
+
 ---
 
 ## Quick Start: Using Workflow Dropdowns ⚡

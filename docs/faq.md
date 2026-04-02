@@ -177,6 +177,26 @@ Absolutely. The Docker image can be deployed to:
 - Render
 - Any platform that supports Docker
 
+### What are Railway's build costs?
+
+Running builds on Railway can impact your monthly costs depending on your plan and build intensity.
+
+**Key Cost Factors:**
+- **Build Usage Costs**: Railway charges for CPU/memory consumption during builds
+- **Hobby Plan**: $5/month includes $5 of resource credits
+- **Usage-Based Billing**: Costs scale with build frequency and intensity
+- **Disk Usage**: Up to 0.5 GB volume storage is free
+
+**Tips to Keep Costs Low:**
+1. **Use Depot CI** - Build externally, deploy only the final image
+2. **Enable Caching** - Reduces build time and resource consumption
+3. **Optimize Builds** - Smaller images = faster builds = lower costs
+4. **Reduce Deploy Frequency** - Batch changes when possible
+
+**Comparison:**
+- Railway auto-build: ~$0.05/build (uses Railway compute)
+- Depot CI + Railway deploy: ~$0.01/build (uses Depot compute, deploys fast)
+
 ## Demo Questions
 
 ### Can I customize the demo app?
