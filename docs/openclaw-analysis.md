@@ -134,12 +134,14 @@ Since OpenClaw's repository is private, we created a **simulation demo app** tha
 ## Next Steps
 
 1. ✅ Demo application created
-2. ⏳ Depot account setup
-3. ⏳ Railway project configuration
-4. ⏳ Run baseline benchmarks
-5. ⏳ Run Depot CI benchmarks
-6. ⏳ Create comparison documentation
+2. ✅ Depot account setup
+3. ✅ Railway project configuration
+4. ✅ Run baseline benchmarks
+5. ✅ Run Depot CI benchmarks
+6. ✅ Create comparison documentation → **[comparison-summary.md](./performance-testing/comparison-summary.md)**
 7. ⏳ Produce demo video
+
+> **Note:** Comprehensive performance testing completed March 31 - April 2, 2026. See [comparison-summary.md](./performance-testing/comparison-summary.md) for complete results showing Depot CI averaging 27s vs GitHub Actions 134s (5x faster).
 
 ---
 

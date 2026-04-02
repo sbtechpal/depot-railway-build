@@ -194,38 +194,17 @@ git push origin main
 
 ---
 
-## Automated Local Benchmark
+## Results
 
-```bash
-# Runs Flow 1 (local) and simulates Flow 3
-./scripts/benchmark-flows.sh
-```
+Comprehensive performance test results are available at:
 
-Output saved to: `benchmarks/results/benchmark_<timestamp>.csv`
+**[comparison-summary.md](./performance-testing/comparison-summary.md)**
 
----
-
-## Results Template
-
-Record your actual results here:
-
-### Build Time Comparison
-
-| Flow | Queue | Deps | Build | Docker | Deploy | **TOTAL** |
-|------|-------|------|-------|--------|--------|-----------|
-| **Flow 1** (Local) | 0s | | | | | |
-| **Flow 2** (Railway) | | | | | | |
-| **Flow 3** (GitHub) | | | | | | |
-| **Flow 4** (Depot) | | | | | | ⭐ |
-
-### Cost Analysis (100 builds/month)
-
-| Flow | Cost/Build | Monthly | Annual |
-|------|------------|---------|--------|
-| Flow 1 | $0.00 | $0 | $0 |
-| Flow 2 | | | |
-| Flow 3 | | | |
-| Flow 4 | | | |
+This includes:
+- Complete results table with all 4 flows and 5 test cases
+- Head-to-head comparisons (Depot vs GitHub, Depot vs Railway, etc.)
+- Detailed breakdowns of each test case
+- Recommendations and migration guide
 
 ---
 

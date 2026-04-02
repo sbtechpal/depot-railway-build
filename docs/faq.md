@@ -93,11 +93,21 @@ docker run -p 3000:3000 openclaw-demo
 
 ### How much faster is Depot CI really?
 
-Based on our benchmarks:
-- **Dependencies**: 9x faster (45s → 5s)
-- **TypeScript build**: 10x faster (30s → 3s)
-- **Docker build**: 11x faster (90s → 8s)
-- **Total workflow**: 5-10x faster (4-7 min → 20-60s)
+Based on our comprehensive performance testing with 5 test cases:
+
+**vs GitHub Actions:**
+- **Average: 5x faster** (27s vs 134s)
+- Baseline (cold): 4.5x faster
+- Comment change: 2.8x faster
+- New dependency: 6.2x faster
+- Major changes: 5.1x faster
+
+**vs Railway Auto-Build:**
+- **Average: Similar** (27s vs 29s)
+- Depot wins 4 out of 5 test cases
+- Railway wins only for new function additions
+
+See [comparison-summary.md](./performance-testing/comparison-summary.md) for complete results.
 
 ### Will my results vary?
 
@@ -107,14 +117,14 @@ Yes, actual performance depends on:
 - Cache hit rates
 - Concurrent workflows
 
-However, most teams see **at least 3-5x improvement** on first run, increasing to **10-40x** as caches warm up.
+However, most teams see **at least 3-5x improvement** vs GitHub Actions, with even greater gains for dependency-heavy builds.
 
 ### What about first-time builds?
 
-First builds benefit from:
+First builds (cold cache) still benefit from:
 - Optimized infrastructure (faster CPUs, better networking)
-- Parallel execution where possible
-- Even without cache, Depot's infrastructure is 2-3x faster
+- Better layer caching than GitHub Actions
+- Depot CI: 31s cold build vs GitHub Actions: 141s (4.5x faster)
 
 Subsequent builds see the full benefit of distributed caching.
 
@@ -178,15 +188,14 @@ Yes! The sample app is open-source (MIT license). You can:
 - Add authentication
 - Connect to real services
 
-### How do I run the benchmarks?
+### How do I run performance tests?
 
-Use the provided benchmark script:
-```bash
-chmod +x scripts/benchmark.sh
-./scripts/benchmark.sh
-```
+Complete performance test results are available at:
+**[comparison-summary.md](./performance-testing/comparison-summary.md)**
 
-Results are saved to `benchmarks/results/`
+For testing setup and instructions, see:
+- **[performance-test-guide.md](./performance-test-guide.md)** — How to run all 4 flows
+- **[test-case-instructions.md](./performance-testing/test-case-instructions.md)** — Progressive test scenarios
 
 ### Can I use this for my own projects?
 

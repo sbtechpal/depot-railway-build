@@ -340,6 +340,10 @@ After running benchmarks:
 
 ## See Also
 
-- [all-flows-comparison.md](../docs/all-flows-comparison.md) — Complete flow analysis
-- [comparison-results.md](../docs/comparison-results.md) — Performance template
-- [recording-checklist.md](../docs/recording-checklist.md) — Video production guide
+- **[comparison-summary.md](./performance-testing/comparison-summary.md)** — Complete performance test results
+- [performance-test-guide.md](./performance-test-guide.md) — How to run all flows
+- [test-case-instructions.md](./performance-testing/test-case-instructions.md) — Progressive test scenarios
+
+---
+
+> **Note:** The benchmarks directory has been removed as comprehensive performance testing has been completed. All results are documented in `comparison-summary.md` with real test data from March 31 - April 2, 2026.
