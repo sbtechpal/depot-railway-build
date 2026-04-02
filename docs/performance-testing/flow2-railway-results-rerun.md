@@ -15,7 +15,7 @@ Performance test results for Flow 2 (Railway Auto-Build) on `flow2-retest` branc
 | **1. Baseline** | No changes, cold build | **34.20s** | 4.7x faster | 4.1x faster | Similar |
 | **2. Comment Change** | Source comment modified | **23.60s** | Similar | 2.8x faster | Similar |
 | **3. New Function** | New utils.ts file | **18.02s** | TBD | TBD | TBD |
-| **4. New Dependency** | Package.json change | TBD | TBD | TBD | TBD |
+| **4. New Dependency** | Package.json change | **40.75s** | TBD | TBD | TBD |
 | **5. Major Changes** | Multiple new packages | TBD | TBD | TBD | TBD |
 
 ---
@@ -146,5 +146,37 @@ git clean -fd sample-app/
 | Flow 4 (Depot CI) | 23s | Depot 1.3x slower |
 
 **Key Insight:** Railway is comparable to Local (18.02s vs 17s) for function additions! The cache works perfectly and build time is excellent.
+
+---
+
+---
+
+### Test Case 4: New Dependency
+
+**Log:** `flow2-railway-build-logs/railway-test2/flow2-railway-rerun-Test-Case-4-applied-Added-ESLint-dependency-logs.1775096999162.log`
+
+**Time:** **40.75 seconds**
+
+**Build Breakdown:**
+- npm ci (deps): ~19s (rebuilt with ESLint)
+- npm ci (production-deps): ~19s (rebuilt with ESLint)
+- TypeScript build: ~2s
+- Total: 40.75s
+
+**Cache Behavior:**
+- Dependency layers: REBUILT ❌ (package.json changed)
+- Both `npm ci` layers had to reinstall
+- Source and build layers: fast copy
+- Added ESLint package (+108 dev dependencies)
+
+**Comparison:**
+| Flow | Time | vs Flow 2 |
+|------|------|-----------|
+| Flow 1 (Local) | 143s | Local 3.5x slower |
+| Flow 2 (Railway) | **40.75s** | baseline |
+| Flow 3 (GitHub Actions) | 193s | GitHub 4.7x slower |
+| Flow 4 (Depot CI) | 31s | Depot 1.3x faster |
+
+**Key Insight:** Railway beats Local for dependency changes by 3.5x! Better network to npm registry makes a huge difference. Depot CI is slightly faster due to advanced caching.
 
 ---
