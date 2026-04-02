@@ -242,6 +242,24 @@ git clean -fd sample-app/
 | Test | Flow 1 (Local) | Flow 2 (Railway) | Winner |
 |------|----------------|-------------------|--------|
 | **Cached (no changes)** | **2s** | 3.66s | **Local 1.8x** |
-| **Clean (first build)** | 162s | 29s | **Railway 5.6x** |
+| **Clean (cold build)** | 162s | 34.20s | **Railway 4.7x** |
 
-**Insight:** Local is faster for cached builds (persistent local cache), but Railway destroys clean builds.
+**Insight:** Local is faster for cached builds (persistent local cache), but Railway destroys cold builds.
+
+---
+
+## Final Results (All 5 Test Cases)
+
+**Note:** Complete results from rerun on flow2-retest branch with true cold builds:
+
+| Test Case | Time | vs Flow 1 | vs Flow 3 | vs Flow 4 |
+|-----------|------|-----------|-----------|-----------|
+| **1. Baseline (Cold)** | **34.20s** | 4.7x faster | 4.1x faster | Similar |
+| **2. Comment Change** | **23.60s** | Similar | 2.8x faster | Similar |
+| **3. New Function** | **18.02s** | Similar | 4.3x faster | Similar |
+| **4. New Dependency** | **40.75s** | 3.5x faster | 7.6x faster | Similar |
+| **5. Major Changes** | **27.73s** | 7.4x faster | 4.8x faster | Similar |
+
+**Average:** 29 seconds across all test cases
+
+See `flow2-railway-results-rerun.md` for detailed analysis of all test cases.

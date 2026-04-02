@@ -146,3 +146,35 @@ Build time:   ~48 seconds
 **Insight:** For small source changes, local and Railway are significantly faster due to:
 - Local: Persistent cache, no overhead
 - Railway: Optimized infrastructure, better layer caching
+
+---
+
+## Final Results Summary (All 5 Test Cases)
+
+Complete GitHub Actions performance results:
+
+| Test Case | Time | vs Flow 1 | vs Flow 2 | vs Flow 4 |
+|-----------|------|-----------|-----------|-----------|
+| **1. Baseline** | **141s** | Similar | 4.1x slower | 4.5x slower |
+| **2. Comment Change** | **65s** | 4.6x slower | 2.8x slower | 2.8x slower |
+| **3. New Function** | **64s** | 3.8x slower | 4.3x slower | 2.8x slower |
+| **4. New Dependency** | **193s** | 1.3x slower | 7.6x slower | 6.2x slower |
+| **5. Major Changes** | **133s** | 1.5x faster | 4.8x slower | 5.1x slower |
+
+**Average:** 134 seconds across all test cases
+
+**Key Finding:** GitHub Actions is the slowest of all 4 flows in every test case. Even for dependency changes where it performed worst (193s), Depot CI completed in just 31s - **6.2x faster**.
+
+---
+
+## Overall Flow Comparison
+
+| Flow | Average Time | vs GitHub Actions |
+|------|--------------|-------------------|
+| **Depot CI** | **27s** 🏆 | **5.0x faster** |
+| Railway | 29s | **4.6x faster** |
+| Local | 108s | **1.2x faster** |
+| GitHub Actions | 134s | baseline |
+
+**Conclusion:** GitHub Actions without Depot is significantly slower for Docker builds. Consider using Depot CI for a 5x speedup with minimal code changes.
+

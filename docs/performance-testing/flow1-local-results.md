@@ -141,12 +141,19 @@ Performance test results for Flow 1 (Local → Railway) Docker builds.
 
 ## Comparison with Other Flows
 
-| Flow | Baseline (cached) | Test 2 (Comment) | Test 4 (Dependency) | Test 5 (Major) |
-|------|-------------------|-------------------|----------------------|----------------|
-| **Flow 1 (Local)** | 2s | 14s | 143s | 206s |
-| **Flow 2 (Railway)** | 3.8s | TBD | TBD | TBD |
-| **Flow 3 (GitHub Actions)** | TBD | TBD | TBD | TBD |
-| **Flow 4 (Depot CI)** | TBD | TBD | TBD | TBD |
+| Flow | Baseline (cold) | Test 2 (Comment) | Test 4 (Dependency) | Test 5 (Major) | Average |
+|------|-----------------|-------------------|----------------------|----------------|---------|
+| **Flow 1 (Local)** | 162s | **14s** 🏆 | 143s | 206s | 108s |
+| **Flow 2 (Railway)** | 34.20s | 23.60s | 40.75s | 27.73s | 29s |
+| **Flow 3 (GitHub Actions)** | 141s | 65s | 193s | 133s | 134s |
+| **Flow 4 (Depot CI)** | **31s** 🏆 | 23s | **31s** 🏆 | **26s** 🏆 | **27s** 🏆 |
+
+**Key Rankings:**
+- **Baseline:** Depot (31s) > Railway (34.20s) > GitHub (141s) > Local (162s)
+- **Comment:** Local (14s) > Depot (23s) ≈ Railway (23.60s) > GitHub (65s)
+- **Dependency:** Depot (31s) > Railway (40.75s) > Local (143s) > GitHub (193s)
+- **Major:** Depot (26s) > Railway (27.73s) > GitHub (133s) > Local (206s)
+- **Overall:** Depot (27s avg) 🏆 > Railway (29s) > Local (108s) > GitHub (134s)
 
 ---
 
