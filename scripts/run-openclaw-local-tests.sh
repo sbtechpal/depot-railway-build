@@ -6,7 +6,7 @@ set -e
 
 # Configuration
 OPENCLAW_DIR="/home/techie/devtools/github-repos/openclaw"
-RESULTS_DIR="/home/techie/devtools/github-repos/depot-railway-build/local-openclaw-ai-testing"
+RESULTS_DIR="/home/techie/devtools/github-repos/depot-railway-build/docs/performance-testing/openclaw-ai-testing/local-openclaw-ai-testing"
 DOCS_DIR="/home/techie/devtools/github-repos/depot-railway-build/docs/performance-testing/openclaw-ai-testing"
 
 # Colors for output
