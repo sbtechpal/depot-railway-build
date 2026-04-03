@@ -62,7 +62,6 @@ jobs:
             "/usr/local/lib/node_modules/.bin/depot" \
             "/usr/share/npm/bin/depot"
           do
-            echo "Checking: $LOCATION"
             if [ -f "$LOCATION" ]; then
               echo "Found depot at: $LOCATION"
               DEPOT_FOUND="$LOCATION"
@@ -71,11 +70,14 @@ jobs:
           done
 
           if [ -n "$DEPOT_FOUND" ]; then
-            # Copy to /usr/local/bin so it persists across shell sessions
-            sudo cp "$DEPOT_FOUND" /usr/local/bin/depot
-            sudo chmod +x /usr/local/bin/depot
+            # Only copy if not already in /usr/local/bin
+            if [ "$DEPOT_FOUND" != "/usr/local/bin/depot" ]; then
+              echo "Copying to /usr/local/bin/depot..."
+              sudo cp "$DEPOT_FOUND" /usr/local/bin/depot
+              sudo chmod +x /usr/local/bin/depot
+            fi
             echo "=========================================="
-            echo "Depot CLI installed and copied to /usr/local/bin:"
+            echo "Depot CLI installed successfully:"
             which depot
             depot --version
             echo "=========================================="
