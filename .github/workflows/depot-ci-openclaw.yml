@@ -74,7 +74,7 @@ jobs:
               echo "=========================================="
               echo "expected_cache=75%" >> $GITHUB_ENV
               echo "test_description=New source file - perf-test.ts in src/" >> $GITHUB_ENV
-              cat > src/perf-test.ts << 'EOF'
+              cat > src/perf-test.ts << 'EOFTEST'
               /**
                * Performance test utility
                * Added for Depot CI testing
@@ -84,16 +84,14 @@ jobs:
                 endTime: number;
                 duration: number;
               }
-
               export function measurePerf(label: string): PerfMetrics {
                 const startTime = Date.now();
-                // Simulated work
                 const result = { startTime, endTime: startTime, duration: 0 };
                 result.endTime = Date.now();
                 result.duration = result.endTime - result.startTime;
                 return result;
               }
-              EOF
+              EOFTEST
               ;;
             test-4-ui)
               echo "=========================================="
@@ -105,13 +103,12 @@ jobs:
               echo "expected_cache=50%" >> $GITHUB_ENV
               echo "test_description=UI change - New component in ui/" >> $GITHUB_ENV
               mkdir -p ui/src/components/test
-              cat > ui/src/components/test/PerfTest.tsx << 'EOF'
+              cat > ui/src/components/test/PerfTest.tsx << 'EOFTEST'
               /**
                * Performance test component
                * Added for Depot CI testing
                */
               import { css } from 'lit';
-
               export class PerfTestComponent extends HTMLElement {
                 static styles = css`
                   :host {
@@ -119,15 +116,13 @@ jobs:
                     padding: 1rem;
                   }
                 `;
-
                 connectedCallback(): void {
                   super.connectedCallback();
                   this.innerHTML = '<p>Performance Test Component</p>';
                 }
               }
-
               customElements.define('perf-test', PerfTestComponent);
-              EOF
+              EOFTEST
               ;;
             test-5-dependency)
               echo "=========================================="
@@ -138,12 +133,7 @@ jobs:
               echo "=========================================="
               echo "expected_cache=25%" >> $GITHUB_ENV
               echo "test_description=New dependency - Add @types/node" >> $GITHUB_ENV
-              # Add a new dev dependency (OpenClaw uses pnpm, but npm pkg works for JSON edits)
-              if command -v pnpm &> /dev/null; then
-                pnpm add -D @types/node@^20.0.0 || npm pkg set devDependencies.@types/node="^20.0.0"
-              else
-                npm pkg set devDependencies.@types-node="^20.0.0"
-              fi
+              npm pkg set devDependencies.@types-node="^20.0.0"
               ;;
             test-6-major)
               echo "=========================================="
@@ -154,20 +144,16 @@ jobs:
               echo "=========================================="
               echo "expected_cache=10%" >> $GITHUB_ENV
               echo "test_description=Major changes - Multiple file types + dependency" >> $GITHUB_ENV
-              # New dependency
               npm pkg set devDependencies.@types-node="^20.0.0"
-              # Source file
-              cat > src/major-test.ts << 'EOF'
+              cat > src/major-test.ts << 'EOFTEST'
               export function majorTest(): string {
                 return "Major performance test";
               }
-              EOF
-              # UI file
+              EOFTEST
               mkdir -p ui/src/components/major
-              cat > ui/src/components/major/MajorTest.tsx << 'EOF'
+              cat > ui/src/components/major/MajorTest.tsx << 'EOFTEST'
               export const MajorTest = () => 'Major Test';
-              EOF
-              # Docs change
+              EOFTEST
               echo "<!-- Major test $(date) -->" >> README.md
               ;;
           esac
