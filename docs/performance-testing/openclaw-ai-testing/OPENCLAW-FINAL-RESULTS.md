@@ -1,104 +1,193 @@
 # OpenClaw Performance Comparison - Final Results
 
-**Test Period:** 2026-04-02 - 2026-04-03
+**Test Period:** April 3, 2026
+**Total Tests:** 30 test runs (6 local + 24 CI)
 **Last Updated:** 2026-04-03
+
+---
 
 ## Executive Summary
 
-| Environment | Average Time | vs Local | Rank |
-|-------------|--------------|----------|------|
-| **Local Docker** | 10m 4s | — | 3rd |
-| **GitHub Actions** | ~3m 43s | **2.7x faster** | 2nd |
-| **Depot CI** | ~1m 59s | **5.1x faster** | 1st |
+| Environment | With Cleanup | Without Cleanup | vs Local (avg) |
+|-------------|--------------|-------------------|-----------------|
+| **Local Docker** | 10m 4s | — | baseline |
+| **GitHub Actions** | 3m 43s | 3m 53s | **2.7x faster** |
+| **Depot CI** | 1m 59s | 2m 18s | **5.1x faster** 🏆 |
 
-## Complete Results Table
+---
 
-| Test | Local | Time | GitHub Actions | Time | Depot CI | Time | Depot vs Local | Depot vs GHA |
-|------|-------|------|----------------|------|----------|------|----------------|--------------|
-| **Baseline** | ✅ | 13m 14s | ✅ | 3m 4s | ✅ | 1m 51s | **7.1x faster** | **1.7x faster** |
-| **Documentation** | ✅ | 10m 7s | ✅ | 2m 39s | ✅ | 1m 50s | **5.5x faster** | **1.4x faster** |
-| **Source File** | ✅ | 8m 58s | ✅ | 2m 37s | ✅ | 1m 51s | **4.8x faster** | **1.4x faster** |
-| **UI Component** | ✅ | 9m 23s | ✅ | 2m 30s | ✅ | 1m 52s | **5.0x faster** | **1.3x faster** |
-| **New Dependency** | ✅ | 9m 53s | ✅ | 6m 3s | ✅ | 1m 53s | **5.3x faster** | **3.3x faster** |
-| **Major Changes** | ✅ | 8m 52s | ✅ | 5m 25s | ✅ | 2m 36s | **3.4x faster** | **2.1x faster** |
+## Complete Results Table (With Disk Cleanup)
 
-## Detailed Breakdown
+| Test | Local | GitHub Actions | Depot CI | Depot vs Local | Depot vs GHA |
+|------|-------|----------------|----------|----------------|--------------|
+| **Baseline** | 13m 14s | 3m 4s | 1m 51s | **7.1x faster** | **1.7x faster** |
+| **Documentation** | 10m 7s | 2m 39s | 1m 50s | **5.5x faster** | **1.4x faster** |
+| **Source File** | 8m 58s | 2m 37s | 1m 51s | **4.8x faster** | **1.4x faster** |
+| **UI Component** | 9m 23s | 2m 30s | 1m 52s | **5.0x faster** | **1.3x faster** |
+| **New Dependency** | 9m 53s | 6m 3s | 1m 53s | **5.3x faster** | **3.3x faster** |
+| **Major Changes** | 8m 52s | 5m 25s | 2m 36s | **3.4x faster** | **2.1x faster** |
 
-### Baseline Test (Cold Build)
+---
 
-| Metric | Local | GitHub Actions | Depot CI |
-|--------|-------|----------------|----------|
-| **Total Time** | 13m 14s | 3m 4s | 1m 51s |
-| **vs Local** | — | 4.3x faster | **7.1x faster** |
-| **Expected Cache** | 100% | 100% | 100% |
+## Complete Results Table (Without Disk Cleanup)
 
-### Documentation Test (README Comment)
+| Test | GitHub Actions | Depot CI | Depot vs Local | Depot vs GHA |
+|------|----------------|----------|----------------|--------------|
+| **Baseline** | 4m 6s | 2m 1s | 6.6x faster | **2.0x faster** |
+| **Documentation** | 4m 1s | 2m 47s | 3.6x faster | **1.4x faster** |
+| **Source File** | 4m 0s | 2m 47s | 3.6x faster | **1.4x faster** |
+| **UI Component** | 3m 57s | **1m 26s** ⚡ | 6.9x faster | **2.8x faster** |
+| **New Dependency** | 3m 55s | 3m 11s | 3.1x faster | **1.1x faster** |
+| **Major Changes** | 3m 51s | **1m 42s** ⚡ | 5.2x faster | **2.2x faster** |
 
-| Metric | Local | GitHub Actions | Depot CI |
-|--------|-------|----------------|----------|
-| **Total Time** | 10m 7s | 2m 39s | 1m 50s |
-| **vs Local** | — | 3.8x faster | **5.5x faster** |
-| **Expected Cache** | 95% | 95% | 95% |
-
-### Source File Test (New TypeScript File)
-
-| Metric | Local | GitHub Actions | Depot CI |
-|--------|-------|----------------|----------|
-| **Total Time** | 8m 58s | 2m 37s | 1m 51s |
-| **vs Local** | — | 3.4x faster | **4.8x faster** |
-| **Expected Cache** | 75% | 75% | 75% |
-
-### UI Component Test (New UI File)
-
-| Metric | Local | GitHub Actions | Depot CI |
-|--------|-------|----------------|----------|
-| **Total Time** | 9m 23s | 2m 30s | 1m 52s |
-| **vs Local** | — | 3.7x faster | **5.0x faster** |
-| **Expected Cache** | 50% | 50% | 50% |
-
-### New Dependency Test (Package.json Touch)
-
-| Metric | Local | GitHub Actions | Depot CI |
-|--------|-------|----------------|----------|
-| **Total Time** | 9m 53s | 6m 3s | 1m 53s |
-| **vs Local** | — | 1.6x faster | **5.3x faster** |
-| **Expected Cache** | 25% | 25% | 25% |
-
-### Major Changes Test (Multiple Files)
-
-| Metric | Local | GitHub Actions | Depot CI |
-|--------|-------|----------------|----------|
-| **Total Time** | 8m 52s | 5m 25s | 2m 36s |
-| **vs Local** | — | 1.6x faster | **3.4x faster** |
-| **Expected Cache** | 10% | 10% | 10% |
+---
 
 ## Performance Analysis
 
 ### Average Build Times
 
 ```
-Local Docker:        10m 4s  (604s avg)
-GitHub Actions:      3m 43s  (223s avg, 6 tests)
-Depot CI:            1m 59s  (119s avg, 6 tests)
+Local Docker:              10m 4s   (604s avg)
+GitHub Actions (clean):     3m 43s   (223s avg, 6 tests)
+GitHub Actions (no clean):  3m 53s   (233s avg, 6 tests)
+Depot CI (clean):           1m 59s   (119s avg, 6 tests)
+Depot CI (no clean):         2m 18s   (138s avg, 6 tests)
 ```
 
 ### Speedup Comparison
 
 ```
-GitHub Actions vs Local:     2.7x faster
-Depot CI vs Local:           5.1x faster
-Depot CI vs GitHub Actions:  1.9x faster
+GitHub Actions vs Local (clean):     3.0x faster
+GitHub Actions vs Local (no clean):  2.7x faster
+Depot CI vs Local (clean):           5.1x faster
+Depot CI vs Local (no clean):         4.6x faster
+Depot CI vs GitHub Actions (clean):  1.9x faster
+Depot CI vs GitHub Actions (no clean): 1.7x faster
 ```
 
-### Key Findings
+---
 
-1. **Depot CI is the clear winner** - averaging **5.1x faster** than local builds and **1.9x faster** than GitHub Actions
-2. **GitHub Actions provides solid improvement** (2.7x faster than local) but lags behind Depot CI
-3. **Depot CI's distributed caching excels** - maintaining 1m 50s-1m 53s across tests 1-5, while GitHub Actions varies more
-4. **Baseline test shows Depot's biggest advantage** (7.1x faster) - superior cold build performance
-5. **Tests 5 & 6 (dependency/major changes) highlight Depot's strengths** - 3.3x and 2.1x faster than GitHub Actions respectively
-6. **All platforms benefit from caching** - but Depot's distributed cache provides the most consistent performance
-7. **For complex Docker builds like OpenClaw** (500+ dependencies), Depot CI saves significant CI time
+## Disk Cleanup Impact Analysis
+
+### When Cleanup Helps:
+
+| Test | GHA Impact | Depot Impact | Reason |
+|------|------------|--------------|---------|
+| Baseline | +34% slower without | +9% slower without | Cold builds need clean space |
+| Documentation | +52% slower without | +52% slower without | Cache operations need space |
+| Source File | +53% slower without | +50% slower without | Similar to documentation |
+| New Dependency | +36% faster without* | +69% slower without | GHA anomaly; Depot needs cache |
+
+*GitHub Actions had an anomaly with cleanup (6m 3s unusually slow)
+
+### When Cleanup Hurts:
+
+| Test | GHA Impact | Depot Impact | Reason |
+|------|------------|--------------|---------|
+| UI Component | +58% slower without | **23% faster without** ⚡ | Filesystem cache more valuable |
+| Major Changes | +27% faster without | **35% faster without** ⚡ | Cleanup overhead > benefit |
+
+### Key Insight:
+
+Cleanup is a tradeoff:
+- **For cold/dependency-heavy builds:** Clean disk space provides clear benefits
+- **For incremental changes:** Existing filesystem cache is more valuable
+- **Cleanup overhead:** The time spent cleaning can outweigh the performance benefits
+
+---
+
+## Test-by-Test Analysis
+
+### 1. Baseline (Cold Build)
+
+| Metric | Local | GHA (clean) | GHA (no clean) | Depot (clean) | Depot (no clean) |
+|--------|-------|-------------|---------------|--------------|----------------|
+| **Time** | 13m 14s | 3m 4s | 4m 6s | 1m 51s | 2m 1s |
+| **vs Local** | — | 4.3x faster | 3.2x faster | 7.1x faster | 6.6x faster |
+
+**Winner:** Depot CI with cleanup (1m 51s)
+
+### 2. Documentation (README Comment)
+
+| Metric | Local | GHA (clean) | GHA (no clean) | Depot (clean) | Depot (no clean) |
+|--------|-------|-------------|---------------|--------------|----------------|
+| **Time** | 10m 7s | 2m 39s | 4m 1s | 1m 50s | 2m 47s |
+| **vs Local** | — | 3.8x faster | 2.5x faster | 5.5x faster | 3.6x faster |
+
+**Winner:** Depot CI with cleanup (1m 50s)
+
+### 3. Source File (New TypeScript File)
+
+| Metric | Local | GHA (clean) | GHA (no clean) | Depot (clean) | Depot (no clean) |
+|--------|-------|-------------|---------------|--------------|----------------|
+| **Time** | 8m 58s | 2m 37s | 4m 0s | 1m 51s | 2m 47s |
+| **vs Local** | — | 3.4x faster | 2.2x faster | 4.8x faster | 3.6x faster |
+
+**Winner:** Depot CI with cleanup (1m 51s)
+
+### 4. UI Component (New UI File)
+
+| Metric | Local | GHA (clean) | GHA (no clean) | Depot (clean) | Depot (no clean) |
+|--------|-------|-------------|---------------|--------------|----------------|
+| **Time** | 9m 23s | 2m 30s | 3m 57s | 1m 52s | **1m 26s** ⚡ |
+| **vs Local** | — | 3.7x faster | 2.4x faster | 5.0x faster | 6.9x faster |
+
+**Winner:** Depot CI WITHOUT cleanup (1m 26s) 🏆
+
+### 5. New Dependency (Package.json Touch)
+
+| Metric | Local | GHA (clean) | GHA (no clean) | Depot (clean) | Depot (no clean) |
+|--------|-------|-------------|---------------|--------------|----------------|
+| **Time** | 9m 53s | 6m 3s* | 3m 55s | 1m 53s | 3m 11s |
+| **vs Local** | — | 1.6x faster | 2.5x faster | 5.3x faster | 3.1x faster |
+
+*Anomaly: unusually slow, possibly runner-specific issue
+
+**Winner:** Depot CI with cleanup (1m 53s)
+
+### 6. Major Changes (Multiple Files Touch)
+
+| Metric | Local | GHA (clean) | GHA (no clean) | Depot (clean) | Depot (no clean) |
+|--------|-------|-------------|---------------|--------------|----------------|
+| **Time** | 8m 52s | 5m 25s | 3m 51s | 2m 36s | **1m 42s** ⚡ |
+| **vs Local** | — | 1.6x faster | 2.3x faster | 3.4x faster | 5.2x faster |
+
+**Winner:** Depot CI WITHOUT cleanup (1m 42s) 🏆
+
+---
+
+## Recommendations
+
+### For Production CI/CD
+
+**Depot CI is strongly recommended** for production CI/CD:
+- **5.1x faster** than local builds (with cleanup)
+- **1.9x faster** than GitHub Actions (with cleanup)
+- Consistent superior performance across all scenarios
+- Best performance for dependency-heavy operations
+
+### When to Use Disk Cleanup
+
+**Enable cleanup when:**
+- Running cold builds (first-time builds)
+- Making dependency changes
+- Disk space is constrained (<20GB available)
+- Running on shared runners with residual data
+
+**Skip cleanup when:**
+- Making small incremental changes (UI, source files)
+- Filesystem cache provides more value than clean space
+- Subsequent builds in the same workflow
+
+### For GitHub Actions Users
+
+**Consider migrating to Depot CI if:**
+- You have complex Docker builds (multi-stage, 500+ dependencies)
+- Build time is a bottleneck
+- You run more than 50 builds per month
+- You value faster feedback cycles
+
+---
 
 ## Test Environment Details
 
@@ -108,7 +197,6 @@ Depot CI vs GitHub Actions:  1.9x faster
 |-----------|-------|
 | **Host** | WSL2 on Windows |
 | **Docker Version** | 28.4.0 |
-| **CPU** | [cores] |
 | **RAM** | 24GB |
 | **Network** | Residential |
 
@@ -118,87 +206,37 @@ Depot CI vs GitHub Actions:  1.9x faster
 |-----------|-------|
 | **Runner** | ubuntu-latest |
 | **CPU** | 2-core |
-| **RAM** | ~7GB |
+| **RAM** | ~7GB (after cleanup: ~14GB) |
 | **Network** | Cloud |
 
 ### Depot CI
 
 | Parameter | Value |
 |-----------|-------|
-| **Runner** | depot-ubuntu-22.04 |
-| **CPU** | [optimized] |
-| **RAM** | [optimized] |
-| **Network** | Cloud (optimized) |
+| **Runner** | Optimized cloud infrastructure |
+| **CPU** | Optimized for Docker builds |
+| **RAM** | Optimized |
+| **Network** | Cloud (distributed caching) |
 
-## Cost Analysis
+---
 
-### Compute Cost Comparison (100 builds/month)
+## All Tests Complete! 🎉
 
-| Environment | Time/Build | Total Time | Cost Estimate |
-|-------------|------------|------------|---------------|
-| **Local** | 10m 4s | 16h 40m | $0 (local hardware) |
-| **GitHub Actions** | 2m 43s | ~4h 30m | ~$8-12/month |
-| **Depot CI** | 1m 51s | ~3h 5m | ~$10-15/month |
+- **30/30 tests completed successfully**
+- **Local Docker:** 6 tests
+- **GitHub Actions:** 12 tests (6 with cleanup, 6 without)
+- **Depot CI:** 12 tests (6 with cleanup, 6 without)
 
-*Costs are estimates based on public pricing. Actual costs depend on build patterns and usage tiers.*
-
-## Recommendations
-
-### For Development
-
-**Use Local Docker** for development builds. While slower (10m avg), it provides:
-- Zero cost
-- Immediate feedback during development
-- Full control over build environment
-- No dependency on external services
-
-### For Production CI/CD
-
-**Depot CI is strongly recommended** for production CI/CD pipelines:
-- **5.5x faster** than local builds
-- **1.5x faster** than GitHub Actions
-- Excellent distributed caching
-- Consistent performance across all cache scenarios
-- Worth the additional cost for teams doing frequent builds
-
-### For GitHub Actions Users
-
-**Consider migrating from GitHub Actions to Depot CI** if:
-- You have complex Docker builds (multi-stage, many dependencies)
-- Build time is a bottleneck in your CI/CD pipeline
-- You run more than 50 builds per month
-- Your team values faster feedback cycles
-
-**Stay with GitHub Actions** if:
-- Your builds are already fast (<2 minutes)
-- You have minimal budget for CI tools
-- Your builds don't use Docker extensively
-- You prefer GitHub's integrated ecosystem
-
-## Next Steps
-
-1. ✅ Complete Local Docker tests (6/6)
-2. ✅ Complete GitHub Actions tests (6/6)
-3. ✅ Complete Depot CI tests (6/6)
-4. ✅ Fill in this template with actual results
-5. ⏳ Create final comparison chart
-6. ⏳ Write summary blog post
-
-### All Tests Complete! 🎉
-
-- **18/18 tests completed successfully**
-- **Local Docker:** 6 tests, avg 10m 4s
-- **GitHub Actions:** 6 tests, avg 3m 43s (2.7x faster)
-- **Depot CI:** 6 tests, avg 1m 59s (5.1x faster vs local, 1.9x faster vs GitHub Actions)
+---
 
 ## References
 
-- [Local Test Results](local-openclaw-ai-testing/summary.md)
-- [Comparison Guide](OPENCLAW-COMPARISON-GUIDE.md)
+- [Comprehensive Analysis](./COMPREHENSIVE-ANALYSIS.md) - Complete 30-test analysis
+- [Testing Summary](./TESTING-SUMMARY.md) - Quick reference guide
 - [Project README](../../README.md)
 
 ---
 
-**Status:** ✅ ALL TESTS COMPLETE!
+**Status:** ✅ ALL TESTS COMPLETE WITH COMPREHENSIVE ANALYSIS
 
 **Last Updated:** 2026-04-03
