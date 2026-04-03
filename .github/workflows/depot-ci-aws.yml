@@ -37,7 +37,7 @@ jobs:
 
       - name: Set up Depot CLI
         run: |
-          curl -L https://depot.dev/install.sh | sh
+          curl -L https://depot.dev/install-cli.sh | sh
           echo "$HOME/.depot/bin" >> $GITHUB_PATH
 
       - name: Authenticate with Depot

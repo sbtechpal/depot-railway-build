@@ -102,48 +102,22 @@ jobs:
         run: |
           echo "Installing Depot CLI..."
 
-          # Install using npm (still available because we didn't remove $AGENT_TOOLSDIRECTORY)
-          echo "Installing via npm..."
-          npm install -g @depot/cli
+          # Install using the official Depot install script (Linux)
+          echo "Installing via curl script..."
+          curl -L https://depot.dev/install-cli.sh | sh
 
-          echo "Searching for depot binary..."
-          DEPOT_FOUND=""
-
-          # Try common locations where npm installs global binaries
-          for LOCATION in \
-            "/usr/local/bin/depot" \
-            "/usr/bin/depot" \
-            "$HOME/.npm-global/bin/depot" \
-            "/opt/homebrew/bin/depot" \
-            "$NVM_BIN/depot" \
-            "/usr/local/lib/node_modules/.bin/depot" \
-            "/usr/share/npm/bin/depot"
-          do
-            if [ -f "$LOCATION" ]; then
-              echo "Found depot at: $LOCATION"
-              DEPOT_FOUND="$LOCATION"
-              break
-            fi
-          done
-
-          if [ -n "$DEPOT_FOUND" ]; then
-            # Only copy if not already in /usr/local/bin
-            if [ "$DEPOT_FOUND" != "/usr/local/bin/depot" ]; then
-              echo "Copying to /usr/local/bin/depot..."
-              sudo cp "$DEPOT_FOUND" /usr/local/bin/depot
-              sudo chmod +x /usr/local/bin/depot
-            fi
-            echo "=========================================="
-            echo "Depot CLI installed successfully:"
-            which depot
-            depot --version
-            echo "=========================================="
-          else
-            echo "ERROR: Could not find depot binary"
-            echo "Search results:"
-            find /usr -name "depot" -type f 2>/dev/null | head -10
-            exit 1
+          # Add to PATH if not already there
+          if [ -f "$HOME/.depot/bin/depot" ] && [ ":$PATH:" != *":$HOME/.depot/bin:"* ]; then
+            echo "Adding $HOME/.depot/bin to PATH..."
+            export PATH="$HOME/.depot/bin:$PATH"
+            echo "export PATH=\"$HOME/.depot/bin:\$PATH\"" >> $GITHUB_ENV
           fi
+
+          echo "=========================================="
+          echo "Depot CLI installed successfully:"
+          which depot
+          depot --version
+          echo "=========================================="
 
       - name: Apply test case
         run: |
