@@ -38,8 +38,10 @@ jobs:
 
       - name: Free up disk space
         run: |
+          echo "=========================================="
           echo "Initial disk usage:"
           df -h
+          echo "=========================================="
 
           # Remove unnecessary software
           sudo rm -rf /usr/share/dotnet
@@ -50,12 +52,45 @@ jobs:
           sudo rm -rf /opt/google
           sudo rm -rf /opt/microsoft
           sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /usr/local/share/gradle
+          sudo rm -rf /usr/local/lib/node_modules
+          sudo rm -rf /usr/local/heroku
+          sudo rm -rf /usr/local/.heroku
 
-          # Clean Docker system
+          # Clean package manager caches
+          sudo apt-get clean || true
+          sudo apt-get autoclean || true
+          sudo rm -rf /var/lib/apt/lists/*
+
+          # Clean language package caches
+          rm -rf ~/.npm ~/.yarn ~/.pnpm-store
+          rm -rf ~/.cargo/registry
+          rm -rf ~/.gradle/caches
+          rm -rf ~/.cache/pip
+          rm -rf ~/.cache/bower
+
+          # Clean system caches
+          sudo rm -rf /tmp/*
+          sudo rm -rf /var/tmp/*
+          sudo rm -rf /var/log/*
+          sudo rm -rf /var/cache/*
+
+          # Clean Docker system aggressively
           docker system prune -af --volumes || true
+          docker builder prune -af || true
 
+          # Remove swap if present (frees ~2-4GB)
+          sudo swapoff -a || true
+          sudo rm -f /swapfile || true
+
+          echo "=========================================="
           echo "Disk usage after cleanup:"
           df -h
+          echo "=========================================="
+
+          # Show disk space breakdown
+          echo "Disk usage by directory:"
+          sudo du -sh /* 2>/dev/null | sort -hr | head -20
 
       - name: Install Depot CLI
         run: |
