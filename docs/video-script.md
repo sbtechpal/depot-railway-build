@@ -87,7 +87,7 @@ Time elapsed: 2:15
 **[VISUAL]** Tagline appears: *"Nearly 2x Faster Docker Builds"*
 
 **[VOICEOVER]**
-"This is Depot CI. A Docker-optimized CI solution that integrates directly with GitHub Actions workflows for faster builds."
+"This is Depot CI. A programmable CI engine that runs your existing GitHub Actions workflows entirely on Depot's own infrastructure — with faster compute, built-in caching, and no configuration required."
 
 ---
 
@@ -97,13 +97,14 @@ Time elapsed: 2:15
 
 ```bash
 # Step 1: Install Depot CLI
-npm install -g @depot/cli
+# macOS:  brew install depot/tap/depot
+# Linux:   curl -L https://depot.dev/install-cli.sh | sh
 
 # Step 2: Login to Depot
 depot login
 
-# Step 3: Initialize Depot in your project
-depot init
+# Step 3: Connect to GitHub
+# (Install Depot Code Access GitHub App via Depot dashboard)
 
 # Step 4: Migrate your workflows
 depot ci migrate
@@ -112,7 +113,7 @@ depot ci migrate
 **[SOUND]** Satisfying "click" or "snap" sound
 
 **[VOICEOVER]**
-"Getting started with Depot CI is straightforward. Install the CLI. Login to your account. Initialize your project. Then run the migrate command - it automatically copies your GitHub Actions workflows and handles all the compatibility fixes for you. Your existing workflows are converted to run on Depot's optimized infrastructure."
+"Getting started with Depot CI is straightforward. Install the CLI using Homebrew on Mac or the install script on Linux. Login to your account. Connect your GitHub organization through the Depot dashboard - this is required for the migration to work. Then run the migrate command - it automatically copies your GitHub Actions workflows and handles all the compatibility fixes for you."
 
 ---
 
@@ -232,13 +233,13 @@ Cache shared across all builds
 ```
 
 **[VOICEOVER]**
-"Here's the key difference. GitHub Actions runners are ephemeral - meaning every build gets a brand new virtual machine that's destroyed after the job finishes. No cache survives between builds. You're downloading 500+ packages from scratch every single time."
+"Here's the key difference. GitHub Actions runners are ephemeral - they start fresh for each job. But here's what matters - without proper caching setup, you're re-downloading 500+ packages from scratch every single time."
 
 **[VISUAL]** Simple diagram showing Depot's distributed cache:
 
 ```
 ┌────────────────────┐
-│  Build 1          │ → Cache saved globally
+│  Build 1          │ → Cache saved to repository
 ├────────────────────┤
 │  Build 2          │ → Reuses Build 1 cache
 ├────────────────────┤
@@ -247,11 +248,11 @@ Cache shared across all builds
 │  Build 100        │ → Reuses all prior cache
 └────────────────────┘
       ↓
-Depot's distributed cache learns from every build
+Depot's repository-scoped cache persists across all your builds
 ```
 
 **[VOICEOVER]**
-"Depot CI uses a distributed global cache that persists across all builds. It learns from every previous build - yours and everyone else's. You only download what's actually new. That's the power of persistent, distributed caching versus starting from scratch every time."
+"Depot CI's cache is repository-scoped and persists across all your builds. Each build benefits from the cache entries created by your previous builds. That's the power of persistent caching versus starting from scratch every time."
 
 ---
 
@@ -308,12 +309,12 @@ Depot CI Cache:
 ├── Distributed global storage
 ├── Persists across all builds
 ├── Configurable size limits (up to unlimited)
-├── Up to 30-day retention options
+├── 14-day retention (default) / up to 30 days (configurable)
 └── Repository-scoped (organized by repo)
 ```
 
 **[VOICEOVER]**
-"Both platforms use remote cache storage that persists across jobs. But there are key differences. GitHub Actions cache is limited to 10 gigabytes with 7-day retention. Depot CI offers configurable cache sizes with options up to 30 days retention. That means your cache stays available longer between builds."
+"Both platforms use remote cache storage that persists across jobs. But there are key differences. GitHub Actions cache is limited to 10 gigabytes with 7-day retention. Depot CI offers configurable cache sizes with 14-day default retention and options up to 30 days. That means your cache stays available longer between builds."
 
 ---
 
@@ -351,14 +352,14 @@ Your builds benefit from:
 Depot CI Features (Not in GitHub Actions):
 
 ✅ SSH into running builds
-✅ Replay from any step
+✅ Retry individual failed jobs
 ✅ Per-second billing
 ✅ Detailed metrics dashboard
 ✅ AI failure diagnosis
 ```
 
 **[VOICEOVER]**
-"Beyond speed, Depot CI includes features GitHub Actions doesn't have. SSH into running builds for debugging. Replay from any failed step. Per-second billing so you only pay for what you use. AI-powered failure diagnosis that tells you exactly what went wrong."
+"Beyond speed, Depot CI includes features GitHub Actions doesn't have. SSH into running builds for debugging. Retry individual failed jobs without rerunning the whole workflow. Per-second billing so you only pay for what you use. AI-powered failure diagnosis that tells you exactly what went wrong."
 
 ---
 
@@ -441,9 +442,11 @@ SAVINGS: 50% reduction
 **[SCREEN]** Terminal showing:
 
 ```bash
-npm install -g @depot/cli
-depot login
-depot init
+# macOS:
+brew install depot/tap/depot
+
+# Linux:
+curl -L https://depot.dev/install-cli.sh | sh
 ```
 
 **[VOICEOVER]**
@@ -458,14 +461,12 @@ depot init
 ```bash
 # In your project directory:
 
-$ npm install -g @depot/cli
+# Install CLI (macOS shown)
+$ brew install depot/tap/depot
 ✔ Installed successfully
 
 $ depot login
 ✔ Logged in as your-account
-
-$ depot init
-✔ Created Depot project
 
 $ depot ci migrate
 ✔ Analyzing workflows...
@@ -479,7 +480,7 @@ Your workflows are now ready to run on Depot CI.
 **[SOUND]** Satisfying "ding" when migration completes
 
 **[VOICEOVER]**
-"The migration process handles everything automatically. The migrate command analyzes your existing GitHub Actions workflows, converts them to run on Depot CI infrastructure, applies any necessary compatibility fixes, and creates new workflow files in the `.depot/workflows/` directory. Your original workflows stay untouched - so you can easily compare or rollback if needed."
+"The migration process handles everything automatically. The migrate command analyzes your existing GitHub Actions workflows, converts them to run on Depot CI infrastructure, applies any necessary compatibility fixes, and creates new workflow files. Your original workflows stay untouched - so you can easily compare or rollback if needed."
 
 ---
 
@@ -525,10 +526,12 @@ Test Application: OpenClaw AI (500+ dependencies, multi-stage Docker build)
 
 | Component | GitHub Actions | Depot CI |
 |-----------|----------------|----------|
-| Runner | ubuntu-latest (2-core) | depot-ubuntu-22.04 (optimized) |
+| Runner | ubuntu-latest (2-core) | depot-ubuntu-24.04 |
 | Cache | GitHub Actions Cache | Depot distributed cache |
 | Docker | docker/build-push-action | depot/build-push-action |
 | Image | GHCR | GHCR |
+
+> **Note:** Tests used GitHub Packages registry for both platforms. Depot CI has a known limitation with GHCR when using secrets.GITHUB_TOKEN - consider Depot Registry if pushing to GitHub Packages.
 
 ### Key Findings
 
