@@ -323,21 +323,21 @@ Over a year: 42,500 minutes = ~700 hours = ~18 full work weeks
 **[VISUAL]** Cost comparison:
 
 ```
-GitHub Actions:
-233 seconds/build × 1,000 builds/month = 233,000 seconds
-Cost per minute: $0.008
-Monthly: ~$31
+GitHub Actions (billed per minute, rounded up):
+233 seconds → rounds up to 4 minutes/build
+1,000 builds × 4 minutes = 4,000 minutes/month
+Cost: $0.008/minute → ~$32/month
 
-Depot CI:
-138 seconds/build × 1,000 builds/month = 138,000 seconds
-Cost per minute: $0.007
-Monthly: ~$16
+Depot CI (billed per second, exact):
+138 seconds/build = 138 seconds billed
+1,000 builds × 138 seconds = 138,000 seconds
+Cost: $0.007/minute → ~$16/month
 
-SAVINGS: 48% reduction
+SAVINGS: 50% reduction
 ```
 
 **[VOICEOVER]**
-"Because Depot CI is 1.7x faster, you use 41% less compute. That translates to real cost savings on CI operations."
+"GitHub Actions rounds up to the nearest minute, so your 3 minute 53 second build gets billed as 4 minutes. Depot CI charges per second - so you only pay for exactly what you use. That's 50% savings on compute costs."
 
 ---
 
