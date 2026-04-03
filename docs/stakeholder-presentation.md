@@ -3,7 +3,7 @@
 ## Slide 1: Title Slide
 
 **Depot CI**
-### 40x Faster Builds for the AI-Augmented Development Era
+### Nearly 2x Faster Builds for the AI-Augmented Development Era
 
 ---
 ---
@@ -19,8 +19,8 @@
 **Depot CI** — A programmable CI engine built with performance as a first-class citizen
 
 ### The Impact
-- **5-10x faster builds**
-- **80% cost reduction**
+- **Nearly 2x faster builds** (based on real testing with OpenClaw AI)
+- **~33% cost reduction** (2026 GitHub Actions pricing)
 - **Teams can iterate at AI speed**
 
 ---
@@ -51,8 +51,8 @@ A programmable CI engine designed for the AI-augmented development era
 
 | Feature | Benefit |
 |---------|---------|
-| **Intelligent Caching** | Learn across all builds, never rebuild the same thing twice |
-| **Distributed Compute** | Scale horizontally when you need it |
+| **Repository-Scoped Cache** | Cache persists across all builds (14-day retention) |
+| **Pre-Warmed Sandboxes** | Jobs start in 2-3 seconds vs cold VM boots |
 | **GitHub Actions Compatible** | No workflow rewrite required |
 | **API-First** | Works for engineers and autonomous agents |
 
@@ -94,7 +94,7 @@ A programmable CI engine designed for the AI-augmented development era
 │    (Baseline)        │      (Showcase)      │
 ├─────────────────────┼─────────────────────┤
 │                     │                     │
-│   Time: 4:32        │   Time: 0:28        │
+│   Time: 3m 53s      │   Time: 2m 18s      │
 │                     │                     │
 │   ✓ SUCCESS         │   ✓ SUCCESS         │
 │                     │                     │
@@ -103,7 +103,7 @@ A programmable CI engine designed for the AI-augmented development era
 
 ### The Result
 
-**10x faster. Same outcome.**
+**1.7x faster. Same outcome.**
 
 ---
 ---
@@ -112,16 +112,17 @@ A programmable CI engine designed for the AI-augmented development era
 
 ### Where Does the Time Go?
 
-| Stage | GitHub Actions | Depot CI | Speedup |
-|-------|----------------|----------|---------|
-| Dependencies | 45s | 5s | **9x** |
-| TypeScript Build | 30s | 3s | **10x** |
-| Docker Build | 90s | 8s | **11x** |
-| Tests | 25s | 5s | **5x** |
-| Deploy | 60s | 30s | **2x** |
-| **TOTAL** | **4:32** | **0:28** | **~10x** |
+| Test Case | GitHub Actions | Depot CI | Speedup |
+|-----------|----------------|----------|---------|
+| Baseline (no cache) | 4m 6s | 2m 1s | **2.0x** |
+| Documentation change | 4m 1s | 2m 47s | **1.4x** |
+| New source file | 4m 0s | 2m 47s | **1.4x** |
+| UI component | 3m 57s | 1m 26s | **2.8x** |
+| New dependency | 3m 55s | 3m 11s | **1.1x** |
+| Major changes | 3m 51s | 1m 42s | **2.2x** |
+| **AVERAGE** | **3m 53s** | **2m 18s** | **1.7x** |
 
-**4 minutes and 32 seconds → 28 seconds**
+**Tested with OpenClaw AI — 500+ dependencies, production application**
 
 ---
 ---
@@ -131,32 +132,34 @@ A programmable CI engine designed for the AI-augmented development era
 ### Time Savings
 
 ```
-10 builds/day × 4 min saved = 40 min/day
-40 min/day × 5 days = 200 min/week
-200 min/week × 50 weeks = 10,000 min/year
+100 builds/day × 1.6 min saved = 160 min/day
+160 min/day × 5 days = 800 min/week
+800 min/week × 50 weeks = 40,000 min/year
 ```
 
 ### That's...
 
-- **167 hours per year**
-- **4+ weeks of work**
-- **An extra month per engineer**
+- **667 hours per year**
+- **~14 weeks of work**
+- **3+ extra months per engineer**
 
 ### Per 10-Engineer Team
 
-**>1,600 hours saved annually**
-*That's a full-time engineer's time*
+**>6,500 hours saved annually**
+*That's 3+ full-time engineers*
 
 ---
 ---
 
 ## Slide 9: The Cost Case
 
-### Monthly CI Costs (100 builds)
+### Monthly CI Costs (1,000 builds)
 
-| Traditional CI | Depot CI | Savings |
-|----------------|----------|---------|
-| $10-50/month | $2-5/month | **80%** |
+| Platform | Cost | Notes |
+|----------|------|-------|
+| GitHub Actions | ~$24/month | 4 min/build × $0.006/min (2026 pricing) |
+| Depot CI | ~$16/month | 2m 18s/build × per-second billing |
+| **Savings** | **~33%** | $8/month saved |
 
 ### Annual Savings (50 developers)
 
@@ -236,19 +239,34 @@ A programmable CI engine designed for the AI-augmented development era
 
 ### Getting Started Is Easy
 
-#### Step 1: Migrate Workflows
+#### Step 1: Install CLI
+```bash
+# macOS
+brew install depot/tap/depot
+
+# Linux
+curl -L https://depot.dev/install-cli.sh | sh
+```
+
+#### Step 2: Login & Connect
+```bash
+depot login
+# Then install Depot Code Access GitHub App via dashboard
+```
+
+#### Step 3: Migrate Workflows
 ```bash
 depot ci migrate
 ```
 
-#### Step 2: Commit & Push
+#### Step 4: Commit & Push
 ```bash
 git add .depot/
 git commit -m "Enable Depot CI"
 git push
 ```
 
-#### Step 3: That's It.
+#### Step 5: That's It.
 
 Your workflows run on Depot infrastructure. **No code changes required.**
 

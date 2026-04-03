@@ -48,16 +48,16 @@ Yes! Depot CI can deploy to:
 ### What caching mechanisms does Depot CI use?
 
 Depot CI uses:
-- **Distributed layer caching** across all builds
+- **Repository-scoped cache** that persists across all builds
 - **Dependency caching** for npm, yarn, pnpm, etc.
 - **Incremental compilation** for TypeScript, Go, Rust
-- **Global cache** shared across your organization
+- **14-day default retention** (configurable up to 30 days)
 
 ## Setup Questions
 
 ### Do I need to rewrite my workflows?
 
-No! Depot CI is GitHub Actions compatible. Simply run:
+No! Depot CI is GitHub Actions compatible. First, install the Depot Code Access GitHub App via the Depot dashboard, then simply run:
 ```bash
 depot ci migrate
 ```

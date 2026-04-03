@@ -23,26 +23,25 @@
 
 # GitHub Actions vs Depot Runners: Complete Performance Comparison
 
-## How Depot Achieved 10x Faster Cache
+> **Note:** This comparison describes **Depot GitHub Actions Runners** (a product that provides faster GitHub-hosted runners), not **Depot CI** (the programmable CI engine that runs your workflows on Depot infrastructure).
 
-Depot reverse-engineered GitHub's undocumented cache system. Key insights:
+## How Depot Achieved Faster Cache Performance
 
-1. **GitHub's Cache Architecture:** GitHub Actions runners are hosted on Azure and use Azure Blob Storage for caching, limited to ~1 Gbps (125 MB/s) network throughput
-2. **Depot's Solution:**
-   - Built a Go proxy on every runner that intercepts GitHub Cache API calls
-   - Replaced Azure Blob URLs with S3 URLs
-   - Increased parallelism from 2 streams to 4 (upload) and 8 (download)
-   - Hosted runners on EC2 close to S3 for maximum throughput
+Depot's approach to cache acceleration leverages:
+
+1. **Optimized infrastructure:** Runners hosted for better cache storage proximity
+2. **Increased parallelism:** More concurrent streams for cache operations
+3. **Drop-in replacement:** Uses same `actions/cache@v3` — no workflow changes required
 
 ## Complete Performance Comparison
 
 | Metric | GitHub Actions | Depot | Improvement |
 |--------|----------------|-------|-------------|
 | **CPU Speed (sysbench)** | 4,119.42 | 8,917.15 | ~2x faster |
-| **Cache Throughput** | 100-150 MB/s | 1 GB/s | 10x faster |
-| **Cache Size Limit** | 10 GB | Unlimited | No limit |
-| **Cache Retention** | 7 days | 30 days | 4x longer |
-| **Cost per Minute** | $0.008 | $0.004 | 50% cheaper |
+| **Cache Throughput** | 100-150 MB/s | Significantly faster | Multiple streams |
+| **Cache Size Limit** | 10 GB (expandable) | Configurable (up to unlimited) | No limit option |
+| **Cache Retention** | 7 days | 14 days (default, up to 30) | 2x longer (up to 4x) |
+| **Cost per Minute** | $0.006 (2026) | $0.004 | ~33% cheaper |
 
 ## Architecture Differences
 
@@ -70,8 +69,8 @@ Depot reverse-engineered GitHub's undocumented cache system. Key insights:
 
 Depot's cache acceleration comes from:
 
-1. EC2-to-S3 proximity (same region, private network)
-2. Higher parallelism (8 streams vs 2)
+1. Optimized runner infrastructure for cache operations
+2. Increased parallelism for cache downloads/uploads
 3. No workflow changes required — drop-in replacement using same `actions/cache@v3`
 
 ---

@@ -223,9 +223,12 @@ depot ci migrate
 ## Getting Started
 
 1. **Sign up**: [depot.dev/sign-up](https://depot.dev/sign-up) — 7-day free trial
-2. **Install CLI**: `npm install -g @depot/cli`
-3. **Migrate workflows**: `depot ci migrate`
-4. **Start building**: `depot ci run`
+2. **Install CLI**:
+   - macOS: `brew install depot/tap/depot`
+   - Linux: `curl -L https://depot.dev/install-cli.sh | sh`
+3. **Login**: `depot login`
+4. **Connect GitHub**: Install Depot Code Access GitHub App via Depot dashboard
+5. **Migrate workflows**: `depot ci migrate`
 
 ---
 

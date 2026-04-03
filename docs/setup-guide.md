@@ -32,7 +32,8 @@ chmod +x scripts/setup.sh
 2. Click "Get Started" or "Sign Up"
 3. Create a new project: `openclaw-demo`
 4. Choose GitHub authentication (recommended)
-5. Authorize the Depot GitHub app
+5. Install the **Depot Code Access** GitHub App via the Depot dashboard (required for Depot CI migration)
+6. Authorize the Depot GitHub app
 
 **Get your credentials:**
 ```bash
@@ -216,8 +217,11 @@ curl http://localhost:3000/skills
 
 **Problem**: `depot: command not found`
 ```bash
-# Install Depot CLI
-curl -L https://depot.dev/install.sh | sh
+# Install Depot CLI (macOS)
+brew install depot/tap/depot
+
+# Install Depot CLI (Linux)
+curl -L https://depot.dev/install-cli.sh | sh
 
 # Add to PATH
 export PATH=$PATH:$HOME/.depot/bin

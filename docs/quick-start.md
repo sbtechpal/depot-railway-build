@@ -57,14 +57,21 @@ docker run -p 3000:3000 openclaw-demo
 ### 2. Install CLIs (2 min)
 
 ```bash
-# Depot CLI
-curl -L https://depot.dev/install.sh | sh
+# Depot CLI (macOS)
+brew install depot/tap/depot
+
+# Depot CLI (Linux)
+curl -L https://depot.dev/install-cli.sh | sh
 
 # Railway CLI
 npm install -g @railway/cli
 ```
 
-### 3. Configure GitHub Secrets (3 min)
+### 3. Connect GitHub (1 min)
+
+**For Depot CI migration:** Install the Depot Code Access GitHub App via the Depot dashboard at depot.dev. This is required for `depot ci migrate` to work.
+
+### 4. Configure GitHub Secrets (3 min)
 
 Add these to your repo's GitHub secrets:
 
@@ -79,7 +86,7 @@ railway init         # Get RAILWAY_PROJECT_ID and RAILWAY_SERVICE_ID
 
 Add to GitHub: Settings → Secrets → New secret
 
-### 4. Run Workflows (2 min)
+### 5. Run Workflows (2 min)
 
 Push to trigger:
 ```bash

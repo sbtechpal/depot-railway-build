@@ -23,7 +23,7 @@ We chose to test with **OpenClaw AI** - a production-grade personal AI assistant
 | **Monorepo** | Multiple packages (ui, src, skills) | Complex build orchestration |
 | **Real-world** | Production application | Accurate performance representation |
 
-This complexity makes OpenClaw AI an ideal test subject - it demonstrates how Depot CI's intelligent caching and Docker-optimized infrastructure provide real advantages for demanding build scenarios.
+This complexity makes OpenClaw AI an ideal test subject - it demonstrates how Depot CI's programmable CI engine with built-in caching provides real advantages for demanding build scenarios.
 
 ---
 
@@ -304,13 +304,15 @@ Depot CI uses a CLI-based migration that automatically converts your GitHub Acti
 
 ```bash
 # Step 1: Install Depot CLI
-npm install -g @depot/cli
+# macOS:  brew install depot/tap/depot
+# Linux:  curl -L https://depot.dev/install-cli.sh | sh
 
 # Step 2: Login to Depot
 depot login
 
-# Step 3: Initialize your project
-depot init
+# Step 3: Connect to GitHub
+# Install the Depot Code Access GitHub App via the Depot dashboard
+# This is required for the migration to work
 
 # Step 4: Migrate your workflows
 depot ci migrate
@@ -327,10 +329,10 @@ depot ci migrate
 
 | Requirement | Description |
 |-------------|-------------|
-| **Depot CLI** | Install via `npm install -g @depot/cli` |
-| **Depot Project** | Created via `depot init` or in Depot dashboard |
-| **OIDC Setup** | Configure trust relationship in Depot project settings |
-| **Permissions** | Add `id-token: write` to your workflow permissions |
+| **Depot CLI** | Install via Homebrew (macOS) or install script (Linux) |
+| **Depot Account** | Create account at depot.dev |
+| **GitHub App** | Install Depot Code Access GitHub App via Depot dashboard |
+| **Repository Access** | Grant Depot access to your GitHub repositories |
 
 > **Note:** The original `.github/workflows/` files are preserved, making it easy to rollback or compare.
 
@@ -362,7 +364,7 @@ This ensures fair comparison across both platforms.
 - Depot CI: 1.9x faster than GitHub Actions on average
 - Biggest advantage: 3.3x faster for dependency changes
 - More consistent: 46s variance vs 3m 33s for GitHub Actions
-- Simple migration: One-line YAML change
+- Simple migration: CLI-based automatic workflow conversion
 
 **For teams using GitHub Actions:** Switch to Depot CI for a 1.9x speedup with minimal code changes.
 

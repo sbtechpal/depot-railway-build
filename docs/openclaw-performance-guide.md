@@ -312,28 +312,28 @@ echo "<!-- Major test -->" >> README.md
 
 ## Why Depot CI is Faster
 
-### 1. Distributed Layer Caching
+### 1. Repository-Scoped Caching
 
 ```
 GitHub Actions:
-├── Cache per workflow run
-├── Limited to runner's local storage
-└── Cold start on new runners
+├── Remote cache storage (Azure Blob)
+├── 7-day default retention
+└── 10 GB default limit (expandable with paid plans)
 
 Depot CI:
-├── Global cache shared across all builds
-├── Pre-fetches layers in parallel
-└── Persistent across runs
+├── Repository-scoped cache across all builds
+├── 14-day default retention (up to 30 days)
+├── Configurable size limits
+└── Built in, no configuration required
 ```
 
-### 2. Optimized Infrastructure
+### 2. Pre-Warmed Infrastructure
 
 | Resource | GitHub Actions | Depot CI |
 |----------|----------------|----------|
-| **CPU** | 2-core shared | 4-8 core dedicated |
-| **Network** | Standard | Optimized for package downloads |
-| **Storage** | EBS backed | SSD with optimized I/O |
-| **Parallelism** | Limited per runner | Distributed build stages |
+| **Runner Start** | Cold VM boot (~30-60s) | Pre-warmed sandboxes (2-3s) |
+| **Cache** | Remote with 7-day retention | Built-in with 14-day retention |
+| **Consistency** | Variable performance | Predictable build times |
 
 ### 3. Smart Build Orchestration
 
