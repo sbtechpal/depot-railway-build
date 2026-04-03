@@ -15,6 +15,11 @@ on:
           - test-4-ui
           - test-5-dependency
           - test-6-major
+      cleanup_disk:
+        description: 'Free up disk space before build (recommended for large builds)'
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: read
@@ -33,6 +38,7 @@ jobs:
           ref: main
 
       - name: Free up disk space
+        if: ${{ github.event.inputs.cleanup_disk != 'false' }}
         run: |
           echo "=========================================="
           echo "Initial disk usage:"
