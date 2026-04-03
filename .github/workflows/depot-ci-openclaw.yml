@@ -59,8 +59,26 @@ jobs:
 
       - name: Install Depot CLI
         run: |
-          curl -fsSL https://depot.dev/install.sh | sh
-          echo "$HOME/bin" >> $GITHUB_PATH
+          echo "Installing Depot CLI..."
+          # Install using npm
+          npm install -g @depot/cli || true
+
+          # Alternative: install via direct download
+          if ! command -v depot &> /dev/null; then
+            echo "npm install failed, trying direct download..."
+            curl -L https://github.com/depot/cli/releases/latest/download/depot-linux-amd64 -o /usr/local/bin/depot
+            chmod +x /usr/local/bin/depot
+          fi
+
+          # Verify installation
+          if command -v depot &> /dev/null; then
+            echo "Depot CLI installed successfully:"
+            which depot
+            depot --version || true
+          else
+            echo "Depot CLI installation failed"
+            exit 1
+          fi
 
       - name: Apply test case
         run: |
@@ -155,7 +173,25 @@ jobs:
           echo "Test: ${{ github.event.inputs.test_case }}"
           echo "Disk space before build:"
           df -h
-          $HOME/bin/depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
+
+          # Try different paths for depot
+          if command -v depot &> /dev/null; then
+            echo "Using depot from PATH"
+            depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
+          elif [ -f /usr/local/bin/depot ]; then
+            echo "Using depot from /usr/local/bin"
+            /usr/local/bin/depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
+          elif [ -f "$HOME/bin/depot" ]; then
+            echo "Using depot from \$HOME/bin"
+            $HOME/bin/depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
+          else
+            echo "ERROR: depot command not found in any location"
+            echo "Checking common paths..."
+            ls -la /usr/local/bin/ | grep depot || echo "Not in /usr/local/bin"
+            ls -la $HOME/bin 2>/dev/null || echo "Not in \$HOME/bin"
+            which depot || echo "Not in PATH"
+            exit 1
+          fi
         env:
           DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
 
