@@ -47,31 +47,42 @@ jobs:
 
           # Install using npm (available before cleanup)
           echo "Installing via npm..."
-          if npm install -g @depot/cli; then
-            echo "Finding depot installation..."
-            # Find the bin directory where npm puts executables
-            NPM_BIN=$(npm bin -g)
-            echo "npm bin -g: $NPM_BIN"
-            DEPOT_PATH="$NPM_BIN/depot"
+          npm install -g @depot/cli
 
-            if [ -f "$DEPOT_PATH" ]; then
-              echo "Found depot at: $DEPOT_PATH"
-              # Copy to /usr/local/bin so it persists across shell sessions
-              sudo cp "$DEPOT_PATH" /usr/local/bin/depot
-              sudo chmod +x /usr/local/bin/depot
-              echo "=========================================="
-              echo "Depot CLI installed and copied to /usr/local/bin:"
-              which depot
-              depot --version
-              echo "=========================================="
-            else
-              echo "ERROR: Could not find depot after npm install"
-              echo "Searching for depot..."
-              find /usr -name depot -type f 2>/dev/null || true
-              exit 1
+          echo "Searching for depot binary..."
+          DEPOT_FOUND=""
+
+          # Try common locations where npm installs global binaries
+          for LOCATION in \
+            "/usr/local/bin/depot" \
+            "/usr/bin/depot" \
+            "$HOME/.npm-global/bin/depot" \
+            "/opt/homebrew/bin/depot" \
+            "$NVM_BIN/depot" \
+            "/usr/local/lib/node_modules/.bin/depot" \
+            "/usr/share/npm/bin/depot"
+          do
+            echo "Checking: $LOCATION"
+            if [ -f "$LOCATION" ]; then
+              echo "Found depot at: $LOCATION"
+              DEPOT_FOUND="$LOCATION"
+              break
             fi
+          done
+
+          if [ -n "$DEPOT_FOUND" ]; then
+            # Copy to /usr/local/bin so it persists across shell sessions
+            sudo cp "$DEPOT_FOUND" /usr/local/bin/depot
+            sudo chmod +x /usr/local/bin/depot
+            echo "=========================================="
+            echo "Depot CLI installed and copied to /usr/local/bin:"
+            which depot
+            depot --version
+            echo "=========================================="
           else
-            echo "ERROR: Failed to install Depot CLI via npm"
+            echo "ERROR: Could not find depot binary"
+            echo "Search results:"
+            find /usr -name "depot" -type f 2>/dev/null | head -10
             exit 1
           fi
 
