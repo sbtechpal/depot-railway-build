@@ -317,7 +317,49 @@ Depot CI Cache:
 
 ---
 
-### 3:40 - 4:00 | Additional Features
+### 3:35 - 3:50 | How Depot Achieves This
+
+**[VISUAL]** Technical architecture diagram:
+
+```
+GITHUB ACTIONS:
+┌─────────────────────┐
+│ Azure-hosted runners│
+│ ↓                    │
+│ Azure Blob Cache     │ ← ~1 Gbps throughput
+│ ↓                    │   (100-150 MB/s)
+│ 2 parallel streams   │
+└─────────────────────┘
+
+DEPOT CI:
+┌─────────────────────┐
+│ AWS EC2 runners     │
+│ ↓                    │
+│ S3 Cache (same zone) │ ← Private network
+│ ↓                    │   ~10 Gbps throughput
+│ 8 parallel streams   │   (1 GB/s - 10x faster)
+└─────────────────────┘
+```
+
+**[VOICEOVER]**
+"So how does Depot achieve this? It comes down to infrastructure advantages. GitHub Actions runners are on Azure with Azure Blob storage, limited to about 150 megabytes per second. Depot CI runs on AWS EC2, directly connected to S3 in the same region over a private network. That's 10 times the throughput - up to 1 gigabyte per second. And instead of 2 parallel downloads, Depot uses 8. The result? Cache operations that are simply faster."
+
+**[VISUAL]** Simple comparison:
+
+```
+Cache Throughput:
+GitHub Actions: ~150 MB/s
+Depot CI:        ~1,000 MB/s
+
+That's 10x faster cache operations
+```
+
+**[VOICEOVER]**
+"And here's the best part - it's a drop-in replacement. Depot works with your existing GitHub Actions workflows and the same `actions/cache@v3` setup. No workflow changes required. You just get faster cache operations automatically."
+
+---
+
+### 3:50 - 4:00 | Additional Features
 
 **[VISUAL]** Feature list appears:
 
