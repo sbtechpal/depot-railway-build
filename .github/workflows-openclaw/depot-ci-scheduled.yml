@@ -1,0 +1,220 @@
+name: Depot CI - OpenClaw Scheduled Performance Tests
+
+on:
+  schedule:
+    # Runs daily at 7:15pm EST (23:15 UTC EDT)
+    - cron: '15 23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  DEPOT_PROJECT_ID: ${{ secrets.DEPOT_PROJECT_ID }}
+
+jobs:
+  # Each test runs as a separate job, 15 minutes apart
+  # Using 'needs' creates the dependency chain
+
+  test-1-baseline:
+    name: Test 1 - Baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout OpenClaw
+        uses: actions/checkout@v4
+        with:
+          repository: openclaw/openclaw
+          ref: main
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install-cli.sh | sh
+          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+
+      - name: Build with Depot CI
+        run: |
+          echo "=========================================="
+          echo "Test: Baseline (100% cache expected)"
+          echo "=========================================="
+          depot build -t openclaw:scheduled-baseline .
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+
+  test-2-docs:
+    name: Test 2 - Documentation Change
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: test-1-baseline
+    steps:
+      - name: Checkout OpenClaw
+        uses: actions/checkout@v4
+        with:
+          repository: openclaw/openclaw
+          ref: main
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install-cli.sh | sh
+          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+
+      - name: Apply documentation change
+        run: |
+          echo "<!-- Scheduled test: $(date) -->" >> README.md
+
+      - name: Build with Depot CI
+        run: |
+          echo "=========================================="
+          echo "Test: Documentation change (95% cache expected)"
+          echo "=========================================="
+          depot build -t openclaw:scheduled-docs .
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+
+  test-3-source:
+    name: Test 3 - New Source File
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: test-2-docs
+    steps:
+      - name: Checkout OpenClaw
+        uses: actions/checkout@v4
+        with:
+          repository: openclaw/openclaw
+          ref: main
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install-cli.sh | sh
+          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+
+      - name: Apply source file change
+        run: |
+          cat > src/perf-test.ts << 'EOF'
+          /**
+           * Scheduled performance test
+           */
+          export interface PerfMetrics {
+            startTime: number;
+            endTime: number;
+            duration: number;
+          }
+          EOF
+
+      - name: Build with Depot CI
+        run: |
+          echo "=========================================="
+          echo "Test: New source file (75% cache expected)"
+          echo "=========================================="
+          depot build -t openclaw:scheduled-source .
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+
+  test-4-ui:
+    name: Test 4 - UI Component Change
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: test-3-source
+    steps:
+      - name: Checkout OpenClaw
+        uses: actions/checkout@v4
+        with:
+          repository: openclaw/openclaw
+          ref: main
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install-cli.sh | sh
+          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+
+      - name: Apply UI component change
+        run: |
+          mkdir -p ui/src/components/test
+          cat > ui/src/components/test/ScheduledPerfTest.tsx << 'EOF'
+          /**
+           * Scheduled performance test component
+           */
+          import { css } from 'lit';
+          export class ScheduledPerfTestComponent extends HTMLElement {
+            static styles = css`:host { display: block; padding: 1rem; }`;
+            connectedCallback(): void {
+              super.connectedCallback();
+              this.innerHTML = '<p>Scheduled Performance Test</p>';
+            }
+          }
+          customElements.define("scheduled-perf-test", ScheduledPerfTestComponent);
+          EOF
+
+      - name: Build with Depot CI
+        run: |
+          echo "=========================================="
+          echo "Test: UI component change (50% cache expected)"
+          echo "=========================================="
+          depot build -t openclaw:scheduled-ui .
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+
+  test-5-dependency:
+    name: Test 5 - New Dependency
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: test-4-ui
+    steps:
+      - name: Checkout OpenClaw
+        uses: actions/checkout@v4
+        with:
+          repository: openclaw/openclaw
+          ref: main
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install-cli.sh | sh
+          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+
+      - name: Apply dependency change
+        run: |
+          touch package.json
+
+      - name: Build with Depot CI
+        run: |
+          echo "=========================================="
+          echo "Test: Dependency change (25% cache expected)"
+          echo "=========================================="
+          depot build -t openclaw:scheduled-dependency .
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+
+  test-6-major:
+    name: Test 6 - Major Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: test-5-dependency
+    steps:
+      - name: Checkout OpenClaw
+        uses: actions/checkout@v4
+        with:
+          repository: openclaw/openclaw
+          ref: main
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install-cli.sh | sh
+          echo "$HOME/.depot/bin" >> $GITHUB_PATH
+
+      - name: Apply major changes
+        run: |
+          touch package.json
+          touch src/scheduled-major-test.ts
+          mkdir -p ui/src/components/major
+          touch ui/src/components/major/ScheduledMajorTest.tsx
+          echo "<!-- Scheduled major test $(date) -->" >> README.md
+
+      - name: Build with Depot CI
+        run: |
+          echo "=========================================="
+          echo "Test: Major changes (10% cache expected)"
+          echo "=========================================="
+          depot build -t openclaw:scheduled-major .
+        env:
+          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
