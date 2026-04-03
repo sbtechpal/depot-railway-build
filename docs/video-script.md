@@ -139,12 +139,12 @@ Test Environment:
 ├── Same Dockerfile (multi-stage build)
 ├── Same Node.js application
 ├── Same dependencies
-├── 5 test scenarios
+├── 6 test scenarios
 └── Fair comparison
 ```
 
 **[VOICEOVER]**
-"We wanted to see the real difference, so we ran a fair comparison. Same Dockerfile. Same application. Five different test scenarios. From cold builds to dependency changes."
+"We wanted to see the real difference, so we ran a fair comparison. Same Dockerfile. Same application. Six different test scenarios. From builds without cache to dependency changes."
 
 ---
 
@@ -159,7 +159,7 @@ Test Environment:
 │                                                             │
 │  Test Case           GitHub    Depot    Depot Speedup       │
 │  ─────────────────────────────────────────────────────────  │
-│  Baseline (cold)     3m 4s    1m 51s   1.9x faster       │
+│  Baseline (without cache)     3m 4s    1m 51s   1.7x faster       │
 │  Comment change       2m 39s    1m 50s   1.4x faster       │
 │  New source file     2m 37s    1m 51s   1.4x faster       │
 │  UI component        2m 30s    1m 52s   1.3x faster       │
@@ -188,18 +188,18 @@ Test Environment:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  NEW DEPENDENCY TEST (Adding ESLint package)               │
+│  NEW DEPENDENCY TEST (Adding new npm package)               │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  GitHub Actions: 193 seconds  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░         │
-│  Depot CI:        31 seconds  ▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░         │
+│  GitHub Actions: 6m 3s     ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░         │
+│  Depot CI:        1m 53s   ▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░         │
 │                                                             │
-│  Depot CI is 6.2x faster for dependency changes             │
+│  Depot CI is 3.3x faster for dependency changes             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **[VOICEOVER]**
-"Look at the dependency test. When adding a new package, GitHub Actions took over 3 minutes. Depot CI took just 31 seconds. That's a 6x difference."
+"Look at the dependency test. When adding a new package to a project with 500+ dependencies, GitHub Actions took over 6 minutes. Depot CI took under 2 minutes. That's a 3x difference."
 
 **[VISUAL]** Animation showing why:
 - GitHub Actions: Re-downloads everything
@@ -210,20 +210,20 @@ Test Environment:
 
 ---
 
-### 2:45 - 3:00 | The Cold Build Reality
+### 2:45 - 3:00 | The Build Without Cache Reality
 
 **[VISUAL]** Baseline comparison:
 
 ```
 First build of the day (no cache):
-GitHub Actions: 2:21
-Depot CI:       0:31
+GitHub Actions: 3m 4s
+Depot CI:       1m 51s
 
-You save nearly 2 minutes on your very first build.
+You save over 1 minute on your very first build.
 ```
 
 **[VOICEOVER]**
-"Even on cold builds with no cache, Depot CI is 4.5x faster. That's nearly 2 minutes saved on your first build of the day. Before you've even had your coffee."
+"Even on builds without cache, Depot CI is 1.7x faster. That's over a minute saved on your first build of the day. Before you've even had your coffee."
 
 ---
 
@@ -424,7 +424,7 @@ Test Application: OpenClaw AI (500+ dependencies, multi-stage Docker build)
 
 | Test Case | GitHub Actions | Depot CI | Speedup |
 |-----------|----------------|----------|---------|
-| Baseline (cold) | 3m 4s | 1m 51s | 1.7x |
+| Baseline (without cache) | 3m 4s | 1m 51s | 1.7x |
 | Documentation change | 2m 39s | 1m 50s | 1.4x |
 | New source file | 2m 37s | 1m 51s | 1.4x |
 | UI component | 2m 30s | 1m 52s | 1.3x |

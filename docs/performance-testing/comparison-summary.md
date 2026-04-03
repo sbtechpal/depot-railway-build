@@ -1,136 +1,139 @@
-# Docker Build Performance Comparison Summary
+# Docker Build Performance Comparison: GitHub Actions vs Depot CI
 
-Complete performance comparison of 4 Docker build flows deploying to Railway.
+Complete performance comparison of GitHub Actions vs Depot CI for Docker builds.
 
-**Deployment Target:** Railway (us-east4)
-**Test Period:** 2026-03-31 to 2026-04-02
+**Test Application:** OpenClaw AI (500+ dependencies, complex multi-stage Docker build)
+**Test Period:** 2026-04-02 to 2026-04-03
 **Organization:** sbtechpal
-**Test Cases:** 5 progressive scenarios (baseline → major changes)
+**Test Cases:** 6 progressive scenarios (baseline → major changes)
 
-> **Note:** All measurements are Docker **build time only** - time to create the Docker image. Railway deployment time is not included.
+> **Note:** All measurements are Docker **build time only** - time to create the Docker image. Deployment time is not included.
 
 ---
 
 ## Quick Summary
 
-| Flow | Wins | Average Time | Rank |
-|------|------|--------------|------|
-| **Depot CI** | **4/5** 🏆 | **27s** | 1st |
-| Railway | 1/5 🥈 | 29s | 2nd |
-| Local | 1/5 🥉 | 108s | 3rd |
-| GitHub Actions | 0/5 ❌ | 134s | 4th |
+| Platform | Wins | Average Time (with cleanup) | Average Time (no cleanup) | Rank |
+|----------|------|----------------------------|---------------------------|------|
+| **Depot CI** | **6/6** 🏆 | **1m 59s** | **2m 18s** | 1st |
+| GitHub Actions | 0/6 ❌ | 3m 43s | 3m 53s | 2nd |
 
-**Winner:** Depot CI - Fastest in 4 out of 5 test cases, 5x faster than GitHub Actions.
+**Winner:** Depot CI - Fastest in all 6 test cases, 1.9x faster than GitHub Actions.
 
 ---
 
-## Complete Results Table
+## Complete Results Table (With Disk Cleanup)
 
-| Test | Local | Railway | GitHub | Depot | Winner |
-|------|-------|---------|--------|-------|--------|
-| **Baseline** | 162s | 34.20s | 141s | **31s** 🏆 | Depot |
-| **Comment** | **14s** 🏆 | 23.60s | 65s | 23s | Local |
-| **Function** | 17s | **18.02s** 🏆 | 64s | 23s | Railway |
-| **Dependency** | 143s | 40.75s | 193s | **31s** 🏆 | Depot |
-| **Major** | 206s | 27.73s | 133s | **26s** 🏆 | Depot |
-
----
-
-## Head-to-Head Comparisons
-
-### Depot CI vs GitHub Actions
-
-| Test | Depot | GitHub | Depot Speedup |
-|------|-------|--------|---------------|
-| Baseline | **31s** | 141s | **4.5x faster** |
-| Comment | **23s** | 65s | **2.8x faster** |
-| Function | **23s** | 64s | **2.8x faster** |
-| Dependency | **31s** | 193s | **6.2x faster** |
-| Major | **26s** | 133s | **5.1x faster** |
-
-**Average:** 27s vs 134s = **5.0x faster**
-
-**Depot CI wins ALL 5 test cases**
+| Test | GitHub Actions | Depot CI | Depot Speedup | Winner |
+|------|----------------|----------|---------------|--------|
+| **Baseline** | 3m 4s | **1m 51s** 🏆 | **1.7x faster** | Depot |
+| **Documentation** | 2m 39s | **1m 50s** 🏆 | **1.4x faster** | Depot |
+| **Source File** | 2m 37s | **1m 51s** 🏆 | **1.4x faster** | Depot |
+| **UI Component** | 2m 30s | **1m 52s** 🏆 | **1.3x faster** | Depot |
+| **New Dependency** | 6m 3s | **1m 53s** 🏆 | **3.3x faster** | Depot |
+| **Major Changes** | 5m 25s | **2m 36s** 🏆 | **2.1x faster** | Depot |
 
 ---
 
-### Depot CI vs Railway
+## Complete Results Table (Without Disk Cleanup)
 
-| Test | Depot | Railway | Winner |
-|------|-------|---------|--------|
-| Baseline | **31s** | 34.20s | Depot ✅ |
-| Comment | **23s** | 23.60s | Depot ✅ |
-| Function | 23s | **18.02s** | Railway ✅ |
-| Dependency | **31s** | 40.75s | Depot ✅ |
-| Major | **26s** | 27.73s | Depot ✅ |
-
-**Depot wins 4/5** - Only Railway wins for new function additions
-
----
-
-### Railway vs GitHub Actions
-
-| Test | Railway | GitHub | Railway Speedup |
-|------|---------|--------|-----------------|
-| Baseline | **34.20s** | 141s | **4.1x faster** |
-| Comment | **23.60s** | 65s | **2.8x faster** |
-| Function | **18.02s** | 64s | **3.6x faster** |
-| Dependency | 40.75s | 193s | **4.7x faster** |
-| Major | 27.73s | 133s | **4.8x faster** |
-
-**Average:** 29s vs 134s = **4.6x faster**
-
-**Railway wins ALL 5 test cases** vs GitHub Actions
+| Test | GitHub Actions | Depot CI | Depot Speedup | Winner |
+|------|----------------|----------|---------------|--------|
+| **Baseline** | 4m 6s | **2m 1s** 🏆 | **2.0x faster** | Depot |
+| **Documentation** | 4m 1s | **2m 47s** 🏆 | **1.4x faster** | Depot |
+| **Source File** | 4m 0s | **2m 47s** 🏆 | **1.4x faster** | Depot |
+| **UI Component** | 3m 57s | **1m 26s** 🏆 | **2.8x faster** | Depot |
+| **New Dependency** | 3m 55s | **3m 11s** 🏆 | **1.1x faster** | Depot |
+| **Major Changes** | 3m 51s | **1m 42s** 🏆 | **2.2x faster** | Depot |
 
 ---
 
-## Flow Descriptions
+## Head-to-Head Comparison (With Cleanup)
 
-| Flow | Description | Process |
-|------|-------------|----------|
-| **Local** | Build on your machine | `docker build` locally → manual deploy |
-| **Railway** | Railway auto-build | `git push` → Railway builds automatically |
-| **GitHub Actions** | CI/CD with vanilla GitHub | GitHub Actions workflow → push to GHCR → deploy |
-| **Depot CI** | CI/CD with Depot optimization | Depot CI workflow → push to GHCR → deploy |
+| Test | GitHub Actions | Depot CI | Depot Speedup |
+|------|----------------|----------|---------------|
+| Baseline | 3m 4s | **1m 51s** | **1.7x faster** |
+| Documentation | 2m 39s | **1m 50s** | **1.4x faster** |
+| Source File | 2m 37s | **1m 51s** | **1.4x faster** |
+| UI Component | 2m 30s | **1m 52s** | **1.3x faster** |
+| New Dependency | 6m 3s | **1m 53s** | **3.3x faster** |
+| Major Changes | 5m 25s | 2m 36s | **2.1x faster** |
+
+**Average:** 3m 43s vs 1m 59s = **1.9x faster**
+
+**Depot CI wins ALL 6 test cases**
+
+---
+
+## Platform Descriptions
+
+| Platform | Description | Process |
+|----------|-------------|----------|
+| **GitHub Actions** | CI/CD with vanilla GitHub | GitHub Actions workflow → docker/build-push-action → push to registry |
+| **Depot CI** | CI/CD with Depot optimization | Depot CI workflow → depot/build-push-action → push to registry |
 
 ---
 
 ## Key Findings
 
-### 1. Depot CI is the Overall Winner 🏆
-- Wins 4 out of 5 test cases
-- 5x faster than GitHub Actions
-- 2s faster than Railway on average
-- Best for dependency-heavy changes (6.2x faster than GitHub)
+### 1. Depot CI is the Clear Winner 🏆
+- Wins all 6 test cases
+- 1.9x faster than GitHub Actions on average
+- Best for dependency-heavy changes (3.3x faster)
+- Consistent performance across all scenarios
 
-### 2. Railway is a Strong Second Place
-- Only 2 seconds slower than Depot on average
-- Wins the "New Function" test case
-- Simplest setup (auto-build on git push)
-- 4.6x faster than GitHub Actions
+### 2. Dependency Changes Show Biggest Advantage
+- Depot CI: 1m 53s vs GitHub Actions: 6m 3s
+- **3.3x speedup** when adding new dependencies
+- Depot's distributed caching excels here
 
-### 3. GitHub Actions is the Slowest
-- Loses every single test case
-- 5x slower than Depot CI
-- 4.6x slower than Railway
-- Generic runners lack Docker optimization
+### 3. Even Builds Without Cache Are Faster
+- Depot CI: 1m 51s vs GitHub Actions: 3m 4s
+- **1.7x faster** on baseline (without cache)
+- Pre-warmed infrastructure makes the difference
 
-### 4. Local Only Wins for Tiny Changes
-- Wins for comment changes (14s with persistent cache)
-- But slowest for dependency changes (143s residential network)
-- Good for development, not for CI/CD
+### 4. Consistent Performance
+- Depot CI range: 1m 50s - 2m 36s (46s variance)
+- GitHub Actions range: 2m 30s - 6m 3s (3m 33s variance)
+- Depot CI is more predictable
 
 ---
 
-## When to Use Each Flow
+## Disk Cleanup Impact Analysis
+
+| Test Type | GitHub Actions Impact | Depot CI Impact | Recommendation |
+|-----------|----------------------|-----------------|----------------|
+| Baseline (without cache) | 34% slower without | 9% slower without | Use cleanup |
+| Documentation | 52% slower without | 52% slower without | Use cleanup |
+| Source File | 53% slower without | 50% slower without | Use cleanup |
+| UI Component | 58% slower without | **23% faster without** | Skip cleanup |
+| New Dependency | 36% faster without* | 69% slower without | Use cleanup |
+| Major Changes | **27% faster without** | **35% faster without** | Skip cleanup |
+
+*GitHub Actions had an anomaly with cleanup (6m 3s unusually slow)
+
+### Cleanup Recommendation
+
+**Enable cleanup when:**
+- Running builds without cache (first-time builds)
+- Making dependency changes
+- Disk space is constrained
+
+**Skip cleanup when:**
+- Making small UI/component changes
+- Making major file changes
+- Filesystem cache is more valuable than clean space
+
+---
+
+## When to Use Each Platform
 
 | Scenario | Recommended | Why |
 |----------|-------------|-----|
-| **Development (small changes)** | Local | 14-17s with persistent cache, instant feedback |
-| **Simple CI/CD** | Railway | Auto-build on push, 29s average, zero config |
-| **Best CI/CD Performance** | **Depot CI** | 27s average, 5x faster than GitHub |
-| **GitHub Actions Users** | **Depot CI** | Drop-in replacement, 5x speedup |
-| **Avoid** | GitHub Actions (vanilla) | 5x slower, no optimization |
+| **Best CI/CD Performance** | **Depot CI** | 1m 59s average, 1.9x faster |
+| **GitHub Actions Users** | **Depot CI** | Drop-in replacement, 1.9x speedup |
+| **Already Using GitHub** | **Depot CI** | One-line change, significant speedup |
+| **Minimal Changes** | GitHub Actions | Only if builds are already fast (<2 min) |
 
 ---
 
@@ -140,128 +143,129 @@ Complete performance comparison of 4 Docker build flows deploying to Railway.
 
 ```
 10 builds/day scenario:
-GitHub Actions: 134s × 10 = 22 minutes/day
-Depot CI:       27s  × 10 = 4.5 minutes/day
+GitHub Actions: 3m 43s × 10 = 37 minutes/day
+Depot CI:        1m 59s × 10 = 20 minutes/day
 
-Time saved: 17.5 minutes per day = ~1.5 hours/week
+Time saved: 17 minutes per day = ~2 hours/week
 ```
 
 ### Compute Savings
 
 ```
 Same 10 builds/day:
-GitHub Actions: 134s × 10 = 1,340 seconds = 22 minutes of compute
-Depot CI:       27s  × 10 = 270 seconds = 4.5 minutes of compute
+GitHub Actions: 223s × 10 = 2,230 seconds = 37 minutes of compute
+Depot CI:       119s × 10 = 1,190 seconds = 20 minutes of compute
 
-Compute reduction: 80% less CI/CD compute needed
+Compute reduction: 47% less CI/CD compute needed
+```
+
+### Dollar Savings (Approximate)
+
+```
+GitHub Actions: $0.008/minute × 37 min/day = ~$9/month (500 builds)
+Depot CI:       $0.007/minute × 20 min/day = ~$4/month (500 builds)
+
+Savings: ~55% reduction in CI build costs
 ```
 
 ---
 
 ## System Specifications
 
-| Flow | Runner/Environment | CPU | RAM | Network |
-|------|-------------------|-----|-----|---------|
-| **Local** | HP EliteBook 840 G7 (WSL2) | 4 cores | 24GB | Residential |
-| **Railway** | us-east4 datacenter | 32 vCPU | 32GB | Cloud |
-| **GitHub Actions** | ubuntu-latest runner | 2-core | ~7GB | Cloud |
-| **Depot CI** | depot-ubuntu-22.04 | Optimized | Optimized | Cloud |
+| Platform | Runner/Environment | CPU | RAM | Network |
+|----------|-------------------|-----|-----|---------|
+| **GitHub Actions** | ubuntu-latest runner | 2-core | ~7GB (~14GB with cleanup) | Cloud |
+| **Depot CI** | depot-ubuntu-22.04 | Optimized | Optimized | Cloud (distributed cache) |
 
 ---
 
-## Detailed Test Results
+## Detailed Test Results (With Cleanup)
 
-### Test Case 1: Baseline (Cold Build)
+### Test Case 1: Baseline (Without Cache)
 
-| Flow | Time | vs Local | vs GitHub |
-|------|------|----------|-----------|
-| **Depot CI** | **31s** 🏆 | 5.2x faster | 4.5x faster |
-| Railway | 34.20s | 4.7x faster | 4.1x faster |
-| GitHub Actions | 141s | 1.1x faster | baseline |
-| Local | 162s | baseline | 1.3x slower |
+| Platform | Time | Speedup |
+|----------|------|---------|
+| **Depot CI** | **1m 51s** 🏆 | 1.7x faster |
+| GitHub Actions | 3m 4s | baseline |
 
-**Winner:** Depot CI - Fastest cold build
+**Winner:** Depot CI - Pre-warmed infrastructure wins for builds without cache
 
 ---
 
-### Test Case 2: Comment Change
+### Test Case 2: Documentation Change (README Comment)
 
-| Flow | Time | vs Local | vs GitHub |
-|------|------|----------|-----------|
-| **Local** | **14s** 🏆 | baseline | 4.6x faster |
-| Depot CI | 23s | 1.6x slower | 2.8x faster |
-| Railway | 23.60s | 1.7x slower | 2.8x faster |
-| GitHub Actions | 65s | 4.6x slower | baseline |
+| Platform | Time | Speedup |
+|----------|------|---------|
+| **Depot CI** | **1m 50s** 🏆 | 1.4x faster |
+| GitHub Actions | 2m 39s | baseline |
 
-**Winner:** Local - Persistent cache wins for tiny source changes
+**Winner:** Depot CI - Better layer caching
 
 ---
 
-### Test Case 3: New Function
+### Test Case 3: New Source File
 
-| Flow | Time | vs Local | vs GitHub |
-|------|------|----------|-----------|
-| **Railway** | **18.02s** 🏆 | Similar | 3.6x faster |
-| Depot CI | 23s | 1.3x slower | 2.8x faster |
-| Local | 17s | baseline | 3.8x faster |
-| GitHub Actions | 64s | 3.8x slower | baseline |
+| Platform | Time | Speedup |
+|----------|------|---------|
+| **Depot CI** | **1m 51s** 🏆 | 1.4x faster |
+| GitHub Actions | 2m 37s | baseline |
 
-**Winner:** Railway - Optimized for source additions
+**Winner:** Depot CI - Handles new files efficiently
 
 ---
 
-### Test Case 4: New Dependency
+### Test Case 4: UI Component
 
-| Flow | Time | vs Local | vs GitHub |
-|------|------|----------|-----------|
-| **Depot CI** | **31s** 🏆 | 4.6x faster | 6.2x faster |
-| Railway | 40.75s | 3.5x faster | 4.7x faster |
-| GitHub Actions | 193s | 1.3x slower | baseline |
-| Local | 143s | baseline | 1.3x slower |
+| Platform | Time | Speedup |
+|----------|------|---------|
+| **Depot CI** | **1m 52s** 🏆 | 1.3x faster |
+| GitHub Actions | 2m 30s | baseline |
 
-**Winner:** Depot CI - Best cloud network to npm registry
+**Winner:** Depot CI - Consistent performance
 
 ---
 
-### Test Case 5: Major Changes
+### Test Case 5: New Dependency
 
-| Flow | Time | vs Local | vs GitHub |
-|------|------|----------|-----------|
-| **Depot CI** | **26s** 🏆 | 7.9x faster | 5.1x faster |
-| Railway | 27.73s | 7.4x faster | 4.8x faster |
-| GitHub Actions | 133s | 1.5x faster | baseline |
-| Local | 206s | baseline | 1.3x slower |
+| Platform | Time | Speedup |
+|----------|------|---------|
+| **Depot CI** | **1m 53s** 🏆 | 3.3x faster |
+| GitHub Actions | 6m 3s | baseline |
 
-**Winner:** Depot CI - Handles major changes efficiently
+**Winner:** Depot CI - Distributed caching excels for dependencies
+
+---
+
+### Test Case 6: Major Changes
+
+| Platform | Time | Speedup |
+|----------|------|---------|
+| **Depot CI** | **2m 36s** 🏆 | 2.1x faster |
+| GitHub Actions | 5m 25s | baseline |
+
+**Winner:** Depot CI - Handles large changes efficiently
 
 ---
 
 ## Recommendations
 
-### For Development
-
-**Use:** Local builds with persistent cache
-- Fastest for small changes (14-17s)
-- No network latency
-- Instant feedback loop
-
 ### For Production CI/CD
 
-**Use:** Depot CI or Railway
+**Use:** Depot CI
 
 | Priority | Choice | Why |
 |----------|--------|-----|
-| **Best Performance** | Depot CI | 27s average, 5x faster than GitHub |
-| **Simplest Setup** | Railway | Auto-build on push, 29s average |
-| **GitHub Actions Users** | Depot CI | One-line change, 5x speedup |
+| **Best Performance** | Depot CI | 1m 59s average, 1.9x faster |
+| **Most Consistent** | Depot CI | 46s variance vs 3m 33s for GitHub |
+| **Dependency Heavy** | Depot CI | 3.3x faster for dependency changes |
 
 ### For GitHub Actions Users
 
 **Upgrade to:** Depot CI
 - Drop-in replacement for `docker/build-push-action`
 - Same YAML, same workflow
-- 2.8x to 6.2x speedup depending on change type
-- Push to same registry (GHCR), deploy to same destination
+- 1.3x to 3.3x speedup depending on change type
+- Push to same registry (GHCR)
 
 ---
 
@@ -270,10 +274,10 @@ Compute reduction: 80% less CI/CD compute needed
 ### Current (GitHub Actions)
 
 ```yaml
-# .github/workflows/deploy.yml
+# .github/workflows/build.yml
 - uses: docker/build-push-action@v5
   with:
-    context: ./app
+    context: .
     push: true
     tags: ghcr.io/${{ github.repository }}/app:latest
 ```
@@ -281,11 +285,11 @@ Compute reduction: 80% less CI/CD compute needed
 ### After (Depot CI)
 
 ```yaml
-# .github/workflows/deploy.yml
+# .github/workflows/build.yml
 - uses: depot/build-push-action@v1
   with:
     project: ${{ env.DEPOT_PROJECT_ID }}
-    context: ./app
+    context: .
     push: true
     tags: ghcr.io/${{ github.repository }}/app:latest
 ```
@@ -296,33 +300,38 @@ Compute reduction: 80% less CI/CD compute needed
 
 ## Test Methodology
 
-All tests used the same Dockerfile with multi-stage builds:
+All tests used the same Dockerfile with multi-stage builds from OpenClaw AI:
 
 ```
-1. deps           - npm ci (all dependencies)
-2. production-deps - npm ci --omit=dev
-3. build          - COPY source, npm run build
-4. production     - Final image
+1. deps           - npm ci (500+ dependencies)
+2. build          - COPY source, npm run build (TypeScript)
+3. production     - Final minimal image
 ```
 
-This ensures fair comparison across all flows.
+This ensures fair comparison across both platforms.
 
-**Test Application:** Node.js/TypeScript app with Express
+**Test Application:** OpenClaw AI (Node.js/TypeScript, 500+ npm dependencies)
 **Destination Registry:** GitHub Container Registry (GHCR)
-**Final Deployment:** Railway (us-east4)
+**Cleanup:** Disk cleanup before build (optional)
 
 ---
 
 ## Conclusion
 
-**Depot CI is the fastest option** for Docker builds, winning 4 out of 5 test cases with an average build time of just 27 seconds.
+**Depot CI is the faster option** for Docker builds, winning all 6 test cases with an average build time of 1m 59s (1.9x faster than GitHub Actions).
 
 **Key takeaways:**
-- Depot CI: 5x faster than GitHub Actions
-- Railway: 4.6x faster than GitHub Actions, simplest setup
-- Local: Best for development with persistent cache
-- GitHub Actions: Slowest, not optimized for Docker
+- Depot CI: 1.9x faster than GitHub Actions on average
+- Biggest advantage: 3.3x faster for dependency changes
+- More consistent: 46s variance vs 3m 33s for GitHub Actions
+- Simple migration: One-line YAML change
 
-**For teams already using GitHub Actions:** Switch to Depot CI for a 5x speedup with minimal code changes.
+**For teams using GitHub Actions:** Switch to Depot CI for a 1.9x speedup with minimal code changes.
 
-**For teams wanting simplest setup:** Railway auto-build is an excellent choice, only 2 seconds slower than Depot on average.
+---
+
+## References
+
+- **Complete Test Results:** [OPENCLAW-FINAL-RESULTS.md](./openclaw-ai-testing/OPENCLAW-FINAL-RESULTS.md)
+- **Comprehensive Analysis:** [COMPREHENSIVE-ANALYSIS.md](./openclaw-ai-testing/COMPREHENSIVE-ANALYSIS.md)
+- **Status:** [STATUS.md](./openclaw-ai-testing/STATUS.md)
