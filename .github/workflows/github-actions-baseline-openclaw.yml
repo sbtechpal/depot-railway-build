@@ -36,115 +36,70 @@ jobs:
         run: |
           case "${{ github.event.inputs.test_case }}" in
             baseline)
-              echo "=========================================="
-              echo "Test Case: Baseline (no changes)"
-              echo "Expected Cache Hit: ~100%"
-              echo "All Docker layers should be cached"
-              echo "=========================================="
               echo "expected_cache=100%" >> $GITHUB_ENV
               echo "test_description=Baseline - Fully cached build" >> $GITHUB_ENV
               ;;
             test-2-docs)
-              echo "=========================================="
-              echo "Test Case: Documentation Change"
-              echo "Expected Cache Hit: ~95%"
-              echo "Changes: README.md comment"
-              echo "Invalidates: COPY . . layer only"
-              echo "=========================================="
               echo "expected_cache=95%" >> $GITHUB_ENV
               echo "test_description=Documentation change - README comment" >> $GITHUB_ENV
               echo "" >> README.md
               echo "<!-- Performance test: $(date) -->" >> README.md
               ;;
             test-3-source)
-              echo "=========================================="
-              echo "Test Case: Source File Addition"
-              echo "Expected Cache Hit: ~75%"
-              echo "Changes: New TypeScript file in src/"
-              echo "Invalidates: COPY . ., rebuilds build:docker"
-              echo "=========================================="
               echo "expected_cache=75%" >> $GITHUB_ENV
               echo "test_description=New source file - perf-test.ts in src/" >> $GITHUB_ENV
-              cat > src/perf-test.ts << 'EOFTEST'
-              /**
-               * Performance test utility
-               * Added for Depot CI testing
-               */
-              export interface PerfMetrics {
-                startTime: number;
-                endTime: number;
-                duration: number;
-              }
-              export function measurePerf(label: string): PerfMetrics {
-                const startTime = Date.now();
-                const result = { startTime, endTime: startTime, duration: 0 };
-                result.endTime = Date.now();
-                result.duration = result.endTime - result.startTime;
-                return result;
-              }
-              EOFTEST
+              echo '/**' > src/perf-test.ts
+              echo ' * Performance test utility' >> src/perf-test.ts
+              echo ' */' >> src/perf-test.ts
+              echo 'export interface PerfMetrics {' >> src/perf-test.ts
+              echo '  startTime: number;' >> src/perf-test.ts
+              echo '  endTime: number;' >> src/perf-test.ts
+              echo '  duration: number;' >> src/perf-test.ts
+              echo '}' >> src/perf-test.ts
+              echo 'export function measurePerf(label: string): PerfMetrics {' >> src/perf-test.ts
+              echo '  const startTime = Date.now();' >> src/perf-test.ts
+              echo '  const result = { startTime, endTime: startTime, duration: 0 };' >> src/perf-test.ts
+              echo '  result.endTime = Date.now();' >> src/perf-test.ts
+              echo '  result.duration = result.endTime - result.startTime;' >> src/perf-test.ts
+              echo '  return result;' >> src/perf-test.ts
+              echo '}' >> src/perf-test.ts
               ;;
             test-4-ui)
-              echo "=========================================="
-              echo "Test Case: UI File Change"
-              echo "Expected Cache Hit: ~50%"
-              echo "Changes: New file in ui/ directory"
-              echo "Invalidates: COPY . ., rebuilds build:docker + ui:build"
-              echo "=========================================="
               echo "expected_cache=50%" >> $GITHUB_ENV
               echo "test_description=UI change - New component in ui/" >> $GITHUB_ENV
               mkdir -p ui/src/components/test
-              cat > ui/src/components/test/PerfTest.tsx << 'EOFTEST'
-              /**
-               * Performance test component
-               * Added for Depot CI testing
-               */
-              import { css } from 'lit';
-              export class PerfTestComponent extends HTMLElement {
-                static styles = css`
-                  :host {
-                    display: block;
-                    padding: 1rem;
-                  }
-                `;
-                connectedCallback(): void {
-                  super.connectedCallback();
-                  this.innerHTML = '<p>Performance Test Component</p>';
-                }
-              }
-              customElements.define('perf-test', PerfTestComponent);
-              EOFTEST
+              echo '/**' > ui/src/components/test/PerfTest.tsx
+              echo ' * Performance test component' >> ui/src/components/test/PerfTest.tsx
+              echo ' */' >> ui/src/components/test/PerfTest.tsx
+              echo "import { css } from 'lit';" >> ui/src/components/test/PerfTest.tsx
+              echo 'export class PerfTestComponent extends HTMLElement {' >> ui/src/components/test/PerfTest.tsx
+              echo '  static styles = css`' >> ui/src/components/test/PerfTest.tsx
+              echo '    :host {' >> ui/src/components/test/PerfTest.tsx
+              echo '      display: block;' >> ui/src/components/test/PerfTest.tsx
+              echo '      padding: 1rem;' >> ui/src/components/test/PerfTest.tsx
+              echo '    }' >> ui/src/components/test/PerfTest.tsx
+              echo '  `;' >> ui/src/components/test/PerfTest.tsx
+              echo '  connectedCallback(): void {' >> ui/src/components/test/PerfTest.tsx
+              echo '    super.connectedCallback();' >> ui/src/components/test/PerfTest.tsx
+              echo "    this.innerHTML = '<p>Performance Test Component</p>';" >> ui/src/components/test/PerfTest.tsx
+              echo '  }' >> ui/src/components/test/PerfTest.tsx
+              echo '}' >> ui/src/components/test/PerfTest.tsx
+              echo 'customElements.define("perf-test", PerfTestComponent);' >> ui/src/components/test/PerfTest.tsx
               ;;
             test-5-dependency)
-              echo "=========================================="
-              echo "Test Case: New Dependency"
-              echo "Expected Cache Hit: ~25%"
-              echo "Changes: Add @types/node to devDependencies"
-              echo "Invalidates: package.json layer, full pnpm install"
-              echo "=========================================="
               echo "expected_cache=25%" >> $GITHUB_ENV
               echo "test_description=New dependency - Add @types/node" >> $GITHUB_ENV
               npm pkg set devDependencies.@types-node="^20.0.0"
               ;;
             test-6-major)
-              echo "=========================================="
-              echo "Test Case: Major Changes"
-              echo "Expected Cache Hit: ~10%"
-              echo "Changes: New dependency + source + UI + docs"
-              echo "Invalidates: All layers, near-full rebuild"
-              echo "=========================================="
               echo "expected_cache=10%" >> $GITHUB_ENV
               echo "test_description=Major changes - Multiple file types + dependency" >> $GITHUB_ENV
               npm pkg set devDependencies.@types-node="^20.0.0"
-              cat > src/major-test.ts << 'EOFTEST'
-              export function majorTest(): string {
-                return "Major performance test";
-              }
-              EOFTEST
+              echo 'export function majorTest(): string {' > src/major-test.ts
+              echo '  return "Major performance test";' >> src/major-test.ts
+              echo '}' >> src/major-test.ts
               mkdir -p ui/src/components/major
-              cat > ui/src/components/major/MajorTest.tsx << 'EOFTEST'
-              export const MajorTest = () => 'Major Test';
-              EOFTEST
+              echo 'export const MajorTest = () => "Major Test";' > ui/src/components/major/MajorTest.tsx
               echo "<!-- Major test $(date) -->" >> README.md
               ;;
           esac
