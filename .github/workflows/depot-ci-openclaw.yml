@@ -36,11 +36,6 @@ jobs:
           repository: openclaw/openclaw
           ref: main
 
-      - name: Install Depot CLI
-        run: |
-          curl -fsSL https://depot.dev/install.sh | sh
-          echo "$HOME/bin" >> $GITHUB_PATH
-
       - name: Free up disk space
         run: |
           echo "Initial disk usage:"
@@ -61,6 +56,11 @@ jobs:
 
           echo "Disk usage after cleanup:"
           df -h
+
+      - name: Install Depot CLI
+        run: |
+          curl -fsSL https://depot.dev/install.sh | sh
+          echo "$HOME/bin" >> $GITHUB_PATH
 
       - name: Apply test case
         run: |
@@ -155,7 +155,7 @@ jobs:
           echo "Test: ${{ github.event.inputs.test_case }}"
           echo "Disk space before build:"
           df -h
-          depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
+          $HOME/bin/depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
         env:
           DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
 
