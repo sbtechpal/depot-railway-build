@@ -1,4 +1,4 @@
-name: Depot CI - OpenClaw Performance Test
+name: Depot_CI-OpenClaw_Performance_Test
 
 on:
   workflow_dispatch:

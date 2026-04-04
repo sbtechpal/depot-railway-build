@@ -1,4 +1,4 @@
-name: Depot CI - OpenClaw Performance Test
+name: GitHub_Actions_Baseline-OpenClaw_Performance_Test
 
 on:
   workflow_dispatch:
@@ -23,16 +23,12 @@ on:
 
 permissions:
   contents: read
-  id-token: write
-
-env:
-  DEPOT_PROJECT_ID: ${{ secrets.DEPOT_PROJECT_ID }}
 
 jobs:
-  depot-ci-build:
-    name: Depot CI Build - OpenClaw
+  github-actions-build:
+    name: GitHub Actions Build - OpenClaw (Baseline)
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Checkout OpenClaw
@@ -49,11 +45,11 @@ jobs:
           df -h
           echo "=========================================="
 
-          # Remove unnecessary software (but NOT $AGENT_TOOLSDIRECTORY to keep npm/pnpm)
+          # Remove unnecessary software
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
-          # Note: NOT removing $AGENT_TOOLSDIRECTORY - keeps npm/pnpm working
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/google
           sudo rm -rf /opt/microsoft
@@ -97,22 +93,6 @@ jobs:
           # Show disk space breakdown
           echo "Disk usage by directory:"
           sudo du -sh /* 2>/dev/null | sort -hr | head -20
-
-      - name: Install Depot CLI
-        run: |
-          echo "Installing Depot CLI..."
-
-          # Install using the official Depot install script (Linux)
-          echo "Installing via curl script..."
-          curl -L https://depot.dev/install-cli.sh | sh
-
-          # Add to GITHUB_PATH for subsequent steps
-          echo "$HOME/.depot/bin" >> $GITHUB_PATH
-
-          echo "=========================================="
-          echo "Depot CLI installed successfully:"
-          $HOME/.depot/bin/depot --version
-          echo "=========================================="
 
       - name: Apply test case
         run: |
@@ -189,41 +169,44 @@ jobs:
       - name: Display test info
         run: |
           echo "=========================================="
-          echo "Depot CI Performance Test - OpenClaw"
+          echo "GitHub Actions Baseline - OpenClaw"
           echo "=========================================="
           echo "Test Case: ${{ github.event.inputs.test_case }}"
           echo "Description: ${{ env.test_description }}"
           echo "Expected Cache Hit: ${{ env.expected_cache }}"
           echo "=========================================="
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Configure pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9
 
-      - name: Build with Depot CI
+      - name: Build with GitHub Actions (Docker Buildx)
         run: |
-          echo "Starting Depot CI build..."
+          echo "Starting GitHub Actions Docker build..."
           echo "Test: ${{ github.event.inputs.test_case }}"
           echo "Disk space before build:"
           df -h
-          echo "Depot CLI location:"
-          which depot
-          depot --version
-          echo "=========================================="
-
-          # Build with Depot
-          depot build -t openclaw:test-${{ github.event.inputs.test_case }} .
-        env:
-          DEPOT_TOKEN: ${{ secrets.DEPOT_TOKEN }}
+          docker buildx build \
+            --load \
+            -t openclaw:gha-test-${{ github.event.inputs.test_case }} \
+            --progress=plain \
+            .
 
       - name: Display build results
         run: |
           echo "=========================================="
           echo "Build Complete!"
           echo "=========================================="
-          echo "Image: openclaw:test-${{ github.event.inputs.test_case }}"
+          echo "Image: openclaw:gha-test-${{ github.event.inputs.test_case }}"
           echo "Test Case: ${{ github.event.inputs.test_case }}"
           echo "Description: ${{ env.test_description }}"
           echo "Expected Cache: ${{ env.expected_cache }}"
           echo "=========================================="
+
+      - name: Show image size
+        run: |
+          docker images openclaw:gha-test-${{ github.event.inputs.test_case }}
