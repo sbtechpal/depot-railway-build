@@ -1,9 +1,9 @@
 # Depot CI vs GitHub Actions: Video Script Flow Diagram
 
-```
-[["__["__                                                                                
-                    DEPOT CI vs GITHUB ACTIONS VIDEO FLOW                            
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+```text
+═══════════════════════════════════════════════════════════════════════════════════════
+                    DEPOT CI vs GITHUB ACTIONS VIDEO FLOW
+═══════════════════════════════════════════════════════════════════════════════════════
 
 +-----------------------------------------------------------------------------+
 |  SECTION 1: THE PROBLEM (0:00 - 0:45)                                        |
@@ -182,24 +182,25 @@
    |  "Depot CI"                             |
    +-----------------------------------------+
 
-[["__["__                                                                                
-  KEY TAKEAWAY: Depot CI is 1.7x faster than GitHub Actions for Docker builds       
-  - Wins every test case (6/6)                                                      
-  - Saves ~14 hours/week for teams doing 100 builds/day                            
-  - 33% cost reduction with per-second billing                                      
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+═══════════════════════════════════════════════════════════════════════════════════════
+  KEY TAKEAWAY: Depot CI is 1.7x faster than GitHub Actions for Docker builds
+  - Wins every test case (6/6)
+  - Saves ~14 hours/week for teams doing 100 builds/day
+  - 33% cost reduction with per-second billing
+═══════════════════════════════════════════════════════════════════════════════════════
 ```
 
 ## Quick Reference
 
-| Metric | GitHub Actions | Depot CI | Improvement |
+| Metric                | GitHub Actions | Depot CI    | Improvement     |
+| --------------------- | -------------- | ----------- | --------------- |
 |--------|----------------|----------|-------------|
-| **Average Build Time** | 3m 53s | 2m 18s | 1.7x faster |
-| **Fastest Test** | 3m 51s | 1m 26s | 2.8x faster |
-| **Slowest Test** | 4m 6s | 3m 11s | 1.1x faster |
-| **Cache Retention** | 7 days | 14-30 days | 2-4x longer |
-| **Billing** | Per-minute | Per-second | More accurate |
-| **Cost (1000 builds/mo)** | ~$24 | ~$16 | 33% savings |
+| **Average Build Time**   | 3m 53s         | 2m 18s      | 1.7x faster      |
+| **Fastest Test**         | 3m 51s         | 1m 26s      | 2.8x faster      |
+| **Slowest Test**         | 4m 6s          | 3m 11s      | 1.1x faster      |
+| **Cache Retention**      | 7 days         | 14-30 days  | 2-4x longer      |
+| **Billing**              | Per-minute     | Per-second  | More accurate    |
+| **Cost (1000 builds/mo)**| ~$24           | ~$16        | 33% savings      |
 
 ## Migration Commands
 
