@@ -49,7 +49,9 @@
    | 2. depot login                          |
    |           |                             |
    |           v                             |
-   | 3. Connect GitHub (via dashboard)       |
+   | 3. Connect GitHub                       |
+   |    (In Depot dashboard: install         |
+   |     "Depot Code Access" GitHub App)     |
    |           |                             |
    |           v                             |
    | 4. depot ci migrate                     |

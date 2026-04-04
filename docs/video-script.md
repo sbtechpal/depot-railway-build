@@ -104,7 +104,7 @@ Time elapsed: 2:15
 depot login
 
 # Step 3: Connect to GitHub
-# (Install Depot Code Access GitHub App via Depot dashboard)
+# (In Depot web dashboard: Install "Depot Code Access" GitHub App)
 
 # Step 4: Migrate your workflows
 depot ci migrate
