@@ -1,0 +1,963 @@
+[2026-04-05T19:30:14.262Z] Complete job name: Depot Build - OpenClaw (test-6-major)
+[2026-04-05T19:30:14.616Z] Syncing repository: openclaw/openclaw
+[2026-04-05T19:30:14.616Z] ##[group]Getting Git version info
+[2026-04-05T19:30:14.616Z] Working directory is '/home/runner/work/depot-railway-build/depot-railway-build'
+[2026-04-05T19:30:14.622Z] git version 2.43.0
+[2026-04-05T19:30:14.624Z] ##[endgroup]
+[2026-04-05T19:30:14.625Z] Temporarily overriding HOME='/home/runner/work/tmp/746a7a8c-0ab0-4206-91b0-89641dec59db' before making global git config changes
+[2026-04-05T19:30:14.625Z] Adding repository directory to the temporary git global config as a safe directory
+[2026-04-05T19:30:14.628Z] Deleting the contents of '/home/runner/work/depot-railway-build/depot-railway-build'
+[2026-04-05T19:30:14.629Z] ##[group]Initializing the repository
+[2026-04-05T19:30:14.633Z] hint: Using 'master' as the name for the initial branch. This default branch name
+[2026-04-05T19:30:14.633Z] hint: is subject to change. To configure the initial branch name to use in all
+[2026-04-05T19:30:14.633Z] hint: of your new repositories, which will suppress this warning, call:
+[2026-04-05T19:30:14.633Z] hint: 
+[2026-04-05T19:30:14.633Z] hint: 	git config --global init.defaultBranch <name>
+[2026-04-05T19:30:14.633Z] hint: 
+[2026-04-05T19:30:14.633Z] hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+[2026-04-05T19:30:14.633Z] hint: 'development'. The just-created branch can be renamed via this command:
+[2026-04-05T19:30:14.633Z] hint: 
+[2026-04-05T19:30:14.633Z] hint: 	git branch -m <name>
+[2026-04-05T19:30:14.633Z] Initialized empty Git repository in /home/runner/work/depot-railway-build/depot-railway-build/.git/
+[2026-04-05T19:30:14.636Z] ##[endgroup]
+[2026-04-05T19:30:14.636Z] ##[group]Disabling automatic garbage collection
+[2026-04-05T19:30:14.639Z] ##[endgroup]
+[2026-04-05T19:30:14.639Z] ##[group]Setting up auth
+[2026-04-05T19:30:14.697Z] ##[endgroup]
+[2026-04-05T19:30:14.697Z] ##[group]Fetching the repository
+[2026-04-05T19:30:18.249Z] From https://github.com/openclaw/openclaw
+[2026-04-05T19:30:18.249Z]  * branch            f0c970fb43c27232b06fc6a5cdd00e994310486b -> FETCH_HEAD
+[2026-04-05T19:30:18.251Z] ##[endgroup]
+[2026-04-05T19:30:18.251Z] ##[group]Determining the checkout info
+[2026-04-05T19:30:18.251Z] ##[endgroup]
+[2026-04-05T19:30:18.256Z] ##[group]Checking out the ref
+[2026-04-05T19:30:19.044Z] Note: switching to 'f0c970fb43c27232b06fc6a5cdd00e994310486b'.
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z] You are in 'detached HEAD' state. You can look around, make experimental
+[2026-04-05T19:30:19.044Z] changes and commit them, and you can discard any commits you make in this
+[2026-04-05T19:30:19.044Z] state without impacting any branches by switching back to a branch.
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z] If you want to create a new branch to retain commits you create, you may
+[2026-04-05T19:30:19.044Z] do so (now or later) by using -c with the switch command. Example:
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z]   git switch -c <new-branch-name>
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z] Or undo this operation with:
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z]   git switch -
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z] Turn off this advice by setting config variable advice.detachedHead to false
+[2026-04-05T19:30:19.044Z] 
+[2026-04-05T19:30:19.044Z] HEAD is now at f0c970f fix: skip sandbox skill copy junk (#61090) (thanks @joelnishanth)
+[2026-04-05T19:30:19.045Z] ##[endgroup]
+[2026-04-05T19:30:19.050Z] f0c970fb43c27232b06fc6a5cdd00e994310486b
+[2026-04-05T19:30:19.197Z] Syncing repository: sbtechpal/depot-railway-build
+[2026-04-05T19:30:19.197Z] ##[group]Getting Git version info
+[2026-04-05T19:30:19.198Z] Working directory is '/home/runner/work/depot-railway-build/depot-railway-build/_test-scripts'
+[2026-04-05T19:30:19.204Z] git version 2.43.0
+[2026-04-05T19:30:19.206Z] ##[endgroup]
+[2026-04-05T19:30:19.208Z] Temporarily overriding HOME='/home/runner/work/tmp/3d315f54-1721-491d-816e-57802f9e8830' before making global git config changes
+[2026-04-05T19:30:19.208Z] Adding repository directory to the temporary git global config as a safe directory
+[2026-04-05T19:30:19.211Z] ##[group]Initializing the repository
+[2026-04-05T19:30:19.213Z] hint: Using 'master' as the name for the initial branch. This default branch name
+[2026-04-05T19:30:19.213Z] hint: is subject to change. To configure the initial branch name to use in all
+[2026-04-05T19:30:19.213Z] hint: of your new repositories, which will suppress this warning, call:
+[2026-04-05T19:30:19.213Z] hint: 
+[2026-04-05T19:30:19.213Z] hint: 	git config --global init.defaultBranch <name>
+[2026-04-05T19:30:19.213Z] hint: 
+[2026-04-05T19:30:19.213Z] hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+[2026-04-05T19:30:19.213Z] hint: 'development'. The just-created branch can be renamed via this command:
+[2026-04-05T19:30:19.214Z] hint: 
+[2026-04-05T19:30:19.214Z] hint: 	git branch -m <name>
+[2026-04-05T19:30:19.214Z] Initialized empty Git repository in /home/runner/work/depot-railway-build/depot-railway-build/_test-scripts/.git/
+[2026-04-05T19:30:19.217Z] ##[endgroup]
+[2026-04-05T19:30:19.217Z] ##[group]Disabling automatic garbage collection
+[2026-04-05T19:30:19.219Z] ##[endgroup]
+[2026-04-05T19:30:19.219Z] ##[group]Setting up auth
+[2026-04-05T19:30:19.277Z] ##[endgroup]
+[2026-04-05T19:30:19.277Z] ##[group]Fetching the repository
+[2026-04-05T19:30:19.471Z] From https://github.com/sbtechpal/depot-railway-build
+[2026-04-05T19:30:19.471Z]  * [new ref]         1346cebbe46d228da0c0a9e21ae5250a6944c400 -> origin/main
+[2026-04-05T19:30:19.473Z] ##[endgroup]
+[2026-04-05T19:30:19.473Z] ##[group]Determining the checkout info
+[2026-04-05T19:30:19.473Z] ##[endgroup]
+[2026-04-05T19:30:19.478Z] ##[group]Checking out the ref
+[2026-04-05T19:30:19.500Z] Switched to a new branch 'main'
+[2026-04-05T19:30:19.500Z] branch 'main' set up to track 'origin/main'.
+[2026-04-05T19:30:19.501Z] ##[endgroup]
+[2026-04-05T19:30:19.506Z] 1346cebbe46d228da0c0a9e21ae5250a6944c400
+[2026-04-05T19:30:19.518Z] ##[group]Run _test-scripts/scripts/apply-openclaw-test-case.sh "test-6-major"
+[2026-04-05T19:30:19.518Z] [36;1m_test-scripts/scripts/apply-openclaw-test-case.sh "test-6-major"[0m
+[2026-04-05T19:30:19.518Z] shell: bash -e {0}
+[2026-04-05T19:30:19.518Z] ##[endgroup]
+[2026-04-05T19:30:19.570Z] ==========================================
+[2026-04-05T19:30:19.570Z] Test Case: Major Changes
+[2026-04-05T19:30:19.570Z] Expected Cache Hit: ~10%
+[2026-04-05T19:30:19.570Z] Changes: New dependency + source + UI + docs
+[2026-04-05T19:30:19.570Z] Invalidates: All layers, near-full rebuild
+[2026-04-05T19:30:19.570Z] ==========================================
+[2026-04-05T19:30:20.503Z] npm warn exec The following package was not found and will be installed: pnpm@10.33.0
+[2026-04-05T19:30:22.547Z]  WARN  Unsupported engine: wanted: {"node":">=22.14.0"} (current: {"node":"v20.20.1","pnpm":"10.32.1"})
+[2026-04-05T19:30:22.570Z] Scope: all 92 workspace projects
+[2026-04-05T19:30:22.888Z] Progress: resolved 1, reused 0, downloaded 0, added 0
+[2026-04-05T19:30:22.895Z]  WARN  deprecated left-pad@1.3.0: use String.prototype.padStart()
+[2026-04-05T19:30:23.891Z] Progress: resolved 106, reused 0, downloaded 0, added 0
+[2026-04-05T19:30:24.891Z] Progress: resolved 126, reused 0, downloaded 0, added 0
+[2026-04-05T19:30:25.892Z] Progress: resolved 278, reused 0, downloaded 0, added 0
+[2026-04-05T19:30:25.897Z] Packages are cloned from the content-addressable store to the virtual store.
+[2026-04-05T19:30:25.897Z]   Content-addressable store is at: /home/runner/.local/share/pnpm/store/v10
+[2026-04-05T19:30:25.897Z]   Virtual store is at:             node_modules/.pnpm
+[2026-04-05T19:30:26.901Z] Progress: resolved 476, reused 0, downloaded 1, added 0
+[2026-04-05T19:30:27.904Z] Progress: resolved 727, reused 0, downloaded 1, added 0
+[2026-04-05T19:30:28.904Z] Progress: resolved 1043, reused 0, downloaded 1, added 0
+[2026-04-05T19:30:29.912Z] Progress: resolved 1311, reused 0, downloaded 1, added 0
+[2026-04-05T19:30:30.977Z]  WARN  8 deprecated subdependencies found: are-we-there-yet@2.0.0, form-data@2.5.4, gauge@3.0.2, glob@7.2.3, has-own@1.0.1, inflight@1.0.6, npmlog@5.0.1, rimraf@3.0.2
+[2026-04-05T19:30:31.201Z] Progress: resolved 1362, reused 0, downloaded 1, added 0
+[2026-04-05T19:30:31.237Z]  WARN  Issues with peer dependencies found
+[2026-04-05T19:30:31.237Z] extensions/discord
+[2026-04-05T19:30:31.237Z] └─┬ @buape/carbon 0.0.0-beta-20260327000044
+[2026-04-05T19:30:31.238Z]   └─┬ @discordjs/voice 0.19.0
+[2026-04-05T19:30:31.238Z]     └─┬ prism-media 1.3.5
+[2026-04-05T19:30:31.238Z]       └── ✕ unmet peer opusscript@^0.0.8: found 0.1.1
+[2026-04-05T19:30:31.238Z] 
+[2026-04-05T19:30:31.330Z] Done in 9.1s using pnpm v10.32.1
+[2026-04-05T19:30:32.265Z] ##[group]Run echo "=========================================="
+[2026-04-05T19:30:32.265Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:30:32.265Z] [36;1mecho "Depot CI - OpenClaw Performance Test"[0m
+[2026-04-05T19:30:32.265Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:30:32.265Z] [36;1mecho "Test Case: test-6-major"[0m
+[2026-04-05T19:30:32.265Z] [36;1mecho "Description: Major changes - Multiple file types + dependency"[0m
+[2026-04-05T19:30:32.265Z] [36;1mecho "Expected Cache Hit: 10%"[0m
+[2026-04-05T19:30:32.265Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:30:32.265Z] [36;1m[0m
+[2026-04-05T19:30:32.265Z] shell: bash -e {0}
+[2026-04-05T19:30:32.265Z] ##[endgroup]
+[2026-04-05T19:30:32.316Z] ==========================================
+[2026-04-05T19:30:32.316Z] Depot CI - OpenClaw Performance Test
+[2026-04-05T19:30:32.316Z] ==========================================
+[2026-04-05T19:30:32.316Z] Test Case: test-6-major
+[2026-04-05T19:30:32.316Z] Description: Major changes - Multiple file types + dependency
+[2026-04-05T19:30:32.316Z] Expected Cache Hit: 10%
+[2026-04-05T19:30:32.316Z] ==========================================
+[2026-04-05T19:30:32.322Z] ##[group]Run echo "build_start=$(date +%s)" >> "$GITHUB_ENV"
+[2026-04-05T19:30:32.322Z] [36;1mecho "build_start=$(date +%s)" >> "$GITHUB_ENV"[0m
+[2026-04-05T19:30:32.322Z] shell: bash -e {0}
+[2026-04-05T19:30:32.322Z] ##[endgroup]
+[2026-04-05T19:30:32.747Z] ##[group]Depot version
+[2026-04-05T19:30:32.756Z] depot version 2.101.21 (2026-03-16)
+[2026-04-05T19:30:32.756Z] https://github.com/depot/cli/releases/tag/v2.101.21
+[2026-04-05T19:30:32.757Z] ##[endgroup]
+[2026-04-05T19:30:32.827Z] #1 [depot] build: https://depot.dev/orgs/xqmz2w73qz/projects/***/builds/803hzr7sk5
+[2026-04-05T19:30:32.954Z] #1 DONE 0.0s
+[2026-04-05T19:30:32.954Z] 
+[2026-04-05T19:30:32.954Z] #2 [depot] launching amd64 machine
+[2026-04-05T19:30:32.954Z] #2 DONE 0.1s
+[2026-04-05T19:30:33.089Z] 
+[2026-04-05T19:30:33.089Z] #3 [depot] connecting to amd64 machine
+[2026-04-05T19:30:33.089Z] #3 DONE 0.0s
+[2026-04-05T19:30:33.089Z] 
+[2026-04-05T19:30:33.089Z] #4 [internal] fetching git attributes
+[2026-04-05T19:30:33.089Z] #4 DONE 0.1s
+[2026-04-05T19:30:33.240Z] 
+[2026-04-05T19:30:33.240Z] #5 [internal] load build definition from Dockerfile
+[2026-04-05T19:30:33.240Z] #5 transferring dockerfile: 13.45kB done
+[2026-04-05T19:30:33.240Z] #5 DONE 0.0s
+[2026-04-05T19:30:33.240Z] 
+[2026-04-05T19:30:33.240Z] #6 resolve image config for docker-image://docker.io/docker/dockerfile:1.7
+[2026-04-05T19:30:33.390Z] #6 DONE 0.1s
+[2026-04-05T19:30:33.391Z] 
+[2026-04-05T19:30:33.391Z] #7 docker-image://docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+[2026-04-05T19:30:33.391Z] #7 resolve docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 0.0s done
+[2026-04-05T19:30:33.391Z] #7 CACHED
+[2026-04-05T19:30:33.530Z] 
+[2026-04-05T19:30:33.530Z] #8 [internal] load metadata for docker.io/library/node:24-bookworm@sha256:3a09aa6354567619221ef6c45a5051b671f953f0a1924d1f819ffb236e520e6b
+[2026-04-05T19:30:33.530Z] #8 DONE 0.0s
+[2026-04-05T19:30:33.530Z] 
+[2026-04-05T19:30:33.530Z] #9 [internal] load .dockerignore
+[2026-04-05T19:30:33.530Z] #9 transferring context: 1.29kB done
+[2026-04-05T19:30:33.530Z] #9 DONE 0.0s
+[2026-04-05T19:30:33.680Z] 
+[2026-04-05T19:30:33.680Z] #10 [build  1/15] FROM docker.io/library/node:24-bookworm@sha256:3a09aa6354567619221ef6c45a5051b671f953f0a1924d1f819ffb236e520e6b
+[2026-04-05T19:30:33.680Z] #10 resolve docker.io/library/node:24-bookworm@sha256:3a09aa6354567619221ef6c45a5051b671f953f0a1924d1f819ffb236e520e6b 0.0s done
+[2026-04-05T19:30:33.680Z] #10 DONE 0.0s
+[2026-04-05T19:30:33.680Z] 
+[2026-04-05T19:30:33.680Z] #11 [internal] load build context
+[2026-04-05T19:30:34.677Z] #11 transferring context: 99.29MB 1.0s done
+[2026-04-05T19:30:34.677Z] #11 DONE 1.1s
+[2026-04-05T19:30:34.827Z] 
+[2026-04-05T19:30:34.827Z] #12 [build  9/15] COPY --from=ext-deps /out/ ./extensions/
+[2026-04-05T19:30:34.828Z] #12 CACHED
+[2026-04-05T19:30:34.828Z] 
+[2026-04-05T19:30:34.828Z] #13 [build  3/15] RUN corepack enable
+[2026-04-05T19:30:34.828Z] #13 CACHED
+[2026-04-05T19:30:34.828Z] 
+[2026-04-05T19:30:34.828Z] #14 [build  5/15] COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+[2026-04-05T19:30:34.828Z] #14 CACHED
+[2026-04-05T19:30:34.828Z] 
+[2026-04-05T19:30:34.828Z] #15 [build  6/15] COPY ui/package.json ./ui/package.json
+[2026-04-05T19:30:34.828Z] #15 CACHED
+[2026-04-05T19:30:34.828Z] 
+[2026-04-05T19:30:34.828Z] #16 [ext-deps 2/3] COPY extensions /tmp/extensions
+[2026-04-05T19:30:34.828Z] #16 CACHED
+[2026-04-05T19:30:34.828Z] 
+[2026-04-05T19:30:34.828Z] #17 [ext-deps 3/3] RUN mkdir -p /out &&     for ext in ; do       if [ -f "/tmp/extensions/$ext/package.json" ]; then         mkdir -p "/out/$ext" &&         cp "/tmp/extensions/$ext/package.json" "/out/$ext/package.json";       fi;     done
+[2026-04-05T19:30:34.828Z] #17 CACHED
+[2026-04-05T19:30:34.828Z] 
+[2026-04-05T19:30:34.828Z] #18 [build  2/15] RUN set -eux;     for attempt in 1 2 3 4 5; do       if curl --retry 5 --retry-all-errors --retry-delay 2 -fsSL https://bun.sh/install | bash; then         break;       fi;       if [ "$attempt" -eq 5 ]; then         exit 1;       fi;       sleep $((attempt * 2));     done
+[2026-04-05T19:30:34.828Z] #18 CACHED
+[2026-04-05T19:30:34.829Z] 
+[2026-04-05T19:30:34.829Z] #19 [build  4/15] WORKDIR /app
+[2026-04-05T19:30:34.829Z] #19 CACHED
+[2026-04-05T19:30:34.829Z] 
+[2026-04-05T19:30:34.829Z] #20 [build  7/15] COPY patches ./patches
+[2026-04-05T19:30:34.829Z] #20 CACHED
+[2026-04-05T19:30:34.829Z] 
+[2026-04-05T19:30:34.829Z] #21 [build  8/15] COPY scripts/postinstall-bundled-plugins.mjs scripts/npm-runner.mjs ./scripts/
+[2026-04-05T19:30:34.829Z] #21 CACHED
+[2026-04-05T19:30:34.829Z] 
+[2026-04-05T19:30:34.829Z] #22 [build 10/15] RUN --mount=type=cache,id=openclaw-pnpm-store,target=/root/.local/share/pnpm/store,sharing=locked     NODE_OPTIONS=--max-old-space-size=2048 pnpm install --frozen-lockfile
+[2026-04-05T19:30:34.829Z] #22 CACHED
+[2026-04-05T19:30:34.829Z] 
+[2026-04-05T19:30:34.829Z] #23 [build 11/15] COPY . .
+[2026-04-05T19:30:36.631Z] #23 DONE 1.8s
+[2026-04-05T19:30:36.631Z] 
+[2026-04-05T19:30:36.631Z] #24 [build 12/15] RUN for dir in /app/extensions /app/.agent /app/.agents; do       if [ -d "$dir" ]; then         find "$dir" -type d -exec chmod 755 {} +;         find "$dir" -type f -exec chmod 644 {} +;       fi;     done
+[2026-04-05T19:30:54.053Z] #24 DONE 17.5s
+[2026-04-05T19:30:54.204Z] 
+[2026-04-05T19:30:54.204Z] #25 [build 13/15] RUN pnpm canvas:a2ui:bundle ||     (echo "A2UI bundle: creating stub (non-fatal)" &&      mkdir -p src/canvas-host/a2ui &&      echo "/* A2UI bundle unavailable in this build */" > src/canvas-host/a2ui/a2ui.bundle.js &&      echo "stub" > src/canvas-host/a2ui/.bundle.hash &&      rm -rf vendor/a2ui apps/shared/OpenClawKit/Tools/CanvasA2UI)
+[2026-04-05T19:30:54.460Z] #25 0.406 
+[2026-04-05T19:30:54.460Z] #25 0.406 > openclaw@2026.4.4 canvas:a2ui:bundle /app
+[2026-04-05T19:30:54.460Z] #25 0.406 > bash scripts/bundle-a2ui.sh
+[2026-04-05T19:30:54.460Z] #25 0.406 
+[2026-04-05T19:30:56.566Z] #25 2.394 <DIR>/a2ui.bundle.js  chunk │ size: 486.00 kB
+[2026-04-05T19:30:56.566Z] #25 2.394 
+[2026-04-05T19:30:56.566Z] #25 2.394 ✔ rolldown v1.0.0-rc.12 Finished in 148.87 ms
+[2026-04-05T19:30:56.566Z] #25 DONE 2.4s
+[2026-04-05T19:30:56.566Z] 
+[2026-04-05T19:30:56.566Z] #26 [build 14/15] RUN pnpm build:docker
+[2026-04-05T19:30:57.018Z] #26 0.380 
+[2026-04-05T19:30:57.019Z] #26 0.380 > openclaw@2026.4.4 build:docker /app
+[2026-04-05T19:30:57.019Z] #26 0.380 > node scripts/tsdown-build.mjs && node scripts/runtime-postbuild.mjs && node scripts/build-stamp.mjs && node --import tsx scripts/canvas-a2ui-copy.ts && node --import tsx scripts/copy-hook-metadata.ts && node --import tsx scripts/copy-export-html-templates.ts && node --import tsx scripts/write-build-info.ts && node --experimental-strip-types scripts/write-cli-startup-metadata.ts && node --import tsx scripts/write-cli-compat.ts
+[2026-04-05T19:30:57.019Z] #26 0.380 
+[2026-04-05T19:31:11.296Z] #26 14.69 [copy-hook-metadata] Copied 4 hook metadata files.
+[2026-04-05T19:31:11.446Z] #26 14.82 [copy-export-html-templates] Copied 5 export-html assets.
+[2026-04-05T19:31:12.927Z] #26 DONE 16.4s
+[2026-04-05T19:31:13.077Z] 
+[2026-04-05T19:31:13.078Z] #27 [build 15/15] RUN pnpm ui:build
+[2026-04-05T19:31:13.679Z] #27 0.648 
+[2026-04-05T19:31:13.679Z] #27 0.648 > openclaw@2026.4.4 ui:build /app
+[2026-04-05T19:31:13.679Z] #27 0.648 > node scripts/ui.js build
+[2026-04-05T19:31:13.679Z] #27 0.648 
+[2026-04-05T19:31:13.959Z] #27 1.032 
+[2026-04-05T19:31:13.959Z] #27 1.032 > openclaw-control-ui@ build /app/ui
+[2026-04-05T19:31:13.959Z] #27 1.032 > vite build
+[2026-04-05T19:31:13.959Z] #27 1.032 
+[2026-04-05T19:31:14.221Z] #27 1.294 vite v8.0.3 building client environment for production...
+[2026-04-05T19:31:14.345Z] #27 1.302 [2K
+[2026-04-05T19:31:14.345Z] transforming...✓ 696 modules transformed.
+[2026-04-05T19:31:14.495Z] #27 1.472 rendering chunks...
+[2026-04-05T19:31:14.911Z] #27 1.869 computing gzip size...
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/index.html                                  2.81 kB │ gzip:   1.05 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/index-CEunN36H.css                 204.78 kB │ gzip:  33.80 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/directive-CUxOzvVj.js                0.36 kB │ gzip:   0.27 kB │ map:     1.03 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/channel-config-extras-CnhailPb.js    0.50 kB │ gzip:   0.32 kB │ map:     2.16 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/skills-shared-DOtW23Gq.js            1.50 kB │ gzip:   0.69 kB │ map:     4.49 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/instances-DWrqqOWY.js                2.79 kB │ gzip:   1.07 kB │ map:     5.53 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/logs-DyPBW1nc.js                     3.12 kB │ gzip:   1.15 kB │ map:     6.45 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/debug-BiKkbHRk.js                    4.17 kB │ gzip:   1.27 kB │ map:     7.15 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/de-DhP8YdZj.js                       4.32 kB │ gzip:   2.11 kB │ map:     6.89 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/zh-TW-GnDPLInd.js                    4.69 kB │ gzip:   2.67 kB │ map:     8.08 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/pt-BR-BaW5eiXE.js                    5.15 kB │ gzip:   2.41 kB │ map:     8.62 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/dreams-D4Bi5u79.js                   5.52 kB │ gzip:   1.85 kB │ map:     9.19 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/format-DCgJzWag.js                   6.10 kB │ gzip:   2.44 kB │ map:    31.22 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/zh-CN-Fdg5YAtN.js                   10.95 kB │ gzip:   5.25 kB │ map:    18.70 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/sessions-2Nd5CVSv.js                11.49 kB │ gzip:   3.20 kB │ map:    27.51 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/es-BNbpobKD.js                      11.93 kB │ gzip:   4.82 kB │ map:    19.08 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/skills-SkTaVqbS.js                  13.93 kB │ gzip:   3.47 kB │ map:    26.49 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/lit-BZwq2xLD.js                     15.03 kB │ gzip:   5.87 kB │ map:    34.52 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/nodes-D368Itye.js                   21.99 kB │ gzip:   5.02 kB │ map:    53.05 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/channels-CDbFcSQ5.js                22.18 kB │ gzip:   4.93 kB │ map:    59.83 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/dist-JpQZl4c2.js                    22.50 kB │ gzip:   6.69 kB │ map:    75.94 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/agents-lpbTp_hb.js                  46.21 kB │ gzip:  11.08 kB │ map:   130.21 kB
+[2026-04-05T19:31:14.911Z] #27 1.880 ../dist/control-ui/assets/cron-DYL80G-q.js                    49.27 kB │ gzip:   8.51 kB │ map:    95.83 kB
+[2026-04-05T19:31:14.912Z] #27 1.880 ../dist/control-ui/assets/index-D6wBJJAv.js                  675.11 kB │ gzip: 179.42 kB │ map: 2,130.53 kB
+[2026-04-05T19:31:14.912Z] #27 1.880 
+[2026-04-05T19:31:14.912Z] #27 1.881 ✓ built in 587ms
+[2026-04-05T19:31:14.912Z] #27 DONE 2.0s
+[2026-04-05T19:31:15.061Z] 
+[2026-04-05T19:31:15.061Z] #28 [runtime-assets 1/1] RUN CI=true pnpm prune --prod &&     find dist -type f ( -name '*.d.ts' -o -name '*.d.mts' -o -name '*.d.cts' -o -name '*.map' ) -delete
+[2026-04-05T19:31:15.628Z] #28 0.717 Lockfile is up to date, resolution step is skipped
+[2026-04-05T19:31:16.497Z] #28 1.585 Progress: resolved 0, reused 0, downloaded 1, added 0
+[2026-04-05T19:31:17.700Z] #28 2.642 Progress: resolved 0, reused 0, downloaded 36, added 0
+[2026-04-05T19:31:18.150Z] #28 3.106 Packages: +18
+[2026-04-05T19:31:18.150Z] #28 3.106 ++++++++++++++++++
+[2026-04-05T19:31:18.752Z] #28 3.700 Progress: resolved 0, reused 0, downloaded 92, added 0
+[2026-04-05T19:31:19.653Z] #28 4.741 Progress: resolved 0, reused 0, downloaded 190, added 0
+[2026-04-05T19:31:20.664Z] #28 5.753 Progress: resolved 0, reused 0, downloaded 206, added 18
+[2026-04-05T19:31:21.087Z] #28 6.176 Progress: resolved 0, reused 0, downloaded 209, added 18, done
+[2026-04-05T19:31:21.388Z] #28 6.410 
+[2026-04-05T19:31:21.388Z] #28 6.410 devDependencies: skipped
+[2026-04-05T19:31:21.388Z] #28 6.410 
+[2026-04-05T19:31:21.539Z] #28 6.543 . postinstall$ node scripts/postinstall-bundled-plugins.mjs
+[2026-04-05T19:31:21.690Z] #28 6.707 . postinstall: Done
+[2026-04-05T19:31:21.690Z] #28 6.708 . prepare$ command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1 && git config core.hooksPath git-hooks || exit 0
+[2026-04-05T19:31:21.840Z] #28 6.801 . prepare: Done
+[2026-04-05T19:31:27.550Z] #28 DONE 12.5s
+[2026-04-05T19:31:34.759Z] 
+[2026-04-05T19:31:34.759Z] #29 [stage-5  1/15] WORKDIR /app
+[2026-04-05T19:31:34.759Z] #29 CACHED
+[2026-04-05T19:31:34.759Z] 
+[2026-04-05T19:31:34.760Z] #30 [stage-5  2/15] RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked     apt-get update &&     if [ "1" != "0" ]; then       DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends;     fi &&     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       procps hostname curl git lsof openssl
+[2026-04-05T19:31:34.760Z] #30 CACHED
+[2026-04-05T19:31:34.760Z] 
+[2026-04-05T19:31:34.760Z] #31 [stage-5  3/15] RUN chown node:node /app
+[2026-04-05T19:31:34.760Z] #31 CACHED
+[2026-04-05T19:31:34.910Z] 
+[2026-04-05T19:31:34.910Z] #32 [stage-5  4/15] COPY --from=runtime-assets --chown=node:node /app/dist ./dist
+[2026-04-05T19:31:37.014Z] #32 DONE 2.1s
+[2026-04-05T19:31:37.014Z] 
+[2026-04-05T19:31:37.014Z] #33 [stage-5  5/15] COPY --from=runtime-assets --chown=node:node /app/node_modules ./node_modules
+[2026-04-05T19:31:49.184Z] #33 DONE 12.2s
+[2026-04-05T19:31:49.184Z] 
+[2026-04-05T19:31:49.185Z] #34 [stage-5  6/15] COPY --from=runtime-assets --chown=node:node /app/package.json .
+[2026-04-05T19:31:49.620Z] #34 DONE 0.6s
+[2026-04-05T19:31:49.771Z] 
+[2026-04-05T19:31:49.771Z] #35 [stage-5  7/15] COPY --from=runtime-assets --chown=node:node /app/openclaw.mjs .
+[2026-04-05T19:31:49.771Z] #35 DONE 0.0s
+[2026-04-05T19:31:49.771Z] 
+[2026-04-05T19:31:49.771Z] #36 [stage-5  8/15] COPY --from=runtime-assets --chown=node:node /app/extensions ./extensions
+[2026-04-05T19:31:50.631Z] #36 DONE 0.9s
+[2026-04-05T19:31:50.631Z] 
+[2026-04-05T19:31:50.631Z] #37 [stage-5  9/15] COPY --from=runtime-assets --chown=node:node /app/skills ./skills
+[2026-04-05T19:31:50.631Z] #37 DONE 0.1s
+[2026-04-05T19:31:50.782Z] 
+[2026-04-05T19:31:50.782Z] #38 [stage-5 10/15] COPY --from=runtime-assets --chown=node:node /app/docs ./docs
+[2026-04-05T19:31:50.932Z] #38 DONE 0.2s
+[2026-04-05T19:31:50.932Z] 
+[2026-04-05T19:31:50.932Z] #39 [stage-5 11/15] RUN install -d -m 0755 "/usr/local/share/corepack" &&     corepack enable &&     for attempt in 1 2 3 4 5; do       if corepack prepare "$(node -p "require('./package.json').packageManager")" --activate; then         break;       fi;       if [ "$attempt" -eq 5 ]; then         exit 1;       fi;       sleep $((attempt * 2));     done &&     chmod -R a+rX "/usr/local/share/corepack"
+[2026-04-05T19:31:51.055Z] #39 0.247 Preparing pnpm@10.32.1 for immediate activation...
+[2026-04-05T19:31:51.625Z] #39 DONE 0.8s
+[2026-04-05T19:31:51.776Z] 
+[2026-04-05T19:31:51.776Z] #40 [stage-5 12/15] RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked     if [ -n "" ]; then       apt-get update &&       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ;     fi
+[2026-04-05T19:31:51.927Z] #40 DONE 0.2s
+[2026-04-05T19:31:51.927Z] 
+[2026-04-05T19:31:51.927Z] #41 [stage-5 13/15] RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked     if [ -n "" ]; then       apt-get update &&       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb &&       mkdir -p /home/node/.cache/ms-playwright &&       PLAYWRIGHT_BROWSERS_PATH=/home/node/.cache/ms-playwright       node /app/node_modules/playwright-core/cli.js install --with-deps chromium &&       chown -R node:node /home/node/.cache/ms-playwright;     fi
+[2026-04-05T19:31:52.227Z] #41 DONE 0.3s
+[2026-04-05T19:31:52.227Z] 
+[2026-04-05T19:31:52.227Z] #42 [stage-5 14/15] RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked     if [ -n "" ]; then       apt-get update &&       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends         ca-certificates curl gnupg &&       install -m 0755 -d /etc/apt/keyrings &&       curl -fsSL https://download.docker.com/linux/debian/gpg -o /tmp/docker.gpg.asc &&       expected_fingerprint="$(printf '%s' "9DC858229FC7DD38854AE2D88D81803C0EBFCD88" | tr '[:lower:]' '[:upper:]' | tr -d '[:space:]')" &&       actual_fingerprint="$(gpg --batch --show-keys --with-colons /tmp/docker.gpg.asc | awk -F: '$1 == "fpr" { print toupper($10); exit }')" &&       if [ -z "$actual_fingerprint" ] || [ "$actual_fingerprint" != "$expected_fingerprint" ]; then         echo "ERROR: Docker apt key fingerprint mismatch (expected $expected_fingerprint, got ${actual_fingerprint:-<empty>})" >&2;         exit 1;       fi &&       gpg --dearmor -o /etc/apt/keyrings/docker.gpg /tmp/docker.gpg.asc &&       rm -f /tmp/docker.gpg.asc &&       chmod a+r /etc/apt/keyrings/docker.gpg &&       printf 'deb [arch=%s signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable\n'         "$(dpkg --print-architecture)" > /etc/apt/sources.list.d/docker.list &&       apt-get update &&       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends         docker-ce-cli docker-compose-plugin;     fi
+[2026-04-05T19:31:52.528Z] #42 DONE 0.3s
+[2026-04-05T19:31:52.528Z] 
+[2026-04-05T19:31:52.528Z] #43 [stage-5 15/15] RUN ln -sf /app/openclaw.mjs /usr/local/bin/openclaw  && chmod 755 /app/openclaw.mjs
+[2026-04-05T19:31:52.828Z] #43 DONE 0.3s
+[2026-04-05T19:31:52.828Z] 
+[2026-04-05T19:31:52.829Z] #44 exporting to image
+[2026-04-05T19:31:52.829Z] #44 exporting layers
+[2026-04-05T19:31:58.211Z] #44 exporting layers 5.4s done
+[2026-04-05T19:31:58.211Z] #44 exporting manifest sha256:8967315e99ee9a9589d1fabe9e63d7009605524901b57706c79e14c960e05c28
+[2026-04-05T19:31:58.362Z] #44 exporting manifest sha256:8967315e99ee9a9589d1fabe9e63d7009605524901b57706c79e14c960e05c28 0.0s done
+[2026-04-05T19:31:58.362Z] #44 exporting config sha256:dd9eccc4ed3936d0acd0a2a401af4d44b4d7db6de1f6fc33653345448bb51504 0.0s done
+[2026-04-05T19:31:58.362Z] #44 DONE 5.5s
+[2026-04-05T19:31:58.362Z] 
+[2026-04-05T19:31:58.362Z] #45 preparing to load
+[2026-04-05T19:32:02.275Z] #45 DONE 3.9s
+[2026-04-05T19:32:02.275Z] 
+[2026-04-05T19:32:02.275Z] #46 pulling openclaw:depot-test-test-6-major
+[2026-04-05T19:32:02.395Z] #46 downloading c032818082ff 4.19MB / 211.51MB
+[2026-04-05T19:32:02.395Z] #46 downloading b7f10042b48b 1.05MB / 5.01MB
+[2026-04-05T19:32:02.395Z] #46 downloading 6a7e0620566c 1.05MB / 48.49MB
+[2026-04-05T19:32:02.395Z] #46 downloading 372231dc2c28 2.10MB / 7.64MB
+[2026-04-05T19:32:02.395Z] #46 downloading 5922d70a72a7 2.10MB / 57.86MB
+[2026-04-05T19:32:02.395Z] #46 downloading 8dfaac7cdbca 8.39MB / 693.51MB 0.1s
+[2026-04-05T19:32:02.395Z] #46 downloading fa27031269f0 3.15MB / 64.40MB
+[2026-04-05T19:32:02.496Z] #46 downloading c032818082ff 17.83MB / 211.51MB 0.2s
+[2026-04-05T19:32:02.496Z] #46 downloading b7f10042b48b 5.01MB / 5.01MB 0.1s done
+[2026-04-05T19:32:02.496Z] #46 downloading 6a7e0620566c 14.68MB / 48.49MB 0.2s
+[2026-04-05T19:32:02.496Z] #46 downloading 372231dc2c28 7.64MB / 7.64MB 0.2s done
+[2026-04-05T19:32:02.496Z] #46 downloading 5922d70a72a7 14.68MB / 57.86MB 0.2s
+[2026-04-05T19:32:02.496Z] #46 downloading fa27031269f0 8.39MB / 64.40MB 0.1s
+[2026-04-05T19:32:02.496Z] #46 downloading a3158bb64088 5.24MB / 9.15MB
+[2026-04-05T19:32:02.496Z] #46 downloading ce032a8423f4 10.93MB / 10.93MB 0.1s done
+[2026-04-05T19:32:02.496Z] #46 downloading aab3b37e4807 11.53MB / 24.04MB 0.1s
+[2026-04-05T19:32:02.496Z] #46 downloading ee44c37b9c63 11.53MB / 30.10MB 0.1s
+[2026-04-05T19:32:02.645Z] #46 downloading 6a7e0620566c 23.07MB / 48.49MB 0.3s
+[2026-04-05T19:32:02.645Z] #46 downloading 5922d70a72a7 23.07MB / 57.86MB 0.3s
+[2026-04-05T19:32:02.645Z] #46 downloading fa27031269f0 26.21MB / 64.40MB 0.3s
+[2026-04-05T19:32:02.645Z] #46 downloading a3158bb64088 9.15MB / 9.15MB 0.1s done
+[2026-04-05T19:32:02.645Z] #46 downloading aab3b37e4807 19.92MB / 24.04MB 0.2s
+[2026-04-05T19:32:02.645Z] #46 downloading ee44c37b9c63 20.97MB / 30.10MB 0.2s
+[2026-04-05T19:32:02.792Z] #46 downloading c032818082ff 45.09MB / 211.51MB 0.5s
+[2026-04-05T19:32:02.792Z] #46 downloading 6a7e0620566c 32.51MB / 48.49MB 0.4s
+[2026-04-05T19:32:02.792Z] #46 downloading 5922d70a72a7 31.46MB / 57.86MB 0.4s
+[2026-04-05T19:32:02.792Z] #46 downloading fa27031269f0 45.09MB / 64.40MB 0.5s
+[2026-04-05T19:32:02.792Z] #46 downloading aab3b37e4807 24.04MB / 24.04MB 0.3s done
+[2026-04-05T19:32:02.793Z] #46 downloading ee44c37b9c63 29.36MB / 30.10MB 0.3s
+[2026-04-05T19:32:02.893Z] #46 downloading c032818082ff 56.62MB / 211.51MB 0.6s
+[2026-04-05T19:32:02.893Z] #46 downloading 6a7e0620566c 42.99MB / 48.49MB 0.5s
+[2026-04-05T19:32:02.893Z] #46 downloading 5922d70a72a7 42.99MB / 57.86MB 0.5s
+[2026-04-05T19:32:02.893Z] #46 downloading 8dfaac7cdbca 44.04MB / 693.51MB 0.5s
+[2026-04-05T19:32:02.893Z] #46 downloading ee44c37b9c63 30.10MB / 30.10MB 0.4s done
+[2026-04-05T19:32:02.994Z] #46 downloading 6a7e0620566c 48.49MB / 48.49MB 0.6s done
+[2026-04-05T19:32:02.995Z] #46 downloading 5922d70a72a7 57.86MB / 57.86MB 0.7s
+[2026-04-05T19:32:02.995Z] #46 downloading fa27031269f0 56.62MB / 64.40MB 0.6s
+[2026-04-05T19:32:02.995Z] #46 extracting 6a7e0620566c 1B
+[2026-04-05T19:32:03.096Z] #46 downloading c032818082ff 81.41MB / 211.51MB 0.8s
+[2026-04-05T19:32:03.096Z] #46 downloading fa27031269f0 64.40MB / 64.40MB 0.8s done
+[2026-04-05T19:32:03.307Z] #46 downloading 5922d70a72a7 57.86MB / 57.86MB 0.8s done
+[2026-04-05T19:32:03.307Z] #46 downloading 8dfaac7cdbca 81.79MB / 693.51MB 0.8s
+[2026-04-05T19:32:03.420Z] #46 downloading c032818082ff 118.49MB / 211.51MB 1.1s
+[2026-04-05T19:32:03.420Z] #46 downloading 8dfaac7cdbca 120.59MB / 693.51MB 1.1s
+[2026-04-05T19:32:03.571Z] #46 downloading c032818082ff 141.56MB / 211.51MB 1.2s
+[2026-04-05T19:32:03.691Z] #46 downloading c032818082ff 167.77MB / 211.51MB 1.3s
+[2026-04-05T19:32:03.691Z] #46 downloading 8dfaac7cdbca 188.74MB / 693.51MB 1.4s
+[2026-04-05T19:32:03.792Z] #46 downloading c032818082ff 211.51MB / 211.51MB 1.5s
+[2026-04-05T19:32:03.909Z] #46 downloading 8dfaac7cdbca 245.37MB / 693.51MB 1.6s
+[2026-04-05T19:32:04.060Z] #46 downloading c032818082ff 211.51MB / 211.51MB 1.7s done
+[2026-04-05T19:32:04.191Z] #46 downloading 8dfaac7cdbca 347.08MB / 693.51MB 1.9s
+[2026-04-05T19:32:04.400Z] #46 downloading 8dfaac7cdbca 414.19MB / 693.51MB 2.1s
+[2026-04-05T19:32:04.604Z] #46 downloading 8dfaac7cdbca 479.20MB / 693.51MB 2.3s
+[2026-04-05T19:32:04.754Z] #46 extracting 6a7e0620566c 1.8s done
+[2026-04-05T19:32:04.755Z] #46 extracting aab3b37e4807 1B
+[2026-04-05T19:32:04.893Z] #46 downloading 8dfaac7cdbca 579.86MB / 693.51MB 2.6s
+[2026-04-05T19:32:05.000Z] #46 downloading 8dfaac7cdbca 616.56MB / 693.51MB 2.7s
+[2026-04-05T19:32:05.292Z] #46 downloading 8dfaac7cdbca 692.06MB / 693.51MB 3.0s
+[2026-04-05T19:32:05.392Z] #46 extracting aab3b37e4807 0.6s done
+[2026-04-05T19:32:05.392Z] #46 extracting fa27031269f0 1B
+[2026-04-05T19:32:05.998Z] #46 downloading 8dfaac7cdbca 693.51MB / 693.51MB 3.6s done
+[2026-04-05T19:32:06.698Z] #46 extracting fa27031269f0 1.4s done
+[2026-04-05T19:32:06.849Z] #46 extracting c032818082ff 1B 0.1s
+[2026-04-05T19:32:09.896Z] #46 extracting 5922d70a72a7 1B
+[2026-04-05T19:32:09.998Z] #46 extracting c032818082ff 3.2s done
+[2026-04-05T19:32:11.248Z] #46 extracting 5922d70a72a7 1.3s done
+[2026-04-05T19:32:11.395Z] #46 extracting a3158bb64088 0.1s done
+[2026-04-05T19:32:11.497Z] #46 extracting ee44c37b9c63 1B 0.1s
+[2026-04-05T19:32:12.894Z] #46 extracting ee44c37b9c63 1.4s done
+[2026-04-05T19:32:12.894Z] #46 extracting 8dfaac7cdbca 1B 0.1s
+[2026-04-05T19:32:17.997Z] #46 extracting 8dfaac7cdbca 6B 5.2s
+[2026-04-05T19:32:23.195Z] #46 extracting 8dfaac7cdbca 11B 10.4s
+[2026-04-05T19:32:25.595Z] #46 extracting 8dfaac7cdbca 12.8s done
+[2026-04-05T19:32:25.595Z] #46 extracting 66e246f1995b 1B
+[2026-04-05T19:32:25.745Z] #46 extracting 66e246f1995b 0.1s done
+[2026-04-05T19:32:25.745Z] #46 extracting 372231dc2c28 1B
+[2026-04-05T19:32:26.293Z] #46 extracting 372231dc2c28 0.5s done
+[2026-04-05T19:32:26.293Z] #46 extracting ce032a8423f4 1B
+[2026-04-05T19:32:26.293Z] #46 extracting b7f10042b48b 1B
+[2026-04-05T19:32:26.396Z] #46 extracting ce032a8423f4 0.1s done
+[2026-04-05T19:32:26.696Z] #46 extracting b7f10042b48b 0.3s done
+[2026-04-05T19:32:26.696Z] #46 DONE 24.4s
+[2026-04-05T19:32:27.307Z] 
+[2026-04-05T19:32:27.307Z] Build Summary: https://depot.dev/orgs/xqmz2w73qz/projects/***/builds/803hzr7sk5
+[2026-04-05T19:32:27.311Z] ##[group]ImageID
+[2026-04-05T19:32:27.311Z] sha256:dd9eccc4ed3936d0acd0a2a401af4d44b4d7db6de1f6fc33653345448bb51504
+[2026-04-05T19:32:27.311Z] ##[endgroup]
+[2026-04-05T19:32:27.311Z] ##[group]Digest
+[2026-04-05T19:32:27.311Z] sha256:8967315e99ee9a9589d1fabe9e63d7009605524901b57706c79e14c960e05c28
+[2026-04-05T19:32:27.311Z] ##[endgroup]
+[2026-04-05T19:32:27.311Z] ##[group]Metadata
+[2026-04-05T19:32:27.311Z] {
+[2026-04-05T19:32:27.311Z]   "containerimage.config.digest": "sha256:dd9eccc4ed3936d0acd0a2a401af4d44b4d7db6de1f6fc33653345448bb51504",
+[2026-04-05T19:32:27.311Z]   "containerimage.descriptor": {
+[2026-04-05T19:32:27.311Z]     "mediaType": "application/vnd.oci.image.manifest.v1+json",
+[2026-04-05T19:32:27.311Z]     "digest": "sha256:8967315e99ee9a9589d1fabe9e63d7009605524901b57706c79e14c960e05c28",
+[2026-04-05T19:32:27.311Z]     "size": 4675,
+[2026-04-05T19:32:27.311Z]     "platform": {
+[2026-04-05T19:32:27.311Z]       "architecture": "amd64",
+[2026-04-05T19:32:27.312Z]       "os": "linux"
+[2026-04-05T19:32:27.312Z]     }
+[2026-04-05T19:32:27.312Z]   },
+[2026-04-05T19:32:27.312Z]   "containerimage.digest": "sha256:8967315e99ee9a9589d1fabe9e63d7009605524901b57706c79e14c960e05c28",
+[2026-04-05T19:32:27.312Z]   "depot.build": {
+[2026-04-05T19:32:27.312Z]     "buildID": "803hzr7sk5",
+[2026-04-05T19:32:27.312Z]     "projectID": "***"
+[2026-04-05T19:32:27.312Z]   },
+[2026-04-05T19:32:27.312Z]   "depot/session.id": "778335529-ja28",
+[2026-04-05T19:32:27.312Z]   "image.name": "openclaw:depot-test-test-6-major",
+[2026-04-05T19:32:27.312Z]   "imageConfigs": [
+[2026-04-05T19:32:27.312Z]     {
+[2026-04-05T19:32:27.312Z]       "created": "2026-04-05T19:31:52.777224842Z",
+[2026-04-05T19:32:27.312Z]       "architecture": "amd64",
+[2026-04-05T19:32:27.312Z]       "os": "linux",
+[2026-04-05T19:32:27.312Z]       "config": {
+[2026-04-05T19:32:27.312Z]         "User": "node",
+[2026-04-05T19:32:27.312Z]         "Env": [
+[2026-04-05T19:32:27.312Z]           "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+[2026-04-05T19:32:27.312Z]           "NODE_VERSION=24.14.0",
+[2026-04-05T19:32:27.312Z]           "YARN_VERSION=1.22.22",
+[2026-04-05T19:32:27.312Z]           "OPENCLAW_BUNDLED_PLUGINS_DIR=/app/extensions",
+[2026-04-05T19:32:27.312Z]           "COREPACK_HOME=/usr/local/share/corepack",
+[2026-04-05T19:32:27.312Z]           "NODE_ENV=production"
+[2026-04-05T19:32:27.312Z]         ],
+[2026-04-05T19:32:27.312Z]         "Entrypoint": [
+[2026-04-05T19:32:27.312Z]           "docker-entrypoint.sh"
+[2026-04-05T19:32:27.312Z]         ],
+[2026-04-05T19:32:27.312Z]         "Cmd": [
+[2026-04-05T19:32:27.312Z]           "node",
+[2026-04-05T19:32:27.312Z]           "openclaw.mjs",
+[2026-04-05T19:32:27.312Z]           "gateway",
+[2026-04-05T19:32:27.312Z]           "--allow-unconfigured"
+[2026-04-05T19:32:27.312Z]         ],
+[2026-04-05T19:32:27.312Z]         "WorkingDir": "/app",
+[2026-04-05T19:32:27.312Z]         "Labels": {
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.base.digest": "sha256:3a09aa6354567619221ef6c45a5051b671f953f0a1924d1f819ffb236e520e6b",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.base.name": "docker.io/library/node:24-bookworm",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.description": "OpenClaw gateway and CLI runtime container image",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.documentation": "https://docs.openclaw.ai/install/docker",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.licenses": "MIT",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.source": "https://github.com/openclaw/openclaw",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.title": "OpenClaw",
+[2026-04-05T19:32:27.312Z]           "org.opencontainers.image.url": "https://openclaw.ai"
+[2026-04-05T19:32:27.312Z]         },
+[2026-04-05T19:32:27.312Z]         "ArgsEscaped": true
+[2026-04-05T19:32:27.312Z]       },
+[2026-04-05T19:32:27.312Z]       "rootfs": {
+[2026-04-05T19:32:27.312Z]         "type": "layers",
+[2026-04-05T19:32:27.312Z]         "diff_ids": [
+[2026-04-05T19:32:27.313Z]           "sha256:ac0b59386af04eb1adb3ecce007f7bfa052e5c2da2b2ab4d683a2e73ef866825",
+[2026-04-05T19:32:27.313Z]           "sha256:70d26ff9e142e8c574c75a2f05927cd1a007d884e1df83b7e8b4be3cbd32db30",
+[2026-04-05T19:32:27.313Z]           "sha256:53cad9b6300b51e81a3b4dafcf89024aa112edc365f0c8c81018d15323aeb631",
+[2026-04-05T19:32:27.313Z]           "sha256:b55778bc269d8a01bf681a071a1a85d57d6acd3013286b756a0a670364bcc307",
+[2026-04-05T19:32:27.313Z]           "sha256:85ac60da26596a17f0d4e41b43bd153989be7071c527d5a0342c013399301750",
+[2026-04-05T19:32:27.313Z]           "sha256:c859671ef031c163870151a0485b6aa2b940a59a9662162f146a6498c1aca3ef",
+[2026-04-05T19:32:27.313Z]           "sha256:2d4f60d146d78f10545814b8fb55d16523b3e11bba4666aed84e8ceca80b4168",
+[2026-04-05T19:32:27.313Z]           "sha256:8e22de3f91c052274023565191cda6d026997a57a78a626af9831be3bd71d528",
+[2026-04-05T19:32:27.313Z]           "sha256:8887a0dc473e6b2943eadf35871597e6466baa18e234a2324c8fd8e89dbe6f2a",
+[2026-04-05T19:32:27.313Z]           "sha256:68fa21b1fd7f99223572f63418b0fb8de462bb8bdd8aebaa18190b9b47e50cd6",
+[2026-04-05T19:32:27.313Z]           "sha256:4b40d2700944a9b4362e1410a3df7567fbf994c777a41dbb5c8338de614fe064",
+[2026-04-05T19:32:27.313Z]           "sha256:1bcfa759cf649bdfcfabf5bf4a277ba5de08463b04b637d4a28e8ee24b411ebe",
+[2026-04-05T19:32:27.313Z]           "sha256:76905a43890cf6caada800f4e3832dc672c1b49094aa00a8dd69c6bd9bfc7bd6",
+[2026-04-05T19:32:27.313Z]           "sha256:58616f594369e8b87f06741107e6079b09a80c6df2e6e87a8afa1d09ec3d16e5",
+[2026-04-05T19:32:27.313Z]           "sha256:49c36ff5b2642a14f56621a97940217d259fc31057f622648bedadeb6a0cb0d5",
+[2026-04-05T19:32:27.313Z]           "sha256:cc26a65e61eac69a20f5c13fd46bf29e911f7ad3e0c1b963e8d5af5cbb7eb8e9",
+[2026-04-05T19:32:27.313Z]           "sha256:f749b6f358d5cfe3723eb515145c0fbadac2a77683476f9e4dd41c51b15f1801",
+[2026-04-05T19:32:27.313Z]           "sha256:125b8db7bde62b4259e755863089389ad4d19ce93cf7f972ba29582d22e8b886",
+[2026-04-05T19:32:27.313Z]           "sha256:c8dd91de12542cee7c70583b1175f179d1885da08e7c006a48b6452fecac68c6",
+[2026-04-05T19:32:27.313Z]           "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+[2026-04-05T19:32:27.313Z]           "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+[2026-04-05T19:32:27.313Z]           "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+[2026-04-05T19:32:27.313Z]           "sha256:08fe80d3896b699aa678e9ce42034d9164cf94e4ea703da978dc7f7f623b74c3"
+[2026-04-05T19:32:27.313Z]         ]
+[2026-04-05T19:32:27.313Z]       },
+[2026-04-05T19:32:27.313Z]       "history": [
+[2026-04-05T19:32:27.313Z]         {
+[2026-04-05T19:32:27.313Z]           "created": "2026-02-23T00:00:00Z",
+[2026-04-05T19:32:27.313Z]           "created_by": "# debian.sh --arch 'amd64' out/ 'bookworm' '@1771804800'",
+[2026-04-05T19:32:27.313Z]           "comment": "debuerreotype 0.17"
+[2026-04-05T19:32:27.313Z]         },
+[2026-04-05T19:32:27.313Z]         {
+[2026-04-05T19:32:27.313Z]           "created": "2026-02-24T19:18:42.626529645Z",
+[2026-04-05T19:32:27.313Z]           "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tcurl \t\tgnupg \t\tnetbase \t\tsq \t\twget \t; \trm -rf /var/lib/apt/lists/* # buildkit",
+[2026-04-05T19:32:27.313Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.313Z]         },
+[2026-04-05T19:32:27.313Z]         {
+[2026-04-05T19:32:27.313Z]           "created": "2026-02-24T20:03:31.215373193Z",
+[2026-04-05T19:32:27.313Z]           "created_by": "RUN /bin/sh -c set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tgit \t\tmercurial \t\topenssh-client \t\tsubversion \t\t\t\tprocps \t; \trm -rf /var/lib/apt/lists/* # buildkit",
+[2026-04-05T19:32:27.313Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.313Z]         },
+[2026-04-05T19:32:27.313Z]         {
+[2026-04-05T19:32:27.313Z]           "created": "2026-02-24T20:33:14.544761541Z",
+[2026-04-05T19:32:27.313Z]           "created_by": "RUN /bin/sh -c set -ex; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tautoconf \t\tautomake \t\tbzip2 \t\tdefault-libmysqlclient-dev \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\timagemagick \t\tlibbz2-dev \t\tlibc6-dev \t\tlibcurl4-openssl-dev \t\tlibdb-dev \t\tlibevent-dev \t\tlibffi-dev \t\tlibgdbm-dev \t\tlibglib2.0-dev \t\tlibgmp-dev \t\tlibjpeg-dev \t\tlibkrb5-dev \t\tliblzma-dev \t\tlibmagickcore-dev \t\tlibmagickwand-dev \t\tlibmaxminddb-dev \t\tlibncurses5-dev \t\tlibncursesw5-dev \t\tlibpng-dev \t\tlibpq-dev \t\tlibreadline-dev \t\tlibsqlite3-dev \t\tlibssl-dev \t\tlibtool \t\tlibwebp-dev \t\tlibxml2-dev \t\tlibxslt-dev \t\tlibyaml-dev \t\tmake \t\tpatch \t\tunzip \t\txz-utils \t\tzlib1g-dev \t; \trm -rf /var/lib/apt/lists/* # buildkit",
+[2026-04-05T19:32:27.313Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.313Z]         },
+[2026-04-05T19:32:27.313Z]         {
+[2026-04-05T19:32:27.314Z]           "created": "2026-02-24T21:19:07.233579686Z",
+[2026-04-05T19:32:27.314Z]           "created_by": "RUN /bin/sh -c groupadd --gid 1000 node   \u0026\u0026 useradd --uid 1000 --gid node --shell /bin/bash --create-home node # buildkit",
+[2026-04-05T19:32:27.314Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.314Z]         },
+[2026-04-05T19:32:27.314Z]         {
+[2026-04-05T19:32:27.314Z]           "created": "2026-02-24T21:19:17.240521558Z",
+[2026-04-05T19:32:27.314Z]           "created_by": "ENV NODE_VERSION=24.14.0",
+[2026-04-05T19:32:27.314Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.314Z]           "empty_layer": true
+[2026-04-05T19:32:27.314Z]         },
+[2026-04-05T19:32:27.314Z]         {
+[2026-04-05T19:32:27.314Z]           "created": "2026-02-24T21:19:17.240521558Z",
+[2026-04-05T19:32:27.314Z]           "created_by": "RUN /bin/sh -c ARCH= \u0026\u0026 dpkgArch=\"$(dpkg --print-architecture)\"   \u0026\u0026 case \"${dpkgArch##*-}\" in     amd64) ARCH='x64';;     ppc64el) ARCH='ppc64le';;     s390x) ARCH='s390x';;     arm64) ARCH='arm64';;     armhf) ARCH='armv7l';;     i386) ARCH='x86';;     *) echo \"unsupported architecture\"; exit 1 ;;   esac   \u0026\u0026 export GNUPGHOME=\"$(mktemp -d)\"   \u0026\u0026 set -ex   \u0026\u0026 for key in     5BE8A3F6C8A5C01D106C0AD820B1A390B168D356     DD792F5973C6DE52C432CBDAC77ABFA00DDBF2B7     CC68F5A3106FF448322E48ED27F5E38D5B0A215F     8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600     890C08DB8579162FEE0DF9DB8BEAB4DFCF555EF4     C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C     108F52B48DB57BB0CC439B2997B01419BD92F80A     A363A499291CBBC940DD62E41F10027AF002F8B0   ; do       { gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" \u0026\u0026 gpg --batch --fingerprint \"$key\"; } ||       { gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" \u0026\u0026 gpg --batch --fingerprint \"$key\"; } ;   done   \u0026\u0026 curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz\"   \u0026\u0026 curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc\"   \u0026\u0026 gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc   \u0026\u0026 gpgconf --kill all   \u0026\u0026 rm -rf \"$GNUPGHOME\"   \u0026\u0026 grep \" node-v$NODE_VERSION-linux-$ARCH.tar.xz\\$\" SHASUMS256.txt | sha256sum -c -   \u0026\u0026 tar -xJf \"node-v$NODE_VERSION-linux-$ARCH.tar.xz\" -C /usr/local --strip-components=1 --no-same-owner   \u0026\u0026 rm \"node-v$NODE_VERSION-linux-$ARCH.tar.xz\" SHASUMS256.txt.asc SHASUMS256.txt   \u0026\u0026 ln -s /usr/local/bin/node /usr/local/bin/nodejs   \u0026\u0026 node --version   \u0026\u0026 npm --version   \u0026\u0026 rm -rf /tmp/* # buildkit",
+[2026-04-05T19:32:27.314Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.314Z]         },
+[2026-04-05T19:32:27.314Z]         {
+[2026-04-05T19:32:27.314Z]           "created": "2026-02-24T21:19:17.240521558Z",
+[2026-04-05T19:32:27.314Z]           "created_by": "ENV YARN_VERSION=1.22.22",
+[2026-04-05T19:32:27.314Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-02-24T21:19:20.391971955Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "RUN /bin/sh -c set -ex   \u0026\u0026 export GNUPGHOME=\"$(mktemp -d)\"   \u0026\u0026 for key in     6A010C5166006599AA17F08146C2130DFD2497F5   ; do     { gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" \u0026\u0026 gpg --batch --fingerprint \"$key\"; } ||     { gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" \u0026\u0026 gpg --batch --fingerprint \"$key\"; } ;   done   \u0026\u0026 curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz\"   \u0026\u0026 curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc\"   \u0026\u0026 gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   \u0026\u0026 gpgconf --kill all   \u0026\u0026 rm -rf \"$GNUPGHOME\"   \u0026\u0026 mkdir -p /opt   \u0026\u0026 tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/   \u0026\u0026 ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn   \u0026\u0026 ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg   \u0026\u0026 rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   \u0026\u0026 yarn --version   \u0026\u0026 rm -rf /tmp/* # buildkit",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-02-24T21:19:20.450021264Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "COPY docker-entrypoint.sh /usr/local/bin/ # buildkit",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-02-24T21:19:20.450021264Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "ENTRYPOINT [\"docker-entrypoint.sh\"]",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-02-24T21:19:20.450021264Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "CMD [\"node\"]",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "ARG OPENCLAW_NODE_BOOKWORM_DIGEST",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "LABEL org.opencontainers.image.base.name=docker.io/library/node:24-bookworm org.opencontainers.image.base.digest=sha256:3a09aa6354567619221ef6c45a5051b671f953f0a1924d1f819ffb236e520e6b",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "ARG OPENCLAW_VARIANT",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "ARG OPENCLAW_BUNDLED_PLUGIN_DIR",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "ARG OPENCLAW_DOCKER_APT_UPGRADE",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "LABEL org.opencontainers.image.source=https://github.com/openclaw/openclaw org.opencontainers.image.url=https://openclaw.ai org.opencontainers.image.documentation=https://docs.openclaw.ai/install/docker org.opencontainers.image.licenses=MIT org.opencontainers.image.title=OpenClaw org.opencontainers.image.description=OpenClaw gateway and CLI runtime container image",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.315Z]           "empty_layer": true
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:26.214074466Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "WORKDIR /app",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.315Z]         },
+[2026-04-05T19:32:27.315Z]         {
+[2026-04-05T19:32:27.315Z]           "created": "2026-04-05T19:05:42.075369043Z",
+[2026-04-05T19:32:27.315Z]           "created_by": "RUN |3 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 /bin/sh -c apt-get update \u0026\u0026     if [ \"${OPENCLAW_DOCKER_APT_UPGRADE}\" != \"0\" ]; then       DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends;     fi \u0026\u0026     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       procps hostname curl git lsof openssl # buildkit",
+[2026-04-05T19:32:27.315Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:05:42.834581781Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "RUN |3 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 /bin/sh -c chown node:node /app # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:36.882410191Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/dist ./dist # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:49.078120244Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/node_modules ./node_modules # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:49.638642063Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/package.json . # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:49.689444825Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/openclaw.mjs . # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:50.543010743Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/extensions ./extensions # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:50.650111388Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/skills ./skills # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:50.826462923Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "COPY --chown=node:node /app/docs ./docs # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:50.826462923Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "ENV OPENCLAW_BUNDLED_PLUGINS_DIR=/app/extensions",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.316Z]           "empty_layer": true
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:50.826462923Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "ENV COREPACK_HOME=/usr/local/share/corepack",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.316Z]           "empty_layer": true
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.316Z]         {
+[2026-04-05T19:32:27.316Z]           "created": "2026-04-05T19:31:51.64403401Z",
+[2026-04-05T19:32:27.316Z]           "created_by": "RUN |3 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 /bin/sh -c install -d -m 0755 \"$COREPACK_HOME\" \u0026\u0026     corepack enable \u0026\u0026     for attempt in 1 2 3 4 5; do       if corepack prepare \"$(node -p \"require('./package.json').packageManager\")\" --activate; then         break;       fi;       if [ \"$attempt\" -eq 5 ]; then         exit 1;       fi;       sleep $((attempt * 2));     done \u0026\u0026     chmod -R a+rX \"$COREPACK_HOME\" # buildkit",
+[2026-04-05T19:32:27.316Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.316Z]         },
+[2026-04-05T19:32:27.317Z]         {
+[2026-04-05T19:32:27.317Z]           "created": "2026-04-05T19:31:51.64403401Z",
+[2026-04-05T19:32:27.317Z]           "created_by": "ARG OPENCLAW_DOCKER_APT_PACKAGES=",
+[2026-04-05T19:32:27.317Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.317Z]           "empty_layer": true
+[2026-04-05T19:32:27.317Z]         },
+[2026-04-05T19:32:27.317Z]         {
+[2026-04-05T19:32:27.317Z]           "created": "2026-04-05T19:31:51.818030541Z",
+[2026-04-05T19:32:27.317Z]           "created_by": "RUN |4 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 OPENCLAW_DOCKER_APT_PACKAGES= /bin/sh -c if [ -n \"$OPENCLAW_DOCKER_APT_PACKAGES\" ]; then       apt-get update \u0026\u0026       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $OPENCLAW_DOCKER_APT_PACKAGES;     fi # buildkit",
+[2026-04-05T19:32:27.317Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.317Z]         },
+[2026-04-05T19:32:27.317Z]         {
+[2026-04-05T19:32:27.317Z]           "created": "2026-04-05T19:31:51.818030541Z",
+[2026-04-05T19:32:27.317Z]           "created_by": "ARG OPENCLAW_INSTALL_BROWSER=",
+[2026-04-05T19:32:27.317Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.317Z]           "empty_layer": true
+[2026-04-05T19:32:27.317Z]         },
+[2026-04-05T19:32:27.317Z]         {
+[2026-04-05T19:32:27.317Z]           "created": "2026-04-05T19:31:52.127777415Z",
+[2026-04-05T19:32:27.317Z]           "created_by": "RUN |5 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 OPENCLAW_DOCKER_APT_PACKAGES= OPENCLAW_INSTALL_BROWSER= /bin/sh -c if [ -n \"$OPENCLAW_INSTALL_BROWSER\" ]; then       apt-get update \u0026\u0026       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb \u0026\u0026       mkdir -p /home/node/.cache/ms-playwright \u0026\u0026       PLAYWRIGHT_BROWSERS_PATH=/home/node/.cache/ms-playwright       node /app/node_modules/playwright-core/cli.js install --with-deps chromium \u0026\u0026       chown -R node:node /home/node/.cache/ms-playwright;     fi # buildkit",
+[2026-04-05T19:32:27.317Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.127777415Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "ARG OPENCLAW_INSTALL_DOCKER_CLI=",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.318Z]           "empty_layer": true
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.127777415Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "ARG OPENCLAW_DOCKER_GPG_FINGERPRINT=9DC858229FC7DD38854AE2D88D81803C0EBFCD88",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.318Z]           "empty_layer": true
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.47643271Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "RUN |7 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 OPENCLAW_DOCKER_APT_PACKAGES= OPENCLAW_INSTALL_BROWSER= OPENCLAW_INSTALL_DOCKER_CLI= OPENCLAW_DOCKER_GPG_FINGERPRINT=9DC858229FC7DD38854AE2D88D81803C0EBFCD88 /bin/sh -c if [ -n \"$OPENCLAW_INSTALL_DOCKER_CLI\" ]; then       apt-get update \u0026\u0026       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends         ca-certificates curl gnupg \u0026\u0026       install -m 0755 -d /etc/apt/keyrings \u0026\u0026       curl -fsSL https://download.docker.com/linux/debian/gpg -o /tmp/docker.gpg.asc \u0026\u0026       expected_fingerprint=\"$(printf '%s' \"$OPENCLAW_DOCKER_GPG_FINGERPRINT\" | tr '[:lower:]' '[:upper:]' | tr -d '[:space:]')\" \u0026\u0026       actual_fingerprint=\"$(gpg --batch --show-keys --with-colons /tmp/docker.gpg.asc | awk -F: '$1 == \"fpr\" { print toupper($10); exit }')\" \u0026\u0026       if [ -z \"$actual_fingerprint\" ] || [ \"$actual_fingerprint\" != \"$expected_fingerprint\" ]; then         echo \"ERROR: Docker apt key fingerprint mismatch (expected $expected_fingerprint, got ${actual_fingerprint:-\u003cempty\u003e})\" \u003e\u00262;         exit 1;       fi \u0026\u0026       gpg --dearmor -o /etc/apt/keyrings/docker.gpg /tmp/docker.gpg.asc \u0026\u0026       rm -f /tmp/docker.gpg.asc \u0026\u0026       chmod a+r /etc/apt/keyrings/docker.gpg \u0026\u0026       printf 'deb [arch=%s signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable\\n'         \"$(dpkg --print-architecture)\" \u003e /etc/apt/sources.list.d/docker.list \u0026\u0026       apt-get update \u0026\u0026       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends         docker-ce-cli docker-compose-plugin;     fi # buildkit",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.777224842Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "RUN |7 OPENCLAW_VARIANT=default OPENCLAW_BUNDLED_PLUGIN_DIR=extensions OPENCLAW_DOCKER_APT_UPGRADE=1 OPENCLAW_DOCKER_APT_PACKAGES= OPENCLAW_INSTALL_BROWSER= OPENCLAW_INSTALL_DOCKER_CLI= OPENCLAW_DOCKER_GPG_FINGERPRINT=9DC858229FC7DD38854AE2D88D81803C0EBFCD88 /bin/sh -c ln -sf /app/openclaw.mjs /usr/local/bin/openclaw  \u0026\u0026 chmod 755 /app/openclaw.mjs # buildkit",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0"
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.777224842Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "ENV NODE_ENV=production",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.318Z]           "empty_layer": true
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.777224842Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "USER node",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.318Z]           "empty_layer": true
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.777224842Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "HEALTHCHECK \u0026{[\"CMD-SHELL\" \"node -e \\\"fetch('http://127.0.0.1:18789/healthz').then((r)=\u003eprocess.exit(r.ok?0:1)).catch(()=\u003eprocess.exit(1))\\\"\"] \"3m0s\" \"10s\" \"15s\" \"0s\" '\\x03'}",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.318Z]           "empty_layer": true
+[2026-04-05T19:32:27.318Z]         },
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.318Z]           "created": "2026-04-05T19:31:52.777224842Z",
+[2026-04-05T19:32:27.318Z]           "created_by": "CMD [\"node\" \"openclaw.mjs\" \"gateway\" \"--allow-unconfigured\"]",
+[2026-04-05T19:32:27.318Z]           "comment": "buildkit.dockerfile.v0",
+[2026-04-05T19:32:27.318Z]           "empty_layer": true
+[2026-04-05T19:32:27.318Z]         }
+[2026-04-05T19:32:27.318Z]       ]
+[2026-04-05T19:32:27.318Z]     }
+[2026-04-05T19:32:27.318Z]   ],
+[2026-04-05T19:32:27.318Z]   "manifests": [
+[2026-04-05T19:32:27.318Z]     {
+[2026-04-05T19:32:27.318Z]       "schemaVersion": 2,
+[2026-04-05T19:32:27.318Z]       "mediaType": "application/vnd.oci.image.manifest.v1+json",
+[2026-04-05T19:32:27.318Z]       "config": {
+[2026-04-05T19:32:27.318Z]         "mediaType": "application/vnd.oci.image.config.v1+json",
+[2026-04-05T19:32:27.318Z]         "digest": "sha256:dd9eccc4ed3936d0acd0a2a401af4d44b4d7db6de1f6fc33653345448bb51504",
+[2026-04-05T19:32:27.318Z]         "size": 18094
+[2026-04-05T19:32:27.318Z]       },
+[2026-04-05T19:32:27.318Z]       "layers": [
+[2026-04-05T19:32:27.318Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:6a7e0620566c7dfbe5d3c9a7601d116556ec17a021b3e824f8ab09d12b0c25c6",
+[2026-04-05T19:32:27.319Z]           "size": 48488777
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:aab3b37e4807fe48145826511e16a527bbc4695222ceb966669a4d16729b3b94",
+[2026-04-05T19:32:27.319Z]           "size": 24038450
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:fa27031269f0a970255d56a9e793fc2a9d6bb091463cd5e632af4ae274881601",
+[2026-04-05T19:32:27.319Z]           "size": 64395853
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:c032818082ff938f43355abf00f71e5531be197952a109867259ad63a917c884",
+[2026-04-05T19:32:27.319Z]           "size": 211511102
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:03bbf11124abb071f8b8551ed5e778f07f76a9e24319be963961391a69306787",
+[2026-04-05T19:32:27.319Z]           "size": 3324
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:5922d70a72a7dbc04fdfb5146bf8dbbea0ea381fb2d02fe2da881bdfdb4e138f",
+[2026-04-05T19:32:27.319Z]           "size": 57859707
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:3dea9ce2fc4a195a1cf8db2fb69c1cfb7c817a9248d4d6bc0ddcb1f701d3ef0d",
+[2026-04-05T19:32:27.319Z]           "size": 1250676
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:0594f60e91c58a9c1a2505ed11f0823eaf05c52be0b49ceaffdf389d066d1441",
+[2026-04-05T19:32:27.319Z]           "size": 450
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:7e626c0f892843dc3d9506bb7877016d4de1eef42a8b17a3abb97361ecc020fa",
+[2026-04-05T19:32:27.319Z]           "size": 99
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:a3158bb6408829a7af6cb0fcb75f314fd1cebc353cc7a2469d55fef13c1af160",
+[2026-04-05T19:32:27.319Z]           "size": 9154214
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:96e4316020f8ee9dd100ac044b4ef45514b6a6a506f5581668d48be681a92a06",
+[2026-04-05T19:32:27.319Z]           "size": 100
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:ee44c37b9c63483f6c7c5d4ed6f7e0ec79fde699eb0bbe899babba50b3b6c000",
+[2026-04-05T19:32:27.319Z]           "size": 30097201
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:8dfaac7cdbca24c419f48cd51b6def8cbcabac105e1683d47f69cf1d623fca7b",
+[2026-04-05T19:32:27.319Z]           "size": 693514365
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.319Z]           "digest": "sha256:58c2eda17a80da238771fdb3945af7a6461d01c197063d515f47aa2a585c346e",
+[2026-04-05T19:32:27.319Z]           "size": 10026
+[2026-04-05T19:32:27.319Z]         },
+[2026-04-05T19:32:27.319Z]         {
+[2026-04-05T19:32:27.319Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:66e246f1995bfa58ec1068197493fdc9f6e2e9d3d031adf1b38ff6cac5e755ef",
+[2026-04-05T19:32:27.320Z]           "size": 1937
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:372231dc2c28b70997a5d7897330a7d257fca6d665efc4d8587b194cf4ed6313",
+[2026-04-05T19:32:27.320Z]           "size": 7644949
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:8ce714e00b45768345636769b330c101265a3809f5648ca4582595d5175ead5b",
+[2026-04-05T19:32:27.320Z]           "size": 103342
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:ce032a8423f45a20c38b46314ade09b6d5d030c021a13d78d41e5f1236a9b750",
+[2026-04-05T19:32:27.320Z]           "size": 10928253
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:b7f10042b48be3590095c0de3cc2f4c12d2216de7f7981e1bf035b620752a226",
+[2026-04-05T19:32:27.320Z]           "size": 5008460
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:bd9ddc54bea929a22b334e73e026d4136e5b73f5cc29942896c72e4ece69b13d",
+[2026-04-05T19:32:27.320Z]           "size": 34
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:bd9ddc54bea929a22b334e73e026d4136e5b73f5cc29942896c72e4ece69b13d",
+[2026-04-05T19:32:27.320Z]           "size": 34
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:bd9ddc54bea929a22b334e73e026d4136e5b73f5cc29942896c72e4ece69b13d",
+[2026-04-05T19:32:27.320Z]           "size": 34
+[2026-04-05T19:32:27.320Z]         },
+[2026-04-05T19:32:27.320Z]         {
+[2026-04-05T19:32:27.320Z]           "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+[2026-04-05T19:32:27.320Z]           "digest": "sha256:65657ec05e239515e4dc83f192a8e402fae99e7c0f03a084502b0e1eaa9d9f96",
+[2026-04-05T19:32:27.320Z]           "size": 195
+[2026-04-05T19:32:27.320Z]         }
+[2026-04-05T19:32:27.320Z]       ]
+[2026-04-05T19:32:27.320Z]     }
+[2026-04-05T19:32:27.320Z]   ]
+[2026-04-05T19:32:27.320Z] }
+[2026-04-05T19:32:27.320Z] ##[endgroup]
+[2026-04-05T19:32:27.332Z] ##[group]Run echo "=========================================="
+[2026-04-05T19:32:27.332Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "Build Complete!"[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "Image: openclaw:depot-test-test-6-major"[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "Test Case: test-6-major"[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "Description: Major changes - Multiple file types + dependency"[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "Expected Cache: 10%"[0m
+[2026-04-05T19:32:27.332Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:32:27.332Z] [36;1m[0m
+[2026-04-05T19:32:27.332Z] shell: bash -e {0}
+[2026-04-05T19:32:27.332Z] ##[endgroup]
+[2026-04-05T19:32:27.399Z] ==========================================
+[2026-04-05T19:32:27.399Z] Build Complete!
+[2026-04-05T19:32:27.399Z] ==========================================
+[2026-04-05T19:32:27.399Z] Image: openclaw:depot-test-test-6-major
+[2026-04-05T19:32:27.399Z] Test Case: test-6-major
+[2026-04-05T19:32:27.399Z] Description: Major changes - Multiple file types + dependency
+[2026-04-05T19:32:27.399Z] Expected Cache: 10%
+[2026-04-05T19:32:27.399Z] ==========================================
+[2026-04-05T19:32:27.405Z] ##[group]Run docker images openclaw:depot-test-test-6-major
+[2026-04-05T19:32:27.405Z] [36;1mdocker images openclaw:depot-test-test-6-major[0m
+[2026-04-05T19:32:27.405Z] [36;1m[0m
+[2026-04-05T19:32:27.405Z] shell: bash -e {0}
+[2026-04-05T19:32:27.405Z] ##[endgroup]
+[2026-04-05T19:32:27.503Z] WARNING: This output is designed for human readability. For machine-readable output, please use --format.
+[2026-04-05T19:32:27.503Z] IMAGE                              ID             DISK USAGE   CONTENT SIZE   EXTRA
+[2026-04-05T19:32:27.503Z] openclaw:depot-test-test-6-major   8967315e99ee       4.66GB         1.16GB        
+[2026-04-05T19:32:27.509Z] ##[group]Run build_end=$(date +%s)
+[2026-04-05T19:32:27.509Z] [36;1mbuild_end=$(date +%s)[0m
+[2026-04-05T19:32:27.509Z] [36;1mduration=$((build_end - build_start))[0m
+[2026-04-05T19:32:27.509Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:32:27.509Z] [36;1mecho "Build Timing: ${duration}s"[0m
+[2026-04-05T19:32:27.509Z] [36;1mecho "Test Case: test-6-major"[0m
+[2026-04-05T19:32:27.509Z] [36;1mecho "Description: Major changes - Multiple file types + dependency"[0m
+[2026-04-05T19:32:27.509Z] [36;1mecho "Expected Cache: 10%"[0m
+[2026-04-05T19:32:27.509Z] [36;1mecho "=========================================="[0m
+[2026-04-05T19:32:27.509Z] [36;1m[0m
+[2026-04-05T19:32:27.509Z] shell: bash -e {0}
+[2026-04-05T19:32:27.510Z] ##[endgroup]
+[2026-04-05T19:32:27.560Z] ==========================================
+[2026-04-05T19:32:27.560Z] Build Timing: 115s
+[2026-04-05T19:32:27.560Z] Test Case: test-6-major
+[2026-04-05T19:32:27.560Z] Description: Major changes - Multiple file types + dependency
+[2026-04-05T19:32:27.561Z] Expected Cache: 10%
+[2026-04-05T19:32:27.561Z] ==========================================
+[2026-04-05T19:32:27.726Z] ##[group]Removing temp folder /tmp/depot-build-push-b2Uck9
+[2026-04-05T19:32:27.726Z] ##[endgroup]
+[2026-04-05T19:32:27.868Z] git version 2.43.0
+[2026-04-05T19:32:27.871Z] Temporarily overriding HOME='/home/runner/work/tmp/3b647221-989a-45c2-a23b-01abe5622644' before making global git config changes
+[2026-04-05T19:32:27.871Z] Adding repository directory to the temporary git global config as a safe directory
+[2026-04-05T19:32:27.894Z] http.https://github.com/.extraheader
+[2026-04-05T19:32:28.070Z] git version 2.43.0
+[2026-04-05T19:32:28.074Z] Temporarily overriding HOME='/home/runner/work/tmp/a56b9a1f-82f9-48b7-8acd-af655f61c0b3' before making global git config changes
+[2026-04-05T19:32:28.074Z] Adding repository directory to the temporary git global config as a safe directory
+[2026-04-05T19:32:28.097Z] http.https://github.com/.extraheader
