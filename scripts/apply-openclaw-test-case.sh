@@ -101,7 +101,7 @@ EOF
     echo "=========================================="
     echo "expected_cache=25%" >> "$GITHUB_ENV"
     echo "test_description=New dependency - Add perf-test-benchmark" >> "$GITHUB_ENV"
-    npm pkg set devDependencies.perf-test-benchmark="^1.0.0"
+    npm pkg set devDependencies.left-pad="^1.3.0"
     ;;
   test-6-major)
     echo "=========================================="
@@ -113,7 +113,7 @@ EOF
     echo "expected_cache=10%" >> "$GITHUB_ENV"
     echo "test_description=Major changes - Multiple file types + dependency" >> "$GITHUB_ENV"
     # New dependency
-    npm pkg set devDependencies.perf-test-benchmark="^1.0.0"
+    npm pkg set devDependencies.left-pad="^1.3.0"
     # Source file
     cat > src/major-test.ts << 'EOF'
 export function majorTest(): string {

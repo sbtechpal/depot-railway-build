@@ -120,12 +120,12 @@ EOF
             ;;
         test-5-dependency)
             # Add a new dependency that doesn't already exist in OpenClaw
-            npm pkg set devDependencies.perf-test-benchmark="^1.0.0"
+            npm pkg set devDependencies.left-pad="^1.3.0"
             ;;
         test-6-major)
             # Multiple changes
             # Dependency
-            npm pkg set devDependencies.perf-test-benchmark="^1.0.0"
+            npm pkg set devDependencies.left-pad="^1.3.0"
             # Source file
             cat > src/major-test.ts << 'EOF'
 export function majorTest(): string {
