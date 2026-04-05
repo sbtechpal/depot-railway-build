@@ -65,8 +65,9 @@ jobs:
         uses: depot/build-push-action@v1
         with:
           project: ${{ secrets.DEPOT_PROJECT_ID }}
+          context: .
           load: true
-          tags: openclaw:depot-test-${{ inputs.test_case }}
+          tags: openclaw:depot-test-${{ inputs.test_case || 'baseline' }}
           provenance: false
 
       - name: Display build results
