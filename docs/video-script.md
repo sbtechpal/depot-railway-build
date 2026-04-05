@@ -1,6 +1,6 @@
 # Depot CI vs GitHub Actions: Performance Comparison Video Script
 
-**Title**: "Depot CI vs GitHub Actions: Nearly 2x Faster Docker Builds"
+**Title**: "Depot CI vs GitHub Actions: 38% Faster Docker Builds"
 **Duration**: ~6 minutes
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
@@ -84,7 +84,7 @@ Time elapsed: 2:15
 
 **[SOUND]** Subtle "whoosh" logo sound, music becomes more optimistic
 
-**[VISUAL]** Tagline appears: *"Nearly 2x Faster Docker Builds"*
+**[VISUAL]** Tagline appears: *"38% Faster Docker Builds"*
 
 **[VOICEOVER]**
 "This is Depot CI. A programmable CI engine that runs your existing GitHub Actions workflows entirely on Depot's own infrastructure — with faster compute, built-in caching, and no configuration required."
@@ -125,15 +125,15 @@ depot ci migrate
 ┌─────────────────────┬─────────────────────┐
 │   GitHub Actions    │      Depot CI        │
 ├─────────────────────┼─────────────────────┤
-│  Generic runners    │  Docker-optimized   │
-│  Basic caching      │  Advanced caching   │
+│  Generic runners    │  16 CPU, 32 GB RAM  │
+│  GHA cache (flat)   │  NVMe SSD cache     │
 │  Cold starts        │  Pre-warmed pool    │
-│  ~3m 43s average    │  ~1m 59s average    │
+│  ~3m 47s average    │  ~2m 20s average    │
 └─────────────────────┴─────────────────────┘
 ```
 
 **[VOICEOVER]**
-"Depot CI uses Docker-optimized runners with intelligent caching and pre-warmed build pools. The result? Builds that are nearly 2 times faster."
+"Depot CI uses remote builders with 16 CPUs and 32 GB of RAM, with NVMe SSD caching built in and no configuration required. The result? Builds that are 38% faster."
 
 ---
 
@@ -166,23 +166,23 @@ Test Environment:
 │           DEPOT CI vs GITHUB ACTIONS                        │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  Test Case           GitHub    Depot    Depot Speedup       │
+│  Test Case           GitHub    Depot    Improvement         │
 │  ─────────────────────────────────────────────────────────  │
-│  Baseline (without cache)     4m 6s    2m 1s    2.0x faster       │
-│  Comment change       4m 1s    2m 47s   1.4x faster       │
-│  New source file     4m 0s    2m 47s   1.4x faster       │
-│  UI component        3m 57s    1m 26s   2.8x faster       │
-│  New dependency     3m 55s    3m 11s   1.1x faster       │
-│  Major changes       3m 51s    1m 42s   2.2x faster       │
+│  Baseline (cold)     3m 44s    2m 28s   34% faster         │
+│  Comment change      3m 56s    3m 2s    23% faster         │
+│  New source file     3m 21s    1m 53s   44% faster         │
+│  UI component        3m 50s    2m 31s   34% faster         │
+│  New dependency      3m 59s    2m 13s   44% faster         │
+│  Major changes       3m 52s    1m 55s   50% faster         │
 │                                                             │
-│  AVERAGE              3m 53s    2m 18s   1.7x faster       │
+│  AVERAGE             3m 47s    2m 20s   38% faster         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **[SOUND]** Subtle "whoosh" as each row animates in
 
 **[VOICEOVER]**
-"Here are the results from testing OpenClaw AI - a complex personal AI assistant with 500+ dependencies. GitHub Actions averaged 3 minutes 53 seconds per build. Depot CI averaged 2 minutes 18 seconds. That's a 1.7x speedup."
+"Here are the results from testing OpenClaw AI - a complex personal AI assistant with 500+ dependencies. GitHub Actions averaged 3 minutes 47 seconds per build. Depot CI averaged 2 minutes 20 seconds. That's a 38% improvement."
 
 **[PAUSE - 2 seconds]**
 
@@ -200,40 +200,44 @@ Test Environment:
 │  NEW DEPENDENCY TEST (Adding new npm package)               │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  GitHub Actions: 3m 55s    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░         │
-│  Depot CI:        3m 11s   ▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░         │
+│  GitHub Actions: 3m 59s    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░         │
+│  Depot CI:        2m 13s   ▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░         │
 │                                                             │
-│  Depot CI is 1.1x faster for dependency changes             │
+│  Depot CI is 44% faster for dependency changes              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **[VOICEOVER]**
-"Look at the dependency test. When adding a new package to a project with 500+ dependencies, GitHub Actions took just under 4 minutes. Depot CI took just over 3 minutes. Even on similar times, Depot CI maintains the edge."
+"Look at the dependency test. When adding a new package to a project with 500+ dependencies, GitHub Actions took nearly 4 minutes. Depot CI completed it in just 2 minutes 13 seconds -- 44% faster."
 
 **[VISUAL]** Animation showing why:
 
 ```
-GITHUB ACTIONS - Every build starts from scratch:
+GITHUB ACTIONS - Flat times, no cache differentiation:
 ┌─────────────────────────────────────┐
-│ New VM (ephemeral)                  │ ← Fresh runner, no cache
-│ Downloads 500+ packages again       │ ← Re-downloads everything
-│ Install time: 2-3 minutes           │
+│ Baseline (cold):  3m 44s            │
+│ Docs change:      3m 56s            │ ← All ~3m 47s
+│ Source change:    3m 21s            │ ← No meaningful
+│ Dependency change: 3m 59s           │ ← cache difference
+│ Major changes:    3m 52s            │
+│ Spread: only 38s                    │
 └─────────────────────────────────────┘
-↓ Build completes
-VM destroyed → Cache gone forever
+GHA cache provides minimal incremental benefit
 
-DEPOT CI - Distributed cache persists:
+DEPOT CI - Real cache differentiation:
 ┌─────────────────────────────────────┐
-│ Optimized infrastructure            │ ← Pre-warmed, ready
-│ Distributed global cache            │ ← Persists across builds
-│ Only downloads NEW packages         │ ← Smart caching
-│ Install time: 30-60 seconds         │
+│ Baseline (cold):  2m 28s            │ ← Cold start
+│ Docs change:      3m 2s (52% cache) │ ← Real cache hits
+│ Source change:    1m 53s (52% cache)│ ← Real cache hits
+│ Dependency:       2m 13s (31% cache)│ ← Lockfile busts cache
+│ Major changes:    1m 55s (50% cache)│ ← Real cache hits
+│ Spread: 69s (real differentiation)  │
 └─────────────────────────────────────┘
-Cache shared across all builds
+NVMe SSD cache provides real incremental build savings
 ```
 
 **[VOICEOVER]**
-"Here's the key difference. GitHub Actions runners are ephemeral - they start fresh for each job. But here's what matters - without proper caching setup, you're re-downloading 500+ packages from scratch every single time."
+"Here's the key difference. GitHub Actions shows nearly flat build times across all cache scenarios -- only 38 seconds between fastest and slowest. The GHA cache simply isn't providing meaningful incremental benefits. But look at Depot CI -- the NVMe SSD cache produces real differentiation. A dependency change that busts the lockfile cache takes longer at 2m 13s, while a simple source change with good cache hits completes in under 2 minutes."
 
 **[VISUAL]** Simple diagram showing Depot's distributed cache:
 
@@ -252,7 +256,7 @@ Depot's repository-scoped cache persists across all your builds
 ```
 
 **[VOICEOVER]**
-"Depot CI's cache is repository-scoped and persists across all your builds. Each build benefits from the cache entries created by your previous builds. That's the power of persistent caching versus starting from scratch every time."
+"Depot CI's NVMe SSD cache is automatic -- no configuration required. Each build benefits from the cache entries created by your previous builds. And unlike GHA's flat cache behavior, Depot's cache shows real differentiation between change types."
 
 ---
 
@@ -262,14 +266,14 @@ Depot's repository-scoped cache persists across all your builds
 
 ```
 First build of the day (no cache):
-GitHub Actions: 4m 6s
-Depot CI:       2m 1s
+GitHub Actions: 3m 44s
+Depot CI:       2m 28s
 
-You save over 2 minutes on your very first build.
+You save over 1 minute on your very first build.
 ```
 
 **[VOICEOVER]**
-"Even on builds without cache, Depot CI is 2x faster. That's over 2 minutes saved on your first build of the day. Before you've even had your coffee."
+"Even on builds without cache, Depot CI is 34% faster. That's over a minute saved on your first build of the day. Before you've even had your coffee."
 
 ---
 
@@ -282,15 +286,16 @@ You save over 2 minutes on your very first build.
 ```
 GitHub Actions              Depot CI
 ┌─────────────┐            ┌─────────────┐
-│ Generic VM  │            │ Pre-warmed  │
-│ Cold start  │            │ Sandboxes   │
-│ No shared   │            │ + Depot     │
-│ state       │            │ Cache       │
+│ 2 CPU, 8 GB │            │ 16 CPU      │
+│ Generic VM  │            │ 32 GB RAM   │
+│ GHA cache   │            │ NVMe SSD    │
+│ (ineffective│            │ Auto-cache  │
+│ for Docker) │            │ (real hits) │
 └─────────────┘            └─────────────┘
 ```
 
 **[VOICEOVER]**
-"The difference comes down to architecture. GitHub Actions spins up a fresh generic VM for every job — no pre-warming, no shared state. Depot CI uses pre-warmed sandboxes on performance-tuned compute, with Depot Cache built in and no configuration required. The result is jobs that start in 2–3 seconds instead of waiting for a cold VM to boot."
+"The difference comes down to architecture. GitHub Actions gives you a 2-CPU generic VM with GHA cache that our tests show provides minimal incremental benefit. Depot CI uses remote builders with 16 CPUs, 32 GB RAM, and NVMe SSD caching built in and no configuration required."
 
 ---
 
@@ -372,25 +377,25 @@ Depot CI Features (Not in GitHub Actions):
 
 ```
 Your Current Setup:
-100 builds/day × 3.7 min = 370 min/day
-370 min/day × 5 days = 1,850 min/week
+100 builds/day × 3.8 min = 380 min/day
+380 min/day × 5 days = 1,900 min/week
 
 With Depot CI:
-100 builds/day × 2 min = 200 min/day
-200 min/day × 5 days = 1,000 min/week
+100 builds/day × 2.3 min = 230 min/day
+230 min/day × 5 days = 1,150 min/week
 
-TIME SAVED: 850 minutes per week (~14 hours/week)
+TIME SAVED: 750 minutes per week (~12.5 hours/week)
 
-Over a year: 42,500 minutes = ~700 hours = ~18 full work weeks
+Over a year: 37,500 minutes = ~625 hours = ~16 full work weeks
 ```
 
 **[VOICEOVER]**
-"If you do 100 builds a day, GitHub Actions costs you over 6 hours. With Depot CI? That's about 3.5 hours. You save over 2 hours every single day."
+"If you do 100 builds a day, GitHub Actions costs you over 6 hours. With Depot CI? That's about 4 hours. You save over 12 hours every single week."
 
 **[VISUAL]** Calendar showing freed-up time, then zooms out to show full year
 
 **[VOICEOVER]**
-"Over a year, that adds up to 700 hours. Nearly 18 full work weeks of time saved."
+"Over a year, that adds up to 625 hours. Nearly 16 full work weeks of time saved."
 
 ---
 
@@ -400,20 +405,20 @@ Over a year: 42,500 minutes = ~700 hours = ~18 full work weeks
 
 ```
 GitHub Actions (billed per minute, rounded up):
-233 seconds → rounds up to 4 minutes/build
+227 seconds → rounds up to 4 minutes/build
 1,000 builds × 4 minutes = 4,000 minutes/month
 Cost: $0.006/minute → ~$24/month
 
 Depot CI (billed per second, exact):
-138 seconds/build = 138 seconds billed
-1,000 builds × 138 seconds = 138,000 seconds
-Cost: $0.007/minute → ~$16/month
+140 seconds/build = 140 seconds billed
+1,000 builds × 140 seconds = 140,000 seconds
+Cost: $0.00005/sec/vCPU → ~$16/month
 
 SAVINGS: ~33% reduction
 ```
 
 **[VOICEOVER]**
-"GitHub Actions rounds up to the nearest minute, so your 3 minute 53 second build gets billed as 4 minutes. Depot CI charges per second - so you only pay for exactly what you use. That's significant savings on compute costs."
+"GitHub Actions rounds up to the nearest minute, so your 3 minute 47 second build gets billed as 4 minutes. Depot CI charges per second - so you only pay for exactly what you use. That's significant savings on compute costs."
 
 ---
 
@@ -508,38 +513,53 @@ Your workflows are now ready to run on Depot CI.
 
 ### Real Performance Results - OpenClaw AI
 
-Tests conducted: 2026-04-02 to 2026-04-03
+Tests conducted: 2026-04-04 to 2026-04-05
 Organization: sbtechpal
 Repository: depot-railway-build
 Test Application: OpenClaw AI (500+ dependencies, multi-stage Docker build)
+OpenClaw Commit: f0c970fb43
 
-| Test Case | GitHub Actions | Depot CI | Speedup |
-|-----------|----------------|----------|---------|
-| Baseline (without cache) | 4m 6s | 2m 1s | 2.0x |
-| Documentation change | 4m 1s | 2m 47s | 1.4x |
-| New source file | 4m 0s | 2m 47s | 1.4x |
-| UI component | 3m 57s | 1m 26s | 2.8x |
-| New dependency | 3m 55s | 3m 11s | 1.1x |
-| Major changes | 3m 51s | 1m 42s | 2.2x |
-| **Average** | **3m 53s** | **2m 18s** | **1.7x** |
+#### GitHub Actions vs Depot CI
+
+| Test Case | GitHub Actions | Depot CI | Improvement |
+|-----------|----------------|----------|-------------|
+| Baseline (cold) | 3m 44s (224s) | 2m 28s (148s) | 34% faster |
+| Documentation change | 3m 56s (236s) | 3m 2s (182s) | 23% faster |
+| New source file | 3m 21s (201s) | 1m 53s (113s) | 44% faster |
+| UI component | 3m 50s (230s) | 2m 31s (151s) | 34% faster |
+| New dependency | 3m 59s (239s) | 2m 13s (133s) | 44% faster |
+| Major changes | 3m 52s (232s) | 1m 55s (115s) | 50% faster |
+| **Average** | **3m 47s (227s)** | **2m 20s (140s)** | **38% faster** |
+
+#### Full Three-Way Comparison (Including Local)
+
+| Test Case | Local Docker | GitHub Actions | Depot CI |
+|-----------|-------------|----------------|----------|
+| Baseline (cold) | 15m 30s | 3m 44s | 2m 28s |
+| Documentation change | 12m 0s | 3m 56s | 3m 2s |
+| New source file | 11m 56s | 3m 21s | 1m 53s |
+| UI component | 9m 59s | 3m 50s | 2m 31s |
+| New dependency | ~10m 57s | 3m 59s | 2m 13s |
+| Major changes | ~8m 46s | 3m 52s | 1m 55s |
+| **Average** | **~11m 28s** | **~3m 47s** | **~2m 20s** |
 
 ### Test Environment
 
-| Component | GitHub Actions | Depot CI |
-|-----------|----------------|----------|
-| Runner | ubuntu-latest (2-core) | depot-ubuntu-24.04 |
-| Cache | GitHub Actions Cache | Depot distributed cache |
-| Docker | docker/build-push-action | depot/build-push-action |
-| Image | GHCR | GHCR |
-
-> **Note:** Tests used GitHub Packages registry for both platforms. Depot CI has a known limitation with GHCR when using secrets.GITHUB_TOKEN - consider Depot Registry if pushing to GitHub Packages.
+| Component | Local Docker | GitHub Actions | Depot CI |
+|-----------|-------------|----------------|----------|
+| Runner | WSL2 (shared cores) | ubuntu-24.04 (2 CPU, 8 GB) | depot-ubuntu-24.04-4 (4 CPU, 16 GB) |
+| Builder | Local Buildx | Docker Buildx + GHA cache | depot/build-push-action@v1 (remote: 16 CPU, 32 GB, NVMe) |
+| Cache | Docker BuildKit local | --cache-from/to type=gha | Automatic NVMe SSD |
+| Auth | N/A | GITHUB_TOKEN | OIDC (id-token: write) |
 
 ### Key Findings
 
 1. **Depot CI wins every test case** - 6/6 victories
-2. **Biggest win: UI component changes** - 2.8x faster
-3. **Consistent performance** - 1m 26s-3m 11s across all tests
-4. **GitHub Actions variability** - 3m 55s-4m 6s depending on test
+2. **38% faster on average** vs GitHub Actions (2m 20s vs 3m 47s)
+3. **Biggest win: major changes** - 50% faster (1m 55s vs 3m 52s)
+4. **Real cache differentiation** - Depot shows 31-52% cache hits; GHA shows flat times (201-239s)
+5. **GHA cache is ineffective** for this workload - nearly flat build times across all cache scenarios
+6. **Local builds are 5x slower** than Depot CI (11m 28s vs 2m 20s)
 
 ---
 
@@ -552,7 +572,7 @@ Test Application: OpenClaw AI (500+ dependencies, multi-stage Docker build)
 | **Resolution** | Record at 1080p or higher |
 | **Timing** | Let the results table breathe - let viewers absorb the numbers |
 | **Comparison** | Use actual screen recordings of real builds when possible |
-| **Emphasis** | Highlight the 1.7x number - that's the key takeaway |
+| **Emphasis** | Highlight the 38% number - that's the key takeaway |
 
 ### Voiceover Guidelines
 
@@ -560,7 +580,7 @@ Test Application: OpenClaw AI (500+ dependencies, multi-stage Docker build)
 |---------|----------|
 | **Tone** | Professional but approachable |
 | **Pace** | 140-150 words per minute |
-| **Emphasis** | Emphasize: "1.7x faster", "every test", "2m 18s" |
+| **Emphasis** | Emphasize: "38% faster", "every test", "2m 20s" |
 | **Pauses** | Pause after key statistics |
 
 ### Production Notes

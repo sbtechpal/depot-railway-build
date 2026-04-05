@@ -3,7 +3,7 @@
 ## Slide 1: Title Slide
 
 **Depot CI**
-### Nearly 2x Faster Builds for the AI-Augmented Development Era
+### 38% Faster Builds for the AI-Augmented Development Era
 
 ---
 ---
@@ -19,7 +19,7 @@
 **Depot CI** — A programmable CI engine built with performance as a first-class citizen
 
 ### The Impact
-- **Nearly 2x faster builds** (based on real testing with OpenClaw AI)
+- **38% faster builds** (based on real testing with OpenClaw AI)
 - **~33% cost reduction** (2026 GitHub Actions pricing)
 - **Teams can iterate at AI speed**
 
@@ -51,9 +51,9 @@ A programmable CI engine designed for the AI-augmented development era
 
 | Feature | Benefit |
 |---------|---------|
-| **Repository-Scoped Cache** | Cache persists across all builds (14-day retention) |
-| **Pre-Warmed Sandboxes** | Jobs start in 2-3 seconds vs cold VM boots |
-| **GitHub Actions Compatible** | No workflow rewrite required |
+| **NVMe SSD Cache** | Automatic caching, no config required |
+| **16 CPU / 32 GB Remote Builders** | Build steps parallelized on powerful hardware |
+| **GitHub Actions Compatible** | CLI migration (`depot ci migrate`) with minor adjustments + AI agent loop support |
 | **API-First** | Works for engineers and autonomous agents |
 
 ---
@@ -94,7 +94,7 @@ A programmable CI engine designed for the AI-augmented development era
 │    (Baseline)        │      (Showcase)      │
 ├─────────────────────┼─────────────────────┤
 │                     │                     │
-│   Time: 3m 53s      │   Time: 2m 18s      │
+│   Time: 3m 47s      │   Time: 2m 20s      │
 │                     │                     │
 │   ✓ SUCCESS         │   ✓ SUCCESS         │
 │                     │                     │
@@ -103,7 +103,7 @@ A programmable CI engine designed for the AI-augmented development era
 
 ### The Result
 
-**1.7x faster. Same outcome.**
+**38% faster. Same outcome.**
 
 ---
 ---
@@ -112,15 +112,15 @@ A programmable CI engine designed for the AI-augmented development era
 
 ### Where Does the Time Go?
 
-| Test Case | GitHub Actions | Depot CI | Speedup |
-|-----------|----------------|----------|---------|
-| Baseline (no cache) | 4m 6s | 2m 1s | **2.0x** |
-| Documentation change | 4m 1s | 2m 47s | **1.4x** |
-| New source file | 4m 0s | 2m 47s | **1.4x** |
-| UI component | 3m 57s | 1m 26s | **2.8x** |
-| New dependency | 3m 55s | 3m 11s | **1.1x** |
-| Major changes | 3m 51s | 1m 42s | **2.2x** |
-| **AVERAGE** | **3m 53s** | **2m 18s** | **1.7x** |
+| Test Case | GitHub Actions | Depot CI | Improvement |
+|-----------|----------------|----------|-------------|
+| Baseline (cold build) | 3m 44s | 2m 28s | **34% faster** |
+| Documentation change | 3m 56s | 3m 2s | **23% faster** |
+| New source file | 3m 21s | 1m 53s | **44% faster** |
+| UI component | 3m 50s | 2m 31s | **34% faster** |
+| New dependency | 3m 59s | 2m 13s | **44% faster** |
+| Major changes | 3m 52s | 1m 55s | **50% faster** |
+| **AVERAGE** | **3m 47s** | **2m 20s** | **38% faster** |
 
 **Tested with OpenClaw AI — 500+ dependencies, production application**
 
@@ -132,15 +132,15 @@ A programmable CI engine designed for the AI-augmented development era
 ### Time Savings
 
 ```
-100 builds/day × 1.6 min saved = 160 min/day
-160 min/day × 5 days = 800 min/week
-800 min/week × 50 weeks = 40,000 min/year
+100 builds/day × 1.5 min saved = 150 min/day
+150 min/day × 5 days = 750 min/week
+750 min/week × 50 weeks = 37,500 min/year
 ```
 
 ### That's...
 
-- **667 hours per year**
-- **~14 weeks of work**
+- **625 hours per year**
+- **~16 weeks of work**
 - **3+ extra months per engineer**
 
 ### Per 10-Engineer Team
@@ -157,8 +157,8 @@ A programmable CI engine designed for the AI-augmented development era
 
 | Platform | Cost | Notes |
 |----------|------|-------|
-| GitHub Actions | ~$24/month | 4 min/build × $0.006/min (2026 pricing) |
-| Depot CI | ~$16/month | 2m 18s/build × per-second billing |
+| GitHub Actions | ~$24/month | 4 min/build x $0.006/min (2026 pricing) |
+| Depot CI | ~$16/month | 2m 20s/build x per-second billing |
 | **Savings** | **~33%** | $8/month saved |
 
 ### Annual Savings (50 developers)
