@@ -100,9 +100,9 @@ EOF
  * Performance test component
  * Added for Depot CI testing
  */
-import { css } from 'lit';
+import { css, html, LitElement } from 'lit';
 
-export class PerfTestComponent extends HTMLElement {
+export class PerfTestComponent extends LitElement {
   static styles = css`
     :host {
       display: block;
@@ -110,9 +110,8 @@ export class PerfTestComponent extends HTMLElement {
     }
   `;
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.innerHTML = '<p>Performance Test Component</p>';
+  render() {
+    return html`<p>Performance Test Component</p>`;
   }
 }
 
@@ -120,24 +119,13 @@ customElements.define('perf-test', PerfTestComponent);
 EOF
             ;;
         test-5-dependency)
-            # Add @types/node to devDependencies
-            if command -v jq &> /dev/null; then
-                jq ".devDependencies.\"@types/node\" = \"^20.0.0\"" package.json > package.json.tmp
-                mv package.json.tmp package.json
-            else
-                # Fallback without jq
-                echo "Warning: jq not found, skipping dependency test modification"
-                echo "Adding comment instead"
-                echo "// Adding @types/node dependency" >> src/dep-test.ts
-            fi
+            # Add a new dependency that doesn't already exist in OpenClaw
+            npm pkg set devDependencies.perf-test-benchmark="^1.0.0"
             ;;
         test-6-major)
             # Multiple changes
             # Dependency
-            if command -v jq &> /dev/null; then
-                jq ".devDependencies.\"@types/node\" = \"^20.0.0\"" package.json > package.json.tmp
-                mv package.json.tmp package.json
-            fi
+            npm pkg set devDependencies.perf-test-benchmark="^1.0.0"
             # Source file
             cat > src/major-test.ts << 'EOF'
 export function majorTest(): string {

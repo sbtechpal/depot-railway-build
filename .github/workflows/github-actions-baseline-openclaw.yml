@@ -53,6 +53,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Record build start time
+        run: echo "build_start=$(date +%s)" >> "$GITHUB_ENV"
+
       - name: Build with GitHub Actions (Docker Buildx)
         run: |
           echo "Starting GitHub Actions Docker build..."
@@ -79,3 +82,15 @@ jobs:
       - name: Show image size
         run: |
           docker images openclaw:gha-test-${{ github.event.inputs.test_case }}
+
+      - name: Record build timing
+        if: always()
+        run: |
+          build_end=$(date +%s)
+          duration=$((build_end - build_start))
+          echo "=========================================="
+          echo "Build Timing: ${duration}s"
+          echo "Test Case: ${{ github.event.inputs.test_case }}"
+          echo "Description: ${{ env.test_description }}"
+          echo "Expected Cache: ${{ env.expected_cache }}"
+          echo "=========================================="
