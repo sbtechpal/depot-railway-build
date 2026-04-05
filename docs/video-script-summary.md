@@ -33,7 +33,7 @@
 
    +-----------------------------------------+
    | Depot CI Introduction                   |
-   | "Nearly 2x Faster Docker Builds"        |
+   | "38% Faster Docker Builds"              |
    | * Runs GitHub Actions workflows         |
    | * On Depot's optimized infrastructure   |
    | * No configuration required             |
@@ -73,24 +73,24 @@
    +---------------------------------------------------------------------+
    |                         TEST RESULTS                                  |
    +---------------------------------------------------------------------+
-   | Test Case              GitHub    Depot    Speedup                   |
+   | Test Case              GitHub    Depot    Improvement                |
    | -------------------------------------------------------------------  |
-   | Baseline (no cache)     4m 6s    2m 1s    2.0x ✓                   |
-   | Comment change         4m 1s    2m 47s   1.4x ✓                   |
-   | New source file        4m 0s    2m 47s   1.4x ✓                   |
-   | UI component           3m 57s   1m 26s   2.8x ✓                   |
-   | New dependency         3m 55s   3m 11s   1.1x ✓                   |
-   | Major changes          3m 51s   1m 42s   2.2x ✓                   |
+   | Baseline (cold)        3m 44s    2m 28s   34% faster ✓              |
+   | Documentation change   3m 56s    3m 2s    23% faster ✓              |
+   | New source file        3m 21s    1m 53s   44% faster ✓              |
+   | UI component           3m 50s    2m 31s   34% faster ✓              |
+   | New dependency         3m 59s    2m 13s   44% faster ✓              |
+   | Major changes          3m 52s    1m 55s   50% faster ✓              |
    | -------------------------------------------------------------------  |
-   | AVERAGE                 3m 53s   2m 18s   1.7x faster              |
+   | AVERAGE                 3m 47s   2m 20s   38% faster                |
    +---------------------------------------------------------------------+
                 |
                 v
    +-----------------------------------------+
    | Key Insights                            |
    | * Depot CI wins ALL 6 test cases       |
-   | * Biggest win: UI component (2.8x)     |
-   | * Even without cache: 2x faster        |
+   | * Biggest win: major changes (50%)     |
+   | * Even without cache: 34% faster       |
    +-----------------------------------------+
 
 +-----------------------------------------------------------------------------+
@@ -100,10 +100,10 @@
    +-----------------------------------------+     +-----------------------------------------+
    | GitHub Actions                          |     | Depot CI                                 |
    +-----------------------------------------+     +-----------------------------------------+
-   | * Generic VM runners                    |     | * Docker-optimized runners               |
-   | * Cold starts                           |     | * Pre-warmed sandboxes                   |
-   | * No shared state                       |     | * Persistent cache                       |
-   | * 7-day cache retention                 |     | * 14-30 day retention                    |
+   | * 2 CPU, 8 GB generic VM                |     | * 16 CPU, 32 GB remote builders          |
+   | * GHA cache (ineffective)               |     | * NVMe SSD cache (automatic)             |
+   | * Flat build times across scenarios     |     | * Real cache differentiation             |
+   | * 7-day cache retention                 |     | * 14-day default retention               |
    | * Per-minute billing                    |     | * Per-second billing                     |
    +-----------------------------------------+     +-----------------------------------------+
 
@@ -111,13 +111,13 @@
 
    GitHub Actions:              Depot CI:
    +--------------+             +--------------+
-   | Fresh VM     |             | Pre-warmed   |
-   | No cache     |             | + Persistent |
-   | Download all |             |   cache      |
-   | 500+ pkgs    |             | Download     |
-   | 2-3 min      |             | NEW pkgs only|
-   +--------------+             | 30-60 sec    |
-                                +--------------+
+   | Flat times   |             | Real cache   |
+   | across all   |             | hits (31-52%)|
+   | scenarios    |             | NVMe SSD     |
+   | 201-239s     |             | 113-182s     |
+   | No real      |             | Meaningful   |
+   | diff (38s)   |             | diff (69s)   |
+   +--------------+             +--------------+
 
    Extra Features (Depot CI only):
    +-----------------------------------------+
@@ -135,12 +135,12 @@
    +-----------------------------------------+
    | Time Savings (100 builds/day)           |
    |                                         |
-   | GitHub Actions:  370 min/day            |
-   | Depot CI:        200 min/day            |
+   | GitHub Actions:  380 min/day            |
+   | Depot CI:        230 min/day            |
    | --------------------------              |
-   | SAVED: 170 min/day = ~14 hrs/week       |
-   |         = ~700 hrs/year                 |
-   |         = ~18 full work weeks!          |
+   | SAVED: 150 min/day = ~12.5 hrs/week    |
+   |         = ~625 hrs/year                 |
+   |         = ~16 full work weeks!          |
    +-----------------------------------------+
                 |
                 v
@@ -185,9 +185,9 @@
    +-----------------------------------------+
 
 ═══════════════════════════════════════════════════════════════════════════════════════
-  KEY TAKEAWAY: Depot CI is 1.7x faster than GitHub Actions for Docker builds
+  KEY TAKEAWAY: Depot CI is 38% faster than GitHub Actions for Docker builds
   - Wins every test case (6/6)
-  - Saves ~14 hours/week for teams doing 100 builds/day
+  - Saves ~12.5 hours/week for teams doing 100 builds/day
   - 33% cost reduction with per-second billing
 ═══════════════════════════════════════════════════════════════════════════════════════
 ```
@@ -196,13 +196,12 @@
 
 | Metric                | GitHub Actions | Depot CI    | Improvement     |
 | --------------------- | -------------- | ----------- | --------------- |
-|--------|----------------|----------|-------------|
-| **Average Build Time**   | 3m 53s         | 2m 18s      | 1.7x faster      |
-| **Fastest Test**         | 3m 51s         | 1m 26s      | 2.8x faster      |
-| **Slowest Test**         | 4m 6s          | 3m 11s      | 1.1x faster      |
-| **Cache Retention**      | 7 days         | 14-30 days  | 2-4x longer      |
-| **Billing**              | Per-minute     | Per-second  | More accurate    |
-| **Cost (1000 builds/mo)**| ~$24           | ~$16        | 33% savings      |
+| **Average Build Time**   | 3m 47s         | 2m 20s      | 38% faster      |
+| **Fastest Test**         | 3m 21s         | 1m 53s      | 44% faster      |
+| **Slowest Test**         | 3m 59s         | 3m 2s       | 23% faster      |
+| **Cache Retention**      | 7 days         | 14 days      | 2x longer       |
+| **Billing**              | Per-minute     | Per-second  | More accurate   |
+| **Cost (1000 builds/mo)**| ~$24           | ~$16        | 33% savings     |
 
 ## Migration Commands
 
