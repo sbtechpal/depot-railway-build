@@ -58,20 +58,21 @@
    +-----------------------------------------+
                 |
                 v
-   +-----------------------------------------+
-   | What Makes It Different                 |
-   | * 16 CPU, 32 GB RAM remote builders     |
-   | * NVMe SSD cache (automatic)            |
-   | * Pre-warmed pool                       |
-   | * 38% faster builds                     |
-   +-----------------------------------------+
+   +-----------------------------------------------+
+   | What Makes It Different                       |
+   | * Runner: 4 CPU, 16 GB (checks out code)     |
+   | * Remote builder: 16 CPU, 32 GB (heavy lift) |
+   | * NVMe SSD cache (automatic)                  |
+   | * Pre-warmed pool                             |
+   | * 38% faster builds                           |
+   +-----------------------------------------------+
 
 +-----------------------------------------------------------------------------+
-|  SECTION 3: DEPOT CI DEMO (1:30 - 2:30)                                      |
+|  SECTION 3: DEPOT CI DEMO (1:30 - 6:50)                                      |
 +-----------------------------------------------------------------------------+
 
    +-----------------------------------------+
-   | Live Demo: Get Started                  |
+   | 1:30 - 1:50 | Get Started               |
    | * Install CLI (brew / curl)             |
    | * Login + Connect GitHub                |
    | * depot ci migrate                      |
@@ -79,22 +80,32 @@
                 |
                 v
    +-----------------------------------------+
-   | Live Demo: The Migration Process        |
-   | * Analyzing workflows...                |
-   | * Converting .github/ → .depot/         |
-   | * Applying compatibility fixes          |
-   | * Migration complete!                   |
+   | 1:50 - 3:00 | Migration Process          |
+   | * Running depot ci migrate live         |
+   | * Showing output step-by-step           |
+   | * Explaining each fix applied           |
    +-----------------------------------------+
                 |
                 v
    +-----------------------------------------+
-   | Start Today                             |
-   | depot.dev                               |
-   | Free trial + Plans from $20/month       |
+   | 3:00 - 4:30 | Review Generated Files     |
+   | * Side-by-side: .github/ vs .depot/     |
+   | * Runner label updates                  |
+   | * Cache flags removed                   |
+   | * Build action replaced                 |
+   +-----------------------------------------+
+                |
+                v
+   +-----------------------------------------+
+   | 4:30 - 6:50 | Run a Build End-to-End     |
+   | * Trigger build on Depot CI             |
+   | * Watch remote builder connect          |
+   | * See NVMe cache hits in real-time      |
+   | * Build completes in ~2m 20s            |
    +-----------------------------------------+
 
 +-----------------------------------------------------------------------------+
-|  SECTION 4: REAL PERFORMANCE DATA (2:30 - 4:00)                              |
+|  SECTION 4: REAL PERFORMANCE DATA (6:50 - 8:20)                              |
 +-----------------------------------------------------------------------------+
 
    +-----------------------------------------+
@@ -130,30 +141,19 @@
    +-----------------------------------------+
 
 +-----------------------------------------------------------------------------+
-|  SECTION 5: WHY DEPOT WINS (4:00 - 5:00)                                      |
+|  SECTION 5: WHY DEPOT WINS (8:20 - 9:20)                                     |
 +-----------------------------------------------------------------------------+
 
-   +-----------------------------------------+     +-----------------------------------------+
-   | GitHub Actions                          |     | Depot CI                                 |
-   +-----------------------------------------+     +-----------------------------------------+
-   | * 2 CPU, 8 GB generic VM                |     | * 16 CPU, 32 GB remote builders          |
-   | * GHA cache (ineffective)               |     | * NVMe SSD cache (automatic)             |
-   | * Flat build times across scenarios     |     | * Real cache differentiation             |
-   | * 7-day cache retention                 |     | * 14-day default retention               |
-   | * Per-minute billing                    |     | * Per-second billing                     |
-   +-----------------------------------------+     +-----------------------------------------+
-
-   Cache Comparison:
-
-   GitHub Actions:              Depot CI:
-   +--------------+             +--------------+
-   | Flat times   |             | Real cache   |
-   | across all   |             | hits (31-52%)|
-   | scenarios    |             | NVMe SSD     |
-   | 201-239s     |             | 113-182s     |
-   | No real      |             | Meaningful   |
-   | diff (38s)   |             | diff (69s)   |
-   +--------------+             +--------------+
+   +-----------------------------------------+     +-----------------------------------------------+
+   | GitHub Actions                          |     | Depot CI                                      |
+   +-----------------------------------------+     +-----------------------------------------------+
+   | * Runner only: 2 CPU, 8 GB              |     | * Runner: 4 CPU, 16 GB (code checkout)       |
+   | * No separate builder                   |     | * Remote builder: 16 CPU, 32 GB (builds)     |
+   | * GHA cache (ineffective)               |     | * NVMe SSD cache (automatic)                  |
+   | * Flat build times across scenarios     |     | * Real cache differentiation                  |
+   | * 7-day cache retention                 |     | * 14-day default retention                    |
+   | * Per-minute billing                    |     | * Per-second billing                           |
+   +-----------------------------------------+     +-----------------------------------------------+
 
    Extra Features (Depot CI only):
    +-----------------------------------------+
@@ -165,16 +165,16 @@
    +-----------------------------------------+
 
 +-----------------------------------------------------------------------------+
-|  SECTION 6: THE IMPACT (5:00 - 6:00)                                          |
+|  SECTION 6: THE IMPACT (9:20 - 10:30)                                         |
 +-----------------------------------------------------------------------------+
 
    +-----------------------------------------+
    | Time Savings (100 builds/day)           |
    |                                         |
-   | GitHub Actions:  380 min/day            |
-   | Depot CI:        230 min/day            |
+   | GitHub Actions:  ~6.5 hrs/day           |
+   | Depot CI:        ~4 hrs/day             |
    | --------------------------              |
-   | SAVED: 150 min/day = ~12.5 hrs/week    |
+   | SAVED: ~12.5 hrs/week                   |
    |         = ~625 hrs/year                 |
    |         = ~16 full work weeks!          |
    +-----------------------------------------+
@@ -187,12 +187,16 @@
    | Depot CI:        ~$16/month             |
    | --------------------------              |
    | SAVED: ~33% reduction                   |
+   | (Pricing as of April 2026)              |
    +-----------------------------------------+
                 |
                 v
    +-----------------------------------------+
-   | Developer Experience + Closing          |
+   | Developer Experience + CTA              |
    | "Ship faster. Iterate more. Wait less." |
+   |                                         |
+   | depot.dev                               |
+   | Free trial + Plans from $20/month       |
    +-----------------------------------------+
                 |
                 v
@@ -207,6 +211,7 @@
 ═══════════════════════════════════════════════════════════════════════════════════════
   KEY TAKEAWAY: Depot CI is 38% faster than GitHub Actions for Docker builds
   - Wins every test case (6/6)
+  - Runner + remote builder architecture (4 CPU runner → 16 CPU builder)
   - Saves ~12.5 hours/week for teams doing 100 builds/day
   - 33% cost reduction with per-second billing
 ═══════════════════════════════════════════════════════════════════════════════════════
@@ -228,11 +233,11 @@
 | Section | Time | Topic |
 |---------|------|-------|
 | 1. The Problem | 0:00 - 0:45 | CI is slowing you down |
-| 2. The Solution | 0:45 - 1:30 | Depot CI introduction |
-| **3. Depot CI Demo** | **1:30 - 2:30** | **Live demo + migration showcase** |
-| 4. Real Performance Data | 2:30 - 4:00 | Head-to-head test results |
-| 5. Why Depot Wins | 4:00 - 5:00 | Architecture + cache comparison |
-| 6. The Impact | 5:00 - 6:00 | Time/cost savings + closing |
+| 2. The Solution | 0:45 - 1:30 | Depot CI introduction + what makes it different |
+| **3. Depot CI Demo** | **1:30 - 6:50** | **Live demo: migrate, review files, run build** |
+| 4. Real Performance Data | 6:50 - 8:20 | Head-to-head test results |
+| 5. Why Depot Wins | 8:20 - 9:20 | Runner + builder architecture + cache comparison |
+| 6. The Impact | 9:20 - 10:30 | Time/cost savings + CTA + closing |
 
 ## Migration Commands
 

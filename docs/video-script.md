@@ -1,7 +1,7 @@
 # Depot CI vs GitHub Actions: Performance Comparison Video Script
 
 **Title**: "Depot CI vs GitHub Actions: 38% Faster Docker Builds"
-**Duration**: ~6 minutes
+**Duration**: ~10:30 minutes
 **Format**: 16:9 (1920x1080)
 **Style**: Screen recording + voiceover with motion graphics overlays
 
@@ -122,22 +122,23 @@ depot ci migrate
 **[VISUAL]** Simple comparison diagram:
 
 ```
-┌─────────────────────┬─────────────────────┐
-│   GitHub Actions    │      Depot CI        │
-├─────────────────────┼─────────────────────┤
-│  Generic runners    │  16 CPU, 32 GB RAM  │
-│  GHA cache (flat)   │  NVMe SSD cache     │
-│  Cold starts        │  Pre-warmed pool    │
-│  ~3m 47s average    │  ~2m 20s average    │
-└─────────────────────┴─────────────────────┘
+┌─────────────────────┬──────────────────────────────────┐
+│   GitHub Actions    │           Depot CI                │
+├─────────────────────┼──────────────────────────────────┤
+│  Runner: 2 CPU, 8GB │  Runner: 4 CPU, 16 GB           │
+│  No separate builder│  Remote builder: 16 CPU, 32 GB   │
+│  GHA cache (flat)   │  NVMe SSD cache                  │
+│  Cold starts        │  Pre-warmed pool                 │
+│  3m 47s average     │  2m 20s average                  │
+└─────────────────────┴──────────────────────────────────┘
 ```
 
 **[VOICEOVER]**
-"Depot CI uses remote builders with 16 CPUs and 32 GB of RAM, with NVMe SSD caching built in and no configuration required. The result? Builds that are 38% faster."
+"Depot CI uses a two-tier architecture: a runner that checks out your code, paired with a remote builder with 16 CPUs and 32 GB of RAM that handles the heavy lifting. NVMe SSD caching is built in with no configuration required. The result? Builds that are 38% faster."
 
 ---
 
-## Section 3: Depot CI Demo (1:30 - 2:30)
+## Section 3: Depot CI Demo (1:30 - 6:50)
 
 ### 1:30 - 1:50 | Live Demo: Get Started
 
@@ -161,7 +162,7 @@ curl -L https://depot.dev/install-cli.sh | sh
 
 ---
 
-### 1:50 - 2:15 | Live Demo: The Migration Process
+### 1:50 - 3:00 | Live Demo: Running depot ci migrate
 
 **[SCREEN]** Terminal showing the complete migration:
 
@@ -191,18 +192,58 @@ Your workflows are now ready to run on Depot CI.
 
 ---
 
-### 2:15 - 2:30 | Start Today
+### 3:00 - 4:30 | Live Demo: Reviewing the Generated Files
 
-**[VISUAL]** Large URL: **depot.dev**
+**[SCREEN]** Walking through `.depot/workflows/` files side-by-side with original `.github/workflows/`:
+
+```bash
+# Compare original vs migrated workflow
+$ diff .github/workflows/build.yml .depot/workflows/build.yml
+
+< runs-on: ubuntu-24.04
+> runs-on: depot-ubuntu-24.04-4
+
+  # Compatibility fixes applied:
+  # ✓ Runner label updated
+  # ✓ Cache flags removed (Depot caches automatically)
+  # ✓ Build action replaced with depot/build-push-action@v1
+```
 
 **[VOICEOVER]**
-"Visit depot.dev to get started. Free trial available. Then plans start at just $20 per month."
+"Let's look at what changed. The migrate command primarily updates the runner label — switching from GitHub's ubuntu runner to Depot's. It also removes GHA cache flags since Depot caches automatically on NVMe SSD, and swaps in Depot's remote build action. Your workflow logic, steps, and environment stay exactly the same."
 
 ---
 
-## Section 4: Real Performance Data (2:30 - 4:00)
+### 4:30 - 6:50 | Live Demo: Running a Build End-to-End
 
-### 2:30 - 2:45 | The Test Setup
+**[SCREEN]** Terminal showing a real build on Depot CI:
+
+```bash
+$ depot ci run --workflow .depot/workflows/build.yml
+
+✔ Starting run...
+✔ Runner provisioned (depot-ubuntu-24.04-4)
+✔ Remote builder connected (16 CPU, 32 GB, NVMe)
+  → Building Docker image...
+  → Layer 1/6: Base image     ← cached (remote builder)
+  → Layer 2/6: Dependencies   ← cached (NVMe SSD)
+  → Layer 3/6: Source copy    ← rebuilding...
+  → Layer 4/6: Compile        ← rebuilding...
+  → Layer 5/6: Prune          ← cached
+  → Layer 6/6: Runtime        ← cached
+✔ Build complete: 2m 20s
+```
+
+(2 minutes of live demo footage — show the actual build running in real-time, point out cache hits on NVMe SSD, show the completed build)
+
+**[VOICEOVER]**
+"Now let's run it. Notice how the remote builder connects — that's where the 16 CPU, 32 GB machine lives. The runner checks out code, but the heavy lifting — the actual Docker build — happens on the remote builder with NVMe SSD cache. Layers that haven't changed are served from cache instantly. Only the changed layers need rebuilding."
+
+---
+
+## Section 4: Real Performance Data (6:50 - 8:20)
+
+### 6:50 - 7:05 | The Test Setup
 
 **[VISUAL]** Test setup appears:
 
@@ -220,7 +261,7 @@ Test Environment:
 
 ---
 
-### 2:45 - 3:15 | The Results
+### 7:05 - 7:35 | The Results
 
 **[VISUAL]** Large results table appears:
 
@@ -254,7 +295,7 @@ Test Environment:
 
 ---
 
-### 3:15 - 3:45 | The Dependency Difference
+### 7:35 - 8:05 | The Dependency Difference
 
 **[VISUAL]** Focus on the "New Dependency" row:
 
@@ -323,7 +364,7 @@ Depot's repository-scoped cache persists across all your builds
 
 ---
 
-### 3:45 - 4:00 | The Build Without Cache Reality
+### 8:05 - 8:20 | The Build Without Cache Reality
 
 **[VISUAL]** Baseline comparison:
 
@@ -340,29 +381,30 @@ You save over 1 minute on your very first build.
 
 ---
 
-## Section 5: Why Depot Wins (4:00 - 5:00)
+## Section 5: Why Depot Wins (8:20 - 9:20)
 
-### 4:00 - 4:20 | Architecture Matters
+### 8:20 - 8:40 | Architecture Matters
 
 **[VISUAL]** Simple architecture comparison:
 
 ```
 GitHub Actions              Depot CI
-┌─────────────┐            ┌─────────────┐
-│ 2 CPU, 8 GB │            │ 16 CPU      │
-│ Generic VM  │            │ 32 GB RAM   │
-│ GHA cache   │            │ NVMe SSD    │
-│ (ineffective│            │ Auto-cache  │
-│ for Docker) │            │ (real hits) │
-└─────────────┘            └─────────────┘
+┌─────────────┐            ┌──────────────────────────────┐
+│ Runner only │            │ Runner (4 CPU, 16 GB)        │
+│ 2 CPU, 8 GB │            │   ↕ delegates to             │
+│ Generic VM  │            │ Remote Builder (16 CPU, 32GB)│
+│ GHA cache   │            │   + NVMe SSD cache           │
+│ (ineffective│            │   + Auto-cache (real hits)   │
+│ for Docker) │            │                              │
+└─────────────┘            └──────────────────────────────┘
 ```
 
 **[VOICEOVER]**
-"The difference comes down to architecture. GitHub Actions gives you a 2-CPU generic VM with GHA cache that our tests show provides minimal incremental benefit. Depot CI uses remote builders with 16 CPUs, 32 GB RAM, and NVMe SSD caching built in and no configuration required."
+"The difference comes down to architecture. GitHub Actions gives you a single 2-CPU runner VM with GHA cache that our tests show provides minimal incremental benefit. Depot CI separates concerns: a runner checks out your code, then delegates the heavy lifting to a remote builder with 16 CPUs, 32 GB RAM, and NVMe SSD caching built in."
 
 ---
 
-### 4:20 - 4:35 | The Cache Advantage
+### 8:40 - 8:55 | The Cache Advantage
 
 **[VISUAL]** Cache comparison animation:
 
@@ -387,7 +429,7 @@ Depot CI Cache:
 
 ---
 
-### 4:35 - 4:50 | How Depot Achieves This
+### 8:55 - 9:10 | How Depot Achieves This
 
 **[VISUAL]** Diagram showing Depot's approach:
 
@@ -413,7 +455,7 @@ Your builds benefit from:
 
 ---
 
-### 4:50 - 5:00 | Additional Features
+### 9:10 - 9:20 | Additional Features
 
 **[VISUAL]** Feature list appears:
 
@@ -432,9 +474,9 @@ Depot CI Features (Not in GitHub Actions):
 
 ---
 
-## Section 6: The Impact (5:00 - 6:00)
+## Section 6: The Impact (9:20 - 10:30)
 
-### 5:00 - 5:20 | Time Savings
+### 9:20 - 9:40 | Time Savings
 
 **[VISUAL]** Calculator animation:
 
@@ -453,7 +495,7 @@ Over a year: 37,500 minutes = ~625 hours = ~16 full work weeks
 ```
 
 **[VOICEOVER]**
-"If you do 100 builds a day, GitHub Actions costs you over 6 hours. With Depot CI? That's about 4 hours. You save over 12 hours every single week."
+"If you do 100 builds a day, GitHub Actions costs you about 6 and a half hours. With Depot CI? That's under 4 hours. You save over 12 hours every single week."
 
 **[VISUAL]** Calendar showing freed-up time, then zooms out to show full year
 
@@ -462,7 +504,7 @@ Over a year: 37,500 minutes = ~625 hours = ~16 full work weeks
 
 ---
 
-### 5:20 - 5:40 | Cost Savings
+### 9:40 - 10:00 | Cost Savings
 
 **[VISUAL]** Cost comparison:
 
@@ -475,22 +517,28 @@ Cost: $0.006/minute → ~$24/month
 Depot CI (billed per second, exact):
 140 seconds/build = 140 seconds billed
 1,000 builds × 140 seconds = 140,000 seconds
-Cost: $0.00005/sec/vCPU → ~$16/month
+Cost: per-second billing → ~$16/month
 
 SAVINGS: ~33% reduction
 ```
+
+*(Pricing as of April 2026. Verify current rates at depot.dev/pricing)*
 
 **[VOICEOVER]**
 "GitHub Actions rounds up to the nearest minute, so your 3 minute 47 second build gets billed as 4 minutes. Depot CI charges per second - so you only pay for exactly what you use. That's significant savings on compute costs."
 
 ---
 
-### 5:40 - 6:00 | Developer Experience + Closing
+### 10:00 - 10:30 | Developer Experience + Closing
 
 **[VISUAL]** Happy developer, fast builds flying by
 
 **[VOICEOVER]**
 "But the real value isn't just time or money. It's how it feels to have fast CI. You push code, seconds later it's built. You make a small change, you don't hesitate to test it."
+
+**[VISUAL]** Text: *"Ship faster. Iterate more. Wait less."*
+
+**[VISUAL]** Large URL: **depot.dev** — Free trial available. Plans start at $20/month.
 
 **[VISUAL]** Final tagline appears:
 
